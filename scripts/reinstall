@@ -1,0 +1,5 @@
+#!/bin/bash
+
+NODE=$1
+echo $NODE is in mode $(basename $0) $(date)
+exit 0

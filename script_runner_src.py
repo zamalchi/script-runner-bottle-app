@@ -18,6 +18,7 @@ import os
 import time
 import smtplib
 import sys
+import commands
 
 ### APACHE #############################################################################################
 
@@ -119,7 +120,7 @@ def hostNotSuppliedMsg():
 def reinstall_node():
 	host = getHostParam(request)
 	if host:
-		result = "{0} is set to reinstall on $(date)".format(host)
+		result = commands.getstatusoutput('./scripts/reinstall ' + host)
 		return result
 	
 	return hostNotSuppliedMsg()
@@ -132,7 +133,7 @@ def reinstall_node():
 def default_node():
 	host = getHostParam(request)
 	if host:
-		result = "{0} is set to default on $(date)".format(host)
+		result = commands.getstatusoutput('./scripts/default ' + host)
 		return result
 
 	return hostNotSuppliedMsg()
