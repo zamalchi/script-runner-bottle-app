@@ -67,27 +67,36 @@ def server_static(filename):
 
 ### COOKIE GETTERS/SETTERS #############################################################################
 
-### NAME ########################################################
-def getNameCookie(request):
-	return request.get_cookie("name") or ""
+# ### NAME ########################################################
+# def getNameCookie(request):
+# 	return request.get_cookie("name") or ""
 
-def setNameCookie(response, name):
-	response.set_cookie("name", name)
+# def setNameCookie(response, name):
+# 	response.set_cookie("name", name)
 
-### DATE ########################################################
-def getDateCookie(request):
-	return request.get_cookie("date") or time.strftime("%Y-%m-%d")
+# ### DATE ########################################################
+# def getDateCookie(request):
+# 	return request.get_cookie("date") or time.strftime("%Y-%m-%d")
 
-def setDateCookie(response, date):
-	response.set_cookie("date", date)
+# def setDateCookie(response, date):
+# 	response.set_cookie("date", date)
 
-### CONSOLIDATED ################################################
-def getCookies(request):
-	return getNameCookie(request), getDateCookie(request)
+# ### CONSOLIDATED ################################################
+# def getCookies(request):
+# 	return getNameCookie(request), getDateCookie(request)
 
-def setCookies(response, name, date):
-	setNameCookie(response, name)
-	setDateCookie(response, date)
+# def setCookies(response, name, date):
+# 	setNameCookie(response, name)
+# 	setDateCookie(response, date)
+
+
+### HELPER METHODS ##################################################################################### 
+
+def getHostParam(request):
+	return request.query.host or None
+
+def hostNotSuppliedMsg():
+	return "Please enter the query parameter: 'host'"
 
 ########################################################################################################
 ########################################################################################################
@@ -105,6 +114,28 @@ def setCookies(response, name, date):
 ########################################################################################################
 ######################################  	NODE ROUTES START	 ###########################################
 ########################################################################################################
+
+@route('/reinstall')
+def reinstall_node():
+	host = getHostParam(request)
+	if host:
+		result = "{0} is set to reinstall on $(date)".format(host)
+		return result
+	
+	return hostNotSuppliedMsg()
+
+########################################################################################################
+########################################################################################################
+########################################################################################################
+
+@route('/default', method='POST')
+def default_node():
+	host = getHostParam(request)
+	if host:
+		result = "{0} is set to default on $(date)".format(host)
+		return result
+
+	return hostNotSuppliedMsg()
 
 
 ########################################################################################################
