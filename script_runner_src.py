@@ -24,6 +24,12 @@ from bottle import Bottle, route, run, request, response, get, post
 def getHostParam(request):
 	return request.query.host or None
 
+def getHTMLHeader():
+	return '<body style="font-family: Monospace;">'
+
+def getHTMLFooter():
+	return '</body>'
+
 def hostNotSuppliedMsg():
 	return "Please enter the query parameter: 'host'"
 
@@ -69,27 +75,44 @@ def default_node():
 ########################################################################################################
 
 @route('/slurm')
-def slurm_node():
-	HOST = "eofe1.mit.edu"
-	COMMAND = "/cm/shared/admin/bin/slurm-daily-node-status -t"
-	
+def slurm_nodes():
+
+	HOST = ""
+	COMMAND = ""
+
+	try:
+		f = open("./scripts/slurm")
+
+		HOST = f.readline().strip()
+		COMMAND = f.readline().strip()
+
+		f.close()
+
+	except IOError:
+		return "/slurm command file not found."
+
+	#######################################################
+
 	ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
                        shell=False,
                        stdout=subprocess.PIPE,
                        stderr=subprocess.PIPE)
 
-	result = ssh.stdout.readlines()
-	#result = commands.getstatusoutput('./scripts/slurm')
+	output = ssh.stdout.readlines()
 	
-	res = ""
+	#######################################################
 
-	for r in result:
-		if "===" in r:
-			res += "<h3>" + r + "</h3>"
+	result = getHTMLHeader()
+
+	for line in output:
+		if "===" in line:
+			result += "<h3>" + line + "</h3>"
 		else:
-			res += "<p>" + r + "</p>"
+			result += "<p>" + line + "</p>"
 
-	return res
+	result += getHTMLFooter()
+
+	return result
 
 ########################################################################################################
 ######################################  	NODE ROUTES END	 #############################################
