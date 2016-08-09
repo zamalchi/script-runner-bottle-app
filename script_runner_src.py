@@ -8,6 +8,7 @@ if (__name__ == "__main__"):
 import os
 import sys
 import commands
+import subprocess
 
 ### APACHE #############################################################################################
 
@@ -69,12 +70,26 @@ def default_node():
 
 @route('/slurm')
 def slurm_node():
-	host = getHostParam(request)
-	if host:
-		result = "getting slurm for {0}...".format(host)
-		return result
+	HOST = "eofe1.mit.edu"
+	COMMAND = "/cm/shared/admin/bin/slurm-daily-node-status -t"
+	
+	ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
+                       shell=False,
+                       stdout=subprocess.PIPE,
+                       stderr=subprocess.PIPE)
 
-	return hostNotSuppliedMsg()
+	result = ssh.stdout.readlines()
+	#result = commands.getstatusoutput('./scripts/slurm')
+	
+	res = ""
+
+	for r in result:
+		if "===" in r:
+			res += "<h3>" + r + "</h3>"
+		else:
+			res += "<p>" + r + "</p>"
+
+	return res
 
 ########################################################################################################
 ######################################  	NODE ROUTES END	 #############################################
