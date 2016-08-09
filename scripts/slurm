@@ -1,5 +1,2 @@
-#!/bin/bash
-
-ssh -i /home/zamalchi/.ssh/id_rsa zamalchi@eofe1.mit.edu
-echo `/cm/shared/admin/bin/slurm-daily-node-status -t`
-exit 0
+eofe1.mit.edu
+/cm/shared/admin/bin/slurm-daily-node-status -t
