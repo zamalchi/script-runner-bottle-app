@@ -7,6 +7,7 @@ import commands
 # from `sinfo` man pages
 states = ['allocated', 'completing', 'down', 'drained', 'draining', 'error', 'fail', 'future', 'idle', 'maint', 'mixed', 'no_respond', 'npc', 'perfctrs', 'power_down', 'power_up', 'reserved', 'unknown']
 
+line_sep = '*****************************************************************************************'
 
 #########################################################################################################################
 #########################################################################################################################
@@ -58,7 +59,6 @@ def getOutputsDict():
 
 # print all the states with separators
 def printOutputs(outputDict):
-    line_sep = '*****************************************************************************************'
     print(line_sep)
 
     for s in states:
@@ -71,6 +71,18 @@ def printOutputs(outputDict):
                 print(each)
             print(line_sep)
 
+def saveOutputsToVar(outputDict):	
+    text = ""
+    text += line_sep + "\n"
+    
+    for s in states:
+        if outputDict[s] != ['']:
+            text += s.upper() + "\n"
+            for each in outputDict[s]:
+                text += each + "\n"
+            text += line_sep + "\n"
+
+    return text
 
 # modifies formatting of each string in a list (the list represents one state) based on the length of each nodelist
 def getModifiedOutput(o):

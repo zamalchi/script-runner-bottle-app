@@ -85,15 +85,11 @@ def default_node():
 
 @route('/slurm')
 def slurm_nodes():
-	text = ""
+	from scripts.states_iterator import *
+	
+	d = getOutputsDict()
 
-	try:
-		f = open(getFileName("slurm_data"))
-		text = f.read()
-		f.close()
-
-	except IOError:
-		return "slurm data not found."
+	text = saveOutputsToVar(d)
 
 	#######################################################
 
