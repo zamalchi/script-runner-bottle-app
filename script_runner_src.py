@@ -85,39 +85,19 @@ def default_node():
 
 @route('/slurm')
 def slurm_nodes():
-
-	HOST = ""
-	COMMAND = ""
+	text = ""
 
 	try:
-		f = open(getFileName("slurm"))
-
-		HOST = f.readline().strip()
-		COMMAND = f.readline().strip()
-
+		f = open(getFileName("slurm_data"))
+		text = f.read()
 		f.close()
 
 	except IOError:
-		return "/slurm command file not found."
+		return "slurm data not found."
 
 	#######################################################
 
-	ssh = subprocess.Popen(["ssh", "%s" % HOST, COMMAND],
-                       shell=False,
-                       stdout=subprocess.PIPE,
-                       stderr=subprocess.PIPE)
-
-	output = ssh.stdout.readlines()
-	
-	#######################################################
-
-	result = ""
-
-	for line in output:
-		if "===" in line:
-			result += "<h3>" + line + "</h3>"
-		else:
-			result += "<p>" + line + "</p>"
+	result = "<pre>" + text + "</pre>"
 
 	result = getHTMLWrapper(result)
 
