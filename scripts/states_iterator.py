@@ -50,39 +50,11 @@ def getOutputs():
     return outputs
 
 
-
 # zips together states and outputs into a dictionary
 def getOutputsDict():
     outputs = getOutputs()
     return dict(zip(states, outputs))
 
-
-# print all the states with separators
-def printOutputs(outputDict):
-    print(line_sep)
-
-    for s in states:
-
-        # only print if the state is not empty of nodes
-        if outputDict[s] != ['']:
-
-            print(s.upper())
-            for each in outputDict[s]:
-                print(each)
-            print(line_sep)
-
-def saveOutputsToVar(outputDict):	
-    text = ""
-    text += line_sep + "\n"
-    
-    for s in states:
-        if outputDict[s] != ['']:
-            text += s.upper() + "\n"
-            for each in outputDict[s]:
-                text += each + "\n"
-            text += line_sep + "\n"
-
-    return text
 
 # modifies formatting of each string in a list (the list represents one state) based on the length of each nodelist
 def getModifiedOutput(o):
@@ -100,7 +72,7 @@ def getModifiedOutput(o):
             if len(nodelist) > 35:
                 # if the nodelist is long : print entire nodelist and the other info on the next line (aligned correctly)
                 # mod_o.append(nodelist + "\n" + "".ljust(35) + "\t{0}\t{1}".format(time, reasons))
-                
+
                 # if the nodelist is long: do not cut it off and print the other data after it (same delimination)
                 mod_o.append(nodelist + "\t{0}\t{1}".format(time,reasons))
             else:
@@ -113,6 +85,38 @@ def getModifiedOutput(o):
 
     return mod_o
 
+
+#########################################################################################################################
+#########################################################################################################################
+#########################################################################################################################
+
+# USER FUNCTIONS
+
+# returns a string formatted for <pre></pre> display
+def saveOutputsToVar():
+    
+    outputsDict = getOutputsDict()
+	
+    text = ""
+    text += line_sep + "\n"
+    
+    for s in states:
+        
+        # only add if the state is not empty of nodes
+        if outputsDict[s] != ['']:
+            
+            text += s.upper() + "\n"
+            for each in outputsDict[s]:
+                text += each + "\n"
+            text += line_sep + "\n"
+
+    return text
+
+
+# print all the states with separators
+def printOutputs():
+    print(saveOutputsToVar())
+
 #########################################################################################################################
 #########################################################################################################################
 #########################################################################################################################
@@ -120,11 +124,9 @@ def getModifiedOutput(o):
 
 # to run from within python
 def run():
-    d = getOutputsDict()
-    printOutputs(d)
-    return d
-
+    printOutputs()
+    
 
 # allows the script to be run from terminal
 if (__name__ == "__main__"):
-    d = run()
+    run()
