@@ -7,7 +7,9 @@ import commands
 # from `sinfo` man pages
 states = ['allocated', 'completing', 'down', 'drained', 'draining', 'error', 'fail', 'future', 'idle', 'maint', 'mixed', 'no_respond', 'npc', 'perfctrs', 'power_down', 'power_up', 'reserved', 'unknown']
 
-line_sep = '*****************************************************************************************'
+line_sep_char = '*'
+line_sep_num = 90
+line_sep = line_sep_char * line_sep_num
 
 #########################################################################################################################
 #########################################################################################################################
