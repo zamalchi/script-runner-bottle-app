@@ -19,6 +19,8 @@ sys.path.insert(1, os.path.dirname(__file__))
 
 from bottle import Bottle, route, run, request, response, get, post
 
+from scripts.states_iterator import *
+
 ### HELPER METHODS ##################################################################################### 
 
 def getFileName(scriptName):
@@ -85,11 +87,9 @@ def default_node():
 
 @route('/slurm')
 def slurm_nodes():
-	from scripts.states_iterator import *
-	
-	d = getOutputsDict()
 
-	text = saveOutputsToVar(d)
+	# from scripts.states_iterator
+	text = saveOutputsToVar()
 
 	#######################################################
 
