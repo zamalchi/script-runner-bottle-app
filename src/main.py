@@ -7,7 +7,6 @@
 ### PACKAGES ###########################################################################################
 
 import os
-import time
 import smtplib
 import sys
 
@@ -108,10 +107,12 @@ def fonts(filename):
 @get('/index')
 def get_foo():
 
-    # code
-    a, b = 1, 2
+    from time import strftime
 
-    return template('index', a=a, b=b)
+    # code
+    time = strftime("%H:%M:%S")
+
+    return template('index', time=time)
 
 ########################################################################################################
 ########################################################################################################
@@ -120,6 +121,7 @@ def get_foo():
 def post_foo():
 
     # code
+    print("POST RECEIVED")
 
     redirect('index')
 

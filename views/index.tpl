@@ -24,18 +24,15 @@
 </head>
 
 
+<!-- PASSED IN FROM ROUTE -->
+<!-- time : current time -->
+
 <body>
 
 <!-- main container start -->
 <div class="container" name="main">
 <!-- row 1 start -->
-<div class="row">
-
-	<div class="col-md-12">
-		<h2 style="text-align: center">/index reached!</h2>
-	</div>
-
-</div>
+	% include('row1.tpl', time=time)
 <!-- row 1 end -->
 </div>
 <!-- main container end -->
