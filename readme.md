@@ -1,2 +1,8 @@
-# bottle-app-template
-Basic setup for a bottle app
+### Bottle App Template
+
+- `run.py` requires:
+  - `-p` : port
+  - `-s` (optional) : smtp sender
+  - `-m` (optional) : smtp receiver
+  
+- use `launcher.sh` to run with presets
