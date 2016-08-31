@@ -90,3 +90,9 @@ ENV/
 
 # PyCharm
 .idea/
+
+# Sass
+.sass-cache/
+
+# files beginning with local
+local*
