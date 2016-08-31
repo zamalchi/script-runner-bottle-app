@@ -2,6 +2,9 @@
 
 parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 
+scss_file="base.scss"
+css_file="main.css"
+
 cd $parent_path
 
-sass --watch ./base.scss:../../static/css/main.css
+sass --watch ./${scss_file}:../../static/css/${css_file}
