@@ -16,7 +16,7 @@
 	<script src="js/bootstrap.min.js"></script>
 
 	<!-- custom js functions -->
-	% include('js_functions.tpl')
+	% include('_js_functions.tpl')
 
 	<!-- SCRIPTS END -->
 	<!-- ######################################################################################################### -->
@@ -32,7 +32,7 @@
 <!-- main container start -->
 <div class="container" name="main">
 <!-- row 1 start -->
-	% include('row1.tpl', time=time)
+	% include('_row1.tpl', time=time)
 <!-- row 1 end -->
 </div>
 <!-- main container end -->
