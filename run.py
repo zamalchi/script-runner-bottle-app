@@ -9,6 +9,7 @@ from src.main import *
 # argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', help = "Port number", action="store", dest="p", required = True)
+parser.add_argument('-a', help = "Host address", action="store", dest="a", required = True)
 
 parser.add_argument('-s', help = "Sender address", action="store", dest="s", required = False)
 parser.add_argument('-m', help = "Receiver address", action="store", dest="m", required = False)
@@ -18,15 +19,16 @@ parser.add_argument('-m', help = "Receiver address", action="store", dest="m", r
 args = parser.parse_args()
 
 port = args.p
+address = args.a
 mailFrom = args.s
 mailTo = args.m
 # dev = args.d
 
-smtpInit(mailTo, mailFrom)
+#smtpInit(mailTo, mailFrom)
 
 # if dev == "True":
     # reloader: restart on module file change
     # run(reloader=True, host='localhost', port=port, debug=True)
 # else:
 
-run(host='localhost', port=port, debug=True)
+run(host=address, port=port, debug=True)
