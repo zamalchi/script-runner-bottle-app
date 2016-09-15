@@ -7,12 +7,13 @@
 ### PACKAGES ###########################################################################################
 
 import os
-import smtplib
 import sys
 
-### IMPORTS ############################################################################################
+from src.bottle import route, get, request, static_file, SimpleTemplate, url
 
-from src.bottle import route, get, post, request, response, template, static_file, redirect, SimpleTemplate, url
+from config.dirs import ROOT_DIR
+
+from scripts.states_iterator import *
 
 ### APACHE #############################################################################################
 
@@ -39,16 +40,16 @@ SimpleTemplate.defaults["url"] = url
 
 ### SMTP ###############################################################################################
 
-receivers = []
-
-def smtpInit(mailTo='', mailFrom='root'):
-    # this is called from the wrapper file
-    # sets the sender and receiver for emails
-    global receivers
-    global sender
-
-    receivers = [mailTo]
-    sender = mailFrom
+# receivers = []
+#
+# def smtpInit(mailTo='', mailFrom='root'):
+#     # this is called from the wrapper file
+#     # sets the sender and receiver for emails
+#     global receivers
+#     global sender
+#
+#     receivers = [mailTo]
+#     sender = mailFrom
 
 ### STATIC ROUTING ########################################################################################
 
@@ -85,6 +86,28 @@ def fonts(filename):
 #     response.set_cookie("foo", value)
 
 
+
+### HELPER METHODS #####################################################################################
+
+def getFileName(scriptName):
+    scriptDir = os.path.join(ROOT_DIR, "scripts")
+    return scriptDir + scriptName
+
+def getHostParam(request):
+    return request.query.host or None
+
+def getHTMLHeader():
+    return '<body style="font-family: Monospace;">'
+
+def getHTMLFooter():
+    return '</body>'
+
+def getHTMLWrapper(html):
+    return getHTMLHeader() + str(html) + getHTMLFooter()
+
+def hostNotSuppliedMsg():
+    return "Please enter the query parameter: 'host'"
+
 ########################################################################################################
 ########################################################################################################
 ########################################################################################################
@@ -100,35 +123,60 @@ def fonts(filename):
 #
 
 ########################################################################################################
-######################################### foo START #############################################
+###################################### NODE ROUTES START ###############################################
 ########################################################################################################
 
-# comment
-@get('/index')
-def get_foo():
+@route('/reinstall')
+def reinstall_node():
+    host = getHostParam(request)
 
-    from time import strftime
+    cmd = "{0} {1}".format(getFileName("reinstall"), host)
 
-    # code
-    time = strftime("%H:%M:%S")
+    if host:
+        result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
+        return result
 
-    return template('index', time=time)
+    return hostNotSuppliedMsg()
+
+
+########################################################################################################
+########################################################################################################
+
+@route('/default')
+def default_node():
+    host = getHostParam(request)
+
+    cmd = "{0} {1}".format(getFileName("default"), host)
+
+    if host:
+        result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
+
+        return result
+
+    return hostNotSuppliedMsg()
+
 
 ########################################################################################################
 ########################################################################################################
 
-@post('/index')
-def post_foo():
+@route('/slurm')
+def slurm_nodes():
 
-    # code
-    print("POST RECEIVED")
+    d = getOutputsDict()
 
-    redirect('index')
+    text = saveOutputsToVar(d)
+
+    #######################################################
+
+    result = "<pre>" + text + "</pre>"
+
+    result = getHTMLWrapper(result)
+
+    return result
 
 ########################################################################################################
-######################################### foo END ###############################################
+###################################### NODE ROUTES END #################################################
 ########################################################################################################
-
 
 
 

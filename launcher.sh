@@ -4,4 +4,4 @@ parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 
 cd $parent_path
 
-./run.py -a localhost -p 8081
+./run.py -a 172.16.1.254 -p 19191
