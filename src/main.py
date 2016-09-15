@@ -90,7 +90,7 @@ def fonts(filename):
 ### HELPER METHODS #####################################################################################
 
 def getFileName(scriptName):
-    scriptDir = os.path.join(ROOT_DIR, "scripts")
+    scriptDir = os.path.join(ROOT_DIR, "scripts/")
     return scriptDir + scriptName
 
 def getHostParam(request):
