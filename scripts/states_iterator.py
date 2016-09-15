@@ -56,32 +56,32 @@ def getOutputsDict():
     outputs = getOutputs()
     return dict(zip(states, outputs))
 
-# print all the states with separators
-def printOutputs(outputDict):
-    print(line_sep)
+# # print all the states with separators
+# def printOutputs(outputDict):
+#     print(line_sep)
+#
+#     for s in states:
+#
+#         # only print if the state is not empty of nodes
+#         if outputDict[s] != ['']:
+#
+#             print(s.upper())
+#             for each in outputDict[s]:
+#                 print(each)
+#             print(line_sep)
 
-    for s in states:
-
-        # only print if the state is not empty of nodes
-        if outputDict[s] != ['']:
-
-            print(s.upper())
-            for each in outputDict[s]:
-                print(each)
-            print(line_sep)
-
-def saveOutputsToVar(outputDict):	
-    text = ""
-    text += line_sep + "\n"
-    
-    for s in states:
-        if outputDict[s] != ['']:
-            text += s.upper() + "\n"
-            for each in outputDict[s]:
-                text += each + "\n"
-            text += line_sep + "\n"
-
-    return text
+# def saveOutputsToVar(outputDict):
+#     text = ""
+#     text += line_sep + "\n"
+#
+#     for s in states:
+#         if outputDict[s] != ['']:
+#             text += s.upper() + "\n"
+#             for each in outputDict[s]:
+#                 text += each + "\n"
+#             text += line_sep + "\n"
+#
+#     return text
 
 # modifies formatting of each string in a list (the list represents one state) based on the length of each nodelist
 def getModifiedOutput(o):
