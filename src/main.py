@@ -162,9 +162,7 @@ def default_node():
 @route('/slurm')
 def slurm_nodes():
 
-    d = getOutputsDict()
-
-    text = saveOutputsToVar(d)
+    text = saveOutputsToVar()
 
     #######################################################
 
