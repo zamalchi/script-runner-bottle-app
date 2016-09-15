@@ -7,13 +7,9 @@ import commands
 # from `sinfo` man pages
 states = ['allocated', 'completing', 'down', 'drained', 'draining', 'error', 'fail', 'future', 'idle', 'maint', 'mixed', 'no_respond', 'npc', 'perfctrs', 'power_down', 'power_up', 'reserved', 'unknown']
 
-<<<<<<< HEAD
-line_sep = '*****************************************************************************************'
-=======
 line_sep_char = '*'
 line_sep_num = 90
 line_sep = line_sep_char * line_sep_num
->>>>>>> dd8b04bcea5aab4ad1ed66618009a1f50c8c76c2
 
 #########################################################################################################################
 #########################################################################################################################
@@ -55,18 +51,11 @@ def getOutputs():
 
     return outputs
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> dd8b04bcea5aab4ad1ed66618009a1f50c8c76c2
 # zips together states and outputs into a dictionary
 def getOutputsDict():
     outputs = getOutputs()
     return dict(zip(states, outputs))
 
-
-<<<<<<< HEAD
 # print all the states with separators
 def printOutputs(outputDict):
     print(line_sep)
@@ -94,8 +83,6 @@ def saveOutputsToVar(outputDict):
 
     return text
 
-=======
->>>>>>> dd8b04bcea5aab4ad1ed66618009a1f50c8c76c2
 # modifies formatting of each string in a list (the list represents one state) based on the length of each nodelist
 def getModifiedOutput(o):
     mod_o = []
@@ -112,11 +99,7 @@ def getModifiedOutput(o):
             if len(nodelist) > 35:
                 # if the nodelist is long : print entire nodelist and the other info on the next line (aligned correctly)
                 # mod_o.append(nodelist + "\n" + "".ljust(35) + "\t{0}\t{1}".format(time, reasons))
-<<<<<<< HEAD
-                
-=======
 
->>>>>>> dd8b04bcea5aab4ad1ed66618009a1f50c8c76c2
                 # if the nodelist is long: do not cut it off and print the other data after it (same delimination)
                 mod_o.append(nodelist + "\t{0}\t{1}".format(time,reasons))
             else:
@@ -129,15 +112,9 @@ def getModifiedOutput(o):
 
     return mod_o
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dd8b04bcea5aab4ad1ed66618009a1f50c8c76c2
 #########################################################################################################################
 #########################################################################################################################
 #########################################################################################################################
-
-<<<<<<< HEAD
 
 # to run from within python
 def run():
@@ -145,18 +122,13 @@ def run():
     printOutputs(d)
     return d
 
-
-# allows the script to be run from terminal
-if (__name__ == "__main__"):
-    d = run()
-=======
 # USER FUNCTIONS
 
 # returns a string formatted for <pre></pre> display
 def saveOutputsToVar():
     
     outputsDict = getOutputsDict()
-	
+
     text = ""
     text += line_sep + "\n"
     
@@ -184,4 +156,3 @@ def printOutputs():
 # allows the script to be run from terminal
 if (__name__ == "__main__"):
     run()
->>>>>>> dd8b04bcea5aab4ad1ed66618009a1f50c8c76c2
