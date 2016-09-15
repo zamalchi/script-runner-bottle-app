@@ -2,9 +2,9 @@
 
 import argparse
 
-from src.bottle import run
-
 from src.main import *
+
+from src.bottle import run
 
 # argparse
 parser = argparse.ArgumentParser()
