@@ -181,12 +181,19 @@ def slurm_nodes():
 def scontrol_show_node():
     node = request.forms.get('node') or -1
 
-    result = ""
+    result = node = state = ""
 
     if node != -1:
         result = getScontrol(node)
 
-    return template('scontrol', result=result)
+        for u in result.split(" "):
+            if "NodeName=" in u:
+                node = u.split('=')[1]
+            elif "State=" in u:
+                state = u.split('=')[1]
+
+
+    return template('scontrol', result=result, node=node, state=state)
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################

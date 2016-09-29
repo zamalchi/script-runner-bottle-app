@@ -37,6 +37,11 @@
 		<div class="col-md-12">
 
 			<div class="panel panel-default">
+
+				<div class="panel-header">
+					<h5>{{node}} - {{state}}</h5>
+				</div>
+
 				<div class="panel-body">
 					% lines = result.split("\n")
 					<table>
