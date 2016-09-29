@@ -9,7 +9,7 @@
 import os
 import sys
 
-from src.bottle import route, get, request, static_file, SimpleTemplate, url
+from src.bottle import route, get, request, static_file, SimpleTemplate, url, template
 
 from config.dirs import ROOT_DIR
 
@@ -162,15 +162,17 @@ def default_node():
 @route('/slurm')
 def slurm_nodes():
 
-    text = saveOutputsToVar()
+    # text = saveOutputsToVar()
+    #
+    # #######################################################
+    #
+    # result = "<pre>" + text + "</pre>"
+    #
+    # result = getHTMLWrapper(result)
+    #
+    outputs = getOutputs()
 
-    #######################################################
-
-    result = "<pre>" + text + "</pre>"
-
-    result = getHTMLWrapper(result)
-
-    return result
+    return template('slurm', outputs=outputs)
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
