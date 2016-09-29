@@ -9,7 +9,7 @@
 import os
 import sys
 
-from src.bottle import route, get, request, static_file, SimpleTemplate, url, template
+from src.bottle import route, get, post, request, static_file, SimpleTemplate, url, template
 
 from config.dirs import ROOT_DIR
 
@@ -173,6 +173,15 @@ def slurm_nodes():
     outputs = getOutputsDict()
 
     return template('slurm', outputs=outputs)
+
+########################################################################################################
+########################################################################################################
+
+@post('/node')
+def scontrol_show_node():
+    node = int(request.forms.get('node') or -1)
+
+    return "node" + node
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################

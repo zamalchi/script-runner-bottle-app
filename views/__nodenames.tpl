@@ -19,5 +19,10 @@
 
 <!-- a single node -->
 % else:
-	<a href="#">{{nodelist}}</a>
+	<form action="/node" enctype="multipart/form-data">
+		<input type="hidden" name="node" value="{{nodelist}}" />
+		<button type="submit">
+			{{nodelist}}
+		</button>
+	</form>
 % end
