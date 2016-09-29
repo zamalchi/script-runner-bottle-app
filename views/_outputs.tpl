@@ -23,13 +23,13 @@
 								% nodelist, time, reasons = l.split("\t")
 								<div class="row">
 									<div class="col-md-3">
-										<pre>{{nodelist}}</pre>
+										<pre name="field">{{nodelist}}</pre>
 									</div>
 									<div class="col-md-3">
-										<pre>{{time}}</pre>
+										<pre name="field">{{time}}</pre>
 									</div>
 									<div class="col-md-5">
-										<pre>{{reasons}}</pre>
+										<pre name="field">{{reasons}}</pre>
 									</div>
 								</div>
 							% end

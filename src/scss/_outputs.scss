@@ -1,11 +1,13 @@
 div#outputs {
 	div[name="state"] {
-		pre {
-			white-space: pre-wrap;
-		}
 
 		div[name="state-fields"] {
-			overflow: hidden;
+
+			[name="field"] {
+				overflow: hidden;
+				white-space: nowrap;
+			}
+
 		}
 	}
 }

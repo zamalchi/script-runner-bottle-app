@@ -1,9 +1,8 @@
 body {
   background-color: lightblue; }
 
-div#outputs div[name="state"] pre {
-  white-space: pre-wrap; }
-div#outputs div[name="state"] div[name="state-fields"] {
-  overflow: hidden; }
+div#outputs div[name="state"] div[name="state-fields"] [name="field"] {
+  overflow: hidden;
+  white-space: nowrap; }
 
 /*# sourceMappingURL=main.css.map */
