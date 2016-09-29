@@ -35,13 +35,17 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			
-			% lines = result.split(" ")
-			<table>
-			% for line in lines:
-			<tr><td>{{line}}</td></tr>
-			% end
-			</table>
+		
+			<div class="panel panel-default">
+				<div class="panel-body">
+					% lines = result.split(" ")
+					<table>
+					% for line in lines:
+					<tr><td>{{line}}</td></tr>
+					% end
+					</table>
+				</div>
+			</div>
 
 		</div>
 	</div>
