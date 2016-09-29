@@ -33,24 +33,9 @@
 <!-- main container start -->
 <div class="container" name="main">
 
-<!-- row 1 start -->
-<div class="row" id="outputs">
-	<div class="col-md-12">
-	<hr />
-	% for state in sorted(outputs.keys()):
-		% if filter(None, outputs[state]):
-
-			<div name="state" id="state-{{state}}">
-				<h4>*** {{state}} ***</h4>
-				<pre>{{"\n".join(outputs[state])}}</pre>
-				<hr />
-			</div>
-
-		% end
-	% end
-	</div>
-</div>
-<!-- row 1 end -->
+<!-- outputs row start -->
+% include('_outputs.tpl')
+<!-- outputs row end -->
 
 </div>
 <!-- main container end -->
