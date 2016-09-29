@@ -37,13 +37,17 @@
 <div class="row" name="outputs">
 	<div class="col-md-12">
 	<hr />
-	% for i in range(len(outputs)):
-		<div name="state" id="state-{{i}}">
-			<pre>
-				{{outputs[i]}}
-			</pre>
-			<hr />
-		</div>
+	% for state in outputs:
+		% if outputs[state]:
+
+			<div name="state" id="state-{{state}}">
+				<pre>
+					{{outputs[state]}}
+				</pre>
+				<hr />
+			</div>
+			
+		% end
 	% end
 	</div>
 </div>

@@ -1,5 +1,7 @@
 div#outputs {
-	pre {
-		white-space: pre-wrap;
+	div[name="state"] {
+		pre {
+			white-space: pre-wrap;
+		}
 	}
 }

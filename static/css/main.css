@@ -1,7 +1,7 @@
 body {
   background-color: lightblue; }
 
-div#outputs pre {
+div#outputs div[name="state"] pre {
   white-space: pre-wrap; }
 
 /*# sourceMappingURL=main.css.map */
