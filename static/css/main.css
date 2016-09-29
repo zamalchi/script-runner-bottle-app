@@ -2,7 +2,7 @@ body {
   background-color: lightblue; }
 
 div#outputs div[name="state"] div[name="state-fields"] [name="field"] {
-  overflow: hidden;
-  white-space: nowrap; }
+  padding-top: 3px;
+  padding-bottom: 3px; }
 
 /*# sourceMappingURL=main.css.map */
