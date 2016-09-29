@@ -22,13 +22,13 @@
 							% if len(l.split("\t")) == 3:
 								% nodelist, time, reasons = l.split("\t")
 								<div class="row">
-									<div class="col-md-3">
+									<div class="col-md-2">
 										% include('__nodenames.tpl', nodelist=nodelist)
 									</div>
 									<div class="col-md-3">
 										<pre name="field">{{time}}</pre>
 									</div>
-									<div class="col-md-5">
+									<div class="col-md-6">
 										<pre name="field">{{reasons}}</pre>
 									</div>
 								</div>
