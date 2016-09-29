@@ -3,11 +3,11 @@ div#outputs {
 
 		div[name="state-fields"] {
 
-			[name="field"] {
+			[name="node"], [name="field] {
 				overflow: hidden;
 				white-space: nowrap;
 			}
-			select[name="field"] {
+			select[name="node"] {
 				padding-top: 3px;
 				padding-bottom: 3px;
 			}

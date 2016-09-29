@@ -6,16 +6,18 @@
 <!-- a list to parse -->
 % if '[' in nodelist:
 	% parsed = parseNodeList(nodelist)
-	<select name="field">
-		% for node in parsed:
-			<option name="node" value="{{node}}">
-				node{{node}}
-			</option>
-		% end
-	</select>
-	<span>
-		[{{len(parsed)}}]
-	</span>
+	<form action="/node" method="post" enctype="multipart/form-data">
+		<select name="node" onclick="this.parentElement.submit()">
+			% for node in parsed:
+				<option name="nodeOption" value="{{node}}">
+					node{{node}}
+				</option>
+			% end
+		</select>
+		<span>
+			[{{len(parsed)}}]
+		</span>
+	</form>
 
 <!-- a single node -->
 % else:
