@@ -1,4 +1,7 @@
 body {
   background-color: lightblue; }
 
+div#outputs pre {
+  white-space: pre-wrap; }
+
 /*# sourceMappingURL=main.css.map */

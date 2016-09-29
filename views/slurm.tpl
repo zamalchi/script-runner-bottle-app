@@ -34,16 +34,19 @@
 <div class="container" name="main">
 
 <!-- row 1 start -->
-<hr />
-% for i in range(len(outputs)):
-	<div name="state" id="state-{{i}}">
-		<pre>
-			{{outputs[i]}}
-		</pre>
-		<hr />
+<div class="row" name="outputs">
+	<div class="col-md-12">
+	<hr />
+	% for i in range(len(outputs)):
+		<div name="state" id="state-{{i}}">
+			<pre>
+				{{outputs[i]}}
+			</pre>
+			<hr />
+		</div>
+	% end
 	</div>
-% end
-
+</div>
 <!-- row 1 end -->
 
 </div>
