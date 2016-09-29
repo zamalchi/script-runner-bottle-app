@@ -3,5 +3,9 @@ div#outputs {
 		pre {
 			white-space: pre-wrap;
 		}
+
+		div[name="state-fields"] {
+			overflow: hidden;
+		}
 	}
 }

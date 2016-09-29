@@ -3,5 +3,7 @@ body {
 
 div#outputs div[name="state"] pre {
   white-space: pre-wrap; }
+div#outputs div[name="state"] div[name="state-fields"] {
+  overflow: hidden; }
 
 /*# sourceMappingURL=main.css.map */
