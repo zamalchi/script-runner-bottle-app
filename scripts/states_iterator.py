@@ -149,6 +149,25 @@ def saveOutputsToVar():
 def printOutputs():
     print(saveOutputsToVar())
 
+
+def parseNodeList(nodelist):
+    replace_chars = ['node', '[', ']']
+    nodes = []
+
+    n = nodelist
+    for c in replace_chars:
+        n = n.replace(c, '')
+
+    units = n.split(',')
+    for u in units:
+        if '-' in u:
+            start, end = u.split('-')
+            for i in range(int(start), int(end)+1):
+                nodes.append(i)
+
+        else:
+            nodes.append()
+
 #########################################################################################################################
 #########################################################################################################################
 #########################################################################################################################

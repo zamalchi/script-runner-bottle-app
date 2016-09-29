@@ -23,7 +23,7 @@
 								% nodelist, time, reasons = l.split("\t")
 								<div class="row">
 									<div class="col-md-3">
-										<pre name="field">{{nodelist}}</pre>
+										% include('__nodenames.tpl', nodelist=nodelist)
 									</div>
 									<div class="col-md-3">
 										<pre name="field">{{time}}</pre>
