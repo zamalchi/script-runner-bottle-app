@@ -37,7 +37,9 @@
 <hr />
 % for i in range(len(outputs)):
 	<div name="state" id="state-{{i}}">
-		{{outputs[i]}}
+		<pre>
+			{{outputs[i]}}
+		</pre>
 		<hr />
 	</div>
 % end

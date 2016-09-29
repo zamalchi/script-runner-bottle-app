@@ -170,7 +170,7 @@ def slurm_nodes():
     #
     # result = getHTMLWrapper(result)
     #
-    outputs = getOutputs()
+    outputs = filter(None, getOutputs())
 
     return template('slurm', outputs=outputs)
 
