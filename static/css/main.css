@@ -2,6 +2,9 @@ body {
   background-color: lightblue; }
 
 div#outputs div[name="state"] div[name="state-fields"] [name="field"] {
+  overflow: hidden;
+  white-space: nowrap; }
+div#outputs div[name="state"] div[name="state-fields"] select[name="field"] {
   padding-top: 3px;
   padding-bottom: 3px; }
 
