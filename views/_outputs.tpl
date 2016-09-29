@@ -14,12 +14,12 @@
 					</div>
 
 					<div class="panel panel-body">
-						% if len(line.split("\t")) == 3:
 
-							% lines = outputs[state]
+						% lines = outputs[state]
 
-							<div class="container">
-							% for l in lines:
+						<div class="container">
+						% for l in lines:
+							% if len(l.split("\t")) == 3:
 								% nodelist, time, reasons = line.split("\t")
 								<div class="row">
 									<div class="col-md-4">
@@ -32,7 +32,6 @@
 										<pre>{{reasons}}</pre>
 									</div>
 								</div>
-								
 							% end
 						% end
 						</div>
