@@ -181,10 +181,12 @@ def slurm_nodes():
 def scontrol_show_node():
     node = request.forms.get('node') or -1
 
+    result = ""
+
     if node != -1:
-        return getScontrol(node)
-    else:
-        return "POST failed"
+        result = getScontrol(node)
+
+    return template('scontrol', result=result)
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
