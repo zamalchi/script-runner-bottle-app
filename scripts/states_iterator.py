@@ -163,10 +163,10 @@ def parseNodeList(nodelist):
         if '-' in u:
             start, end = u.split('-')
             for i in range(int(start), int(end)+1):
-                nodes.append(i)
+                nodes.append(str(i).zfill(3))
 
         else:
-            nodes.append(u)
+            nodes.append(str(u).zfill(3))
 
     return sorted(nodes)
 
