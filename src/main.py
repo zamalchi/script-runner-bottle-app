@@ -182,7 +182,7 @@ def scontrol_show_node():
     node = request.forms.get('node') or -1
 
     if node != -1:
-        return "node{0}".format(node)
+        return getScontrol(node)
     else:
         return "POST failed"
 
