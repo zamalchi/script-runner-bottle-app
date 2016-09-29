@@ -14,23 +14,26 @@
 					</div>
 
 					<div class="panel panel-body">
-						% lines = outputs[state]
+						% if len(line.split("\t")) == 3:
 
-						<div class="container">
-						% for l in lines:
-							% nodelist, time, reasons = line.split("\t")
-							<div class="row">
-								<div class="col-md-4">
-									<pre>{{nodelist}}</pre>
-								</div>
-								<div class="col-md-4">
-									<pre>{{time}}</pre>
-								</div>
-								<div class="col-md-4">
-									<pre>{{reasons}}</pre>
-								</div>
-							</div>
+							% lines = outputs[state]
 
+							<div class="container">
+							% for l in lines:
+								% nodelist, time, reasons = line.split("\t")
+								<div class="row">
+									<div class="col-md-4">
+										<pre>{{nodelist}}</pre>
+									</div>
+									<div class="col-md-4">
+										<pre>{{time}}</pre>
+									</div>
+									<div class="col-md-4">
+										<pre>{{reasons}}</pre>
+									</div>
+								</div>
+								
+							% end
 						% end
 						</div>
 
