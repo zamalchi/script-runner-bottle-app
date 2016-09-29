@@ -179,12 +179,12 @@ def slurm_nodes():
 
 @post('/node')
 def scontrol_show_node():
-    node = request.forms.get('node') or -1
+    requested = request.forms.get('node') or -1
 
     result = node = state = ""
 
-    if node != -1:
-        result = getScontrol(node)
+    if requested != -1:
+        result = getScontrol(requested)
 
         for u in result.split(" "):
             if "NodeName=" in u:
