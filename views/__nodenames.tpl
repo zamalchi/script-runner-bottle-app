@@ -5,13 +5,17 @@
 
 <!-- a list to parse -->
 % if '[' in nodelist:
+	% parsed = parseNodeList(nodelist)
 	<select name="field">
-		% for node in parseNodeList(nodelist):
+		% for node in parsed:
 			<option name="node" value="{{node}}">
 				node{{node}}
 			</option>
 		% end
 	</select>
+	<span>
+		[{{len(parsed)}}]
+	</span>
 
 <!-- a single node -->
 % else:
