@@ -9,11 +9,11 @@
 				
 				<div class="panel panel-default">
 
-					<div class="panel panel-header">
+					<div class="panel-header">
 						<h1 name="state-title">*** {{state}} ***</h1>
 					</div>
 
-					<div class="panel panel-body">
+					<div class="panel-body">
 
 						% lines = outputs[state]
 
