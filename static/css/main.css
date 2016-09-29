@@ -11,8 +11,10 @@ div#outputs div[name="state"] div[name="state-fields"] select {
   padding-top: 3px;
   padding-bottom: 3px; }
 
-div.panel[name="scontrol"] [name="title"] {
+div.panel[name="scontrol"] .panel-header {
   font-size: 2vw;
-  margin-left: 10px; }
+  margin-left: 20px; }
+div.panel[name="scontrol"] .panel-body {
+  font-size: .5vw; }
 
 /*# sourceMappingURL=main.css.map */
