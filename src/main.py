@@ -179,9 +179,12 @@ def slurm_nodes():
 
 @post('/node')
 def scontrol_show_node():
-    node = int(request.forms.get('node') or -1)
+    node = request.forms.get('node') or -1
 
-    return "node{0}".format(node.zfill(2))
+    if node != -1:
+        return "node{0}".format(node)
+    else:
+        return "POST failed"
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
