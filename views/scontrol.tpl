@@ -36,10 +36,10 @@
 	<div class="row">
 		<div class="col-md-12">
 
-			<div class="panel panel-default">
+			<div class="panel panel-default" name="scontrol">
 
 				<div class="panel-header">
-					<h5>{{node}} - {{state}}</h5>
+					<h1 name="title">{{node}} - {{state}}</h1>
 				</div>
 
 				<div class="panel-body">
