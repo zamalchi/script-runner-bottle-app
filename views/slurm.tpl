@@ -37,11 +37,11 @@
 <div class="row" id="outputs">
 	<div class="col-md-12">
 	<hr />
-	% for state in outputs:
+	% for state in sorted(outputs.keys()):
 		% if filter(None, outputs[state]):
 
 			<div name="state" id="state-{{state}}">
-				<h3>*** {{state}} ***</h3>
+				<h4>*** {{state}} ***</h4>
 				<pre>{{"\n".join(outputs[state])}}</pre>
 				<hr />
 			</div>
