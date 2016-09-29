@@ -20,7 +20,7 @@
 						<div class="container">
 						% for l in lines:
 							% if len(l.split("\t")) == 3:
-								% nodelist, time, reasons = line.split("\t")
+								% nodelist, time, reasons = l.split("\t")
 								<div class="row">
 									<div class="col-md-4">
 										<pre>{{nodelist}}</pre>
