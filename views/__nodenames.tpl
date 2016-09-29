@@ -19,8 +19,9 @@
 
 <!-- a single node -->
 % else:
+	% node = nodelist.replace('node', '')
 	<form action="/node" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="node" value="{{nodelist}}" />
+		<input type="hidden" name="node" value="{{node}}" />
 		<button type="submit">
 			{{nodelist}}
 		</button>
