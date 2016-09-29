@@ -4,7 +4,7 @@
 @import 'misc';
 
 body {
-	background-color: lightblue;
+	background-color: $bg_color;
 }
 
 @import 'outputs';
