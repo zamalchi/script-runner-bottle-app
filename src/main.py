@@ -181,7 +181,7 @@ def slurm_nodes():
 def scontrol_show_node():
     node = int(request.forms.get('node') or -1)
 
-    return "node" + node
+    return "node{0}".format(node)
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
