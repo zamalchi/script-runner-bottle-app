@@ -176,7 +176,7 @@ def getScontrol(node):
     if (type(node) is int) or ('node' not in node):
         node = "node" + str(node).zfill(2)
 
-    cmd = "scontrol -o show node {0}".format(node)
+    cmd = "scontrol show node {0}".format(node)
 
     return commands.getstatusoutput(cmd)[1]
 

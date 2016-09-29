@@ -35,10 +35,10 @@
 
 	<div class="row">
 		<div class="col-md-12">
-		
+
 			<div class="panel panel-default">
 				<div class="panel-body">
-					% lines = result.split(" ")
+					% lines = result.split("\n")
 					<table>
 					% for line in lines:
 					<tr><td>{{line}}</td></tr>
