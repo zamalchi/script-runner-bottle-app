@@ -19,7 +19,7 @@
 
 <!-- a single node -->
 % else:
-	<form action="/node" enctype="multipart/form-data">
+	<form action="/node" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="node" value="{{nodelist}}" />
 		<button type="submit">
 			{{nodelist}}
