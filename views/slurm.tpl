@@ -38,13 +38,11 @@
 	<div class="col-md-12">
 	<hr />
 	% for state in outputs:
-		% if outputs[state] != "['']":
+		% if outputs[state].contains("['']"):
 
 			<div name="state" id="state-{{state}}">
 				<h3>*** {{state}} ***</h3>
-				<pre>
-					{{outputs[state]}}
-				</pre>
+				<pre>{{outputs[state]}}</pre>
 				<hr />
 			</div>
 
