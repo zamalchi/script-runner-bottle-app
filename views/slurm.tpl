@@ -42,7 +42,7 @@
 
 			<div name="state" id="state-{{state}}">
 				<h3>*** {{state}} ***</h3>
-				<pre>{{outputs[state]}}</pre>
+				<pre>{{"\n".join(outputs[state])}}</pre>
 				<hr />
 			</div>
 
