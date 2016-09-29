@@ -1,6 +1,11 @@
 div#outputs {
 	div[name="state"] {
 
+		[name="state-title"] {
+			font-size: 5vw;
+			text-align: center;
+		}
+
 		div[name="state-fields"] {
 
 			.field {

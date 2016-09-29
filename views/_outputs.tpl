@@ -10,7 +10,7 @@
 				<div class="panel panel-default">
 
 					<div class="panel panel-header">
-						<h4>*** {{state}} ***</h4>
+						<h1 name="state-title">*** {{state}} ***</h1>
 					</div>
 
 					<div class="panel panel-body">
