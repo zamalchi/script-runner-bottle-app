@@ -1,4 +1,22 @@
 body {
-  background-color: lightblue; }
+  background-color: #476f9e; }
+
+div#outputs div[name="state"] [name="state-title"] {
+  font-size: 2vw;
+  margin-left: 30px; }
+div#outputs div[name="state"] div[name="state-fields"] .field {
+  overflow: hidden;
+  white-space: nowrap; }
+div#outputs div[name="state"] div[name="state-fields"] select {
+  padding-top: 3px;
+  padding-bottom: 3px; }
+
+div.panel[name="scontrol"] {
+  margin-top: 30px; }
+  div.panel[name="scontrol"] [name="title"] {
+    font-size: 1.75vw;
+    margin-left: 20px; }
+  div.panel[name="scontrol"] .panel-body {
+    font-size: 1.25vw; }
 
 /*# sourceMappingURL=main.css.map */

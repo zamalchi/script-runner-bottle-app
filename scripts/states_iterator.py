@@ -149,6 +149,37 @@ def saveOutputsToVar():
 def printOutputs():
     print(saveOutputsToVar())
 
+
+def parseNodeList(nodelist):
+    replace_chars = ['node', '[', ']']
+    nodes = []
+
+    n = nodelist
+    for c in replace_chars:
+        n = n.replace(c, '')
+
+    units = n.split(',')
+    for u in units:
+        if '-' in u:
+            start, end = u.split('-')
+            for i in range(int(start), int(end)+1):
+                nodes.append(str(i).zfill(3))
+
+        else:
+            nodes.append(str(u).zfill(3))
+
+    return sorted(nodes)
+
+
+def getScontrol(node):
+
+    if (type(node) is int) or ('node' not in node):
+        node = "node" + str(node).zfill(2)
+
+    cmd = "scontrol show node {0}".format(node)
+
+    return commands.getstatusoutput(cmd)[1]
+
 #########################################################################################################################
 #########################################################################################################################
 #########################################################################################################################

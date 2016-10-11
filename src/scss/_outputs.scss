@@ -1,0 +1,22 @@
+div#outputs {
+	div[name="state"] {
+
+		[name="state-title"] {
+			font-size: 2vw;
+			margin-left: 30px;
+		}
+
+		div[name="state-fields"] {
+
+			.field {
+				overflow: hidden;
+				white-space: nowrap;
+			}
+			select {
+				padding-top: 3px;
+				padding-bottom: 3px;
+			}
+
+		}
+	}
+}

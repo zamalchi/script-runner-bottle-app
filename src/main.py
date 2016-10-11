@@ -9,7 +9,7 @@
 import os
 import sys
 
-from src.bottle import route, get, request, static_file, SimpleTemplate, url
+from src.bottle import route, get, post, request, static_file, SimpleTemplate, url, template
 
 from config.dirs import ROOT_DIR
 
@@ -162,15 +162,38 @@ def default_node():
 @route('/slurm')
 def slurm_nodes():
 
-    text = saveOutputsToVar()
+    # text = saveOutputsToVar()
+    #
+    # #######################################################
+    #
+    # result = "<pre>" + text + "</pre>"
+    #
+    # result = getHTMLWrapper(result)
+    #
+    outputs = getOutputsDict()
 
-    #######################################################
+    return template('slurm', outputs=outputs)
 
-    result = "<pre>" + text + "</pre>"
+########################################################################################################
+########################################################################################################
 
-    result = getHTMLWrapper(result)
+@post('/node')
+def scontrol_show_node():
+    requested = request.forms.get('node') or -1
 
-    return result
+    result = node = state = ""
+
+    if requested != -1:
+        result = getScontrol(requested)
+
+        for u in result.split(" "):
+            if "NodeName=" in u:
+                node = u.split('=')[1]
+            elif "State=" in u:
+                state = u.split('=')[1]
+
+
+    return template('scontrol', result=result, node=node, state=state)
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
