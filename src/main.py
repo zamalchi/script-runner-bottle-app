@@ -162,15 +162,15 @@ def default_node():
 @route('/slurm')
 def slurm_nodes():
 
-    # text = saveOutputsToVar()
-    #
-    # #######################################################
-    #
-    # result = "<pre>" + text + "</pre>"
-    #
-    # result = getHTMLWrapper(result)
-    #
-    outputs = getOutputsDict()
+    from pickle import load
+
+    file = os.path.join(ROOT_DIR, "local_example.p")
+
+    outputs = load(open(file, "rb"))
+
+    # TODO: change this back before deploying
+
+    # outputs = getOutputsDict()
 
     return template('slurm', outputs=outputs)
 
