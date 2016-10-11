@@ -28,7 +28,19 @@
 <!-- time : current time -->
 <!-- outputs : [str] from all the states -->
 
-<body>
+<body style="padding-top: 60px;">
+
+<nav class="navbar navbar-default navbar-fixed-top" style="margin-top: 0px; padding: 10px; margin-bottom: 0px; background-color: lightgrey;">
+	<div class="container-fluid">
+		<ul class="nav nav-pills nav-justified">
+			% for state in sorted(outputs.keys()):
+				% if filter(None, outputs[state]):
+					<li><a href="#{{state}}" style="font-size: 1.2em;" class="btn btn-default">{{state}}</a></li>
+				% end
+			% end
+		</ul>
+	</div>
+</nav>
 
 <!-- main container start -->
 <div class="container" name="main">

@@ -11,8 +11,9 @@
 				
 				<div class="panel panel-default">
 
-					<div class="panel-header">
-						<h1 name="state-title">*** {{state}} ***</h1>
+					<div class="panel-heading" style="padding-top: 0px;">
+						<a name="{{state}}" class="anchor title-anchor"></a>
+						<h2 name="state-title" style="margin-top: 0px;">{{state}}</h2>
 					</div>
 
 					<div class="panel-body">
@@ -28,7 +29,7 @@
 								<div class="row">
 									<a name="{{i}}" class="anchor"></a>
 									<div class="col-md-2">
-										% include('__nodenames.tpl', nodelist=nodelist, anchor=i)
+										% include('__nodenames.tpl', nodelist=nodelist, anchor=i, requested=requested)
 									</div>
 									<div class="col-md-3">
 										<pre name="field">{{time}}</pre>

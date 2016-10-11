@@ -15,13 +15,18 @@
 	<select name="node" onclick="this.parentElement.submit()">
 
 		% for node in parsed:
+			% if str(requested) == str(node):
+			<option name="nodeOption" value="{{node}}" selected>
+			% else:
 			<option name="nodeOption" value="{{node}}">
+			% end
 				node{{node}}
 			</option>
 		% end
 	</select>
-	<span>
-		[{{len(parsed)}}]
+
+	<span class="label label-default" style="font-size: 1em;">
+		{{len(parsed)}}
 	</span>
 
 <!-- a single node -->
@@ -33,7 +38,7 @@
 	<button type="submit">
 		{{nodelist}}
 	</button>
-	
+
 % end
 
 </form>
