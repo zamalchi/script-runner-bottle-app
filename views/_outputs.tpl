@@ -19,7 +19,7 @@
 
 						% lines = outputs[state]
 
-						<div class="container" name="state-fields">
+						<div class="container-fluid" name="state-fields">
 
 						% for l in lines:
 							% if len(l.split("\t")) == 3:
@@ -28,7 +28,7 @@
 								<div class="row">
 									<a name="{{i}}" class="anchor"></a>
 									<div class="col-md-2">
-										% include('__nodenames.tpl', nodelist=nodelist)
+										% include('__nodenames.tpl', nodelist=nodelist, anchor=i)
 									</div>
 									<div class="col-md-3">
 										<pre name="field">{{time}}</pre>
@@ -37,6 +37,29 @@
 										<pre name="field">{{reasons}}</pre>
 									</div>
 								</div>
+
+								% if str(anchorHere) == str(i):
+									<div class="row">
+										<div class="col-md-12">
+											<div class="panel panel-default" style="border: 1px solid grey;">
+												<div class="panel-heading">
+													<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+												</div>
+
+												<div class="panel-body">
+													% for line in scontrol_result.split("\n"):
+														% for field in line.split(" "):
+															% if '=' in field:
+																% key, val = field.split("=")
+																<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
+															% end
+														% end
+													% end
+												</div>
+											</div>
+										</div>
+									</div>
+								% end
 
 								% i += 1
 							

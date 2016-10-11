@@ -34,7 +34,7 @@
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl')
+% include('_outputs.tpl', anchorHere=anchor, requested=requested, scontrol_result=scontrol_result)
 <!-- outputs row end -->
 
 </div>

@@ -13,8 +13,8 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 
 .anchor {
   display: inline-block;
-  padding-top: 25px;
-  margin-top: -25px; }
+  padding-top: 175px;
+  margin-top: -175px; }
 
 div.panel[name="scontrol"] {
   margin-top: 30px; }
