@@ -20,3 +20,10 @@ div#outputs {
 		}
 	}
 }
+
+// fixes page positioning around anchors
+.anchor {
+	display: inline-block;
+	padding-top: 25px;
+	margin-top: -25px;
+}

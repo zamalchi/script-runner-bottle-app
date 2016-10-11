@@ -2,6 +2,8 @@
 	<div class="col-md-12">
 	<hr />
 
+	% i = 0 # anchor counter index
+
 	% for state in sorted(outputs.keys()):
 		% if filter(None, outputs[state]):
 
@@ -18,10 +20,13 @@
 						% lines = outputs[state]
 
 						<div class="container" name="state-fields">
+
 						% for l in lines:
 							% if len(l.split("\t")) == 3:
+
 								% nodelist, time, reasons = l.split("\t")
 								<div class="row">
+									<a name="{{i}}" class="anchor"></a>
 									<div class="col-md-2">
 										% include('__nodenames.tpl', nodelist=nodelist)
 									</div>
@@ -32,8 +37,12 @@
 										<pre name="field">{{reasons}}</pre>
 									</div>
 								</div>
+
+								% i += 1
+							
 							% end
 						% end
+
 						</div>
 
 					</div>
