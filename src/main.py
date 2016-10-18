@@ -27,6 +27,23 @@ if __name__ == "__main__":
     print("Exiting...")
     exit()
 
+### DEV MODE ###########################################################################################
+
+devMode = False
+
+def setDevMode(d):
+    global devMode
+    if type(d) is bool:
+        devMode = d
+    print("###############")
+    print("DEV MODE ACTIVE")
+    print("###############")
+
+
+def getDevMode():
+    global devMode
+    return devMode
+
 ### FOR CSS READING IN TEMPLATES #######################################################################
 
 SimpleTemplate.defaults["url"] = url
@@ -181,7 +198,8 @@ def hostNotSuppliedMsg():
 @route('/slurm')
 def slurm_nodes():
 
-    from pickle import load
+    outputs = {}
+    scontrol_result = ""
 
     anchor = getAnchorCookie(request)
     deleteAnchorCookie(response)
@@ -189,17 +207,30 @@ def slurm_nodes():
     requested = getRequestedCookie(request)
     deleteRequestedCookie(response)
 
+    if getDevMode():
+        from pickle import load
 
-    nodelist_file = os.path.join(ROOT_DIR, "local_example.p")
-    scontrol_file = os.path.join(ROOT_DIR, "local_scontrol.p")
+        if requested:
+            nodelist_file = scontrol_file = None
+            try:
+                nodelist_file = open(os.path.join(ROOT_DIR, "local_example.p"), 'rb')
+                scontrol_file = open(os.path.join(ROOT_DIR, "local_scontrol.p"), 'rb')
+            except IOError:
+                pass
 
-    scontrol_result = load(open(scontrol_file, 'rb')) or "File not read"
+            if nodelist_file:
+                outputs = load(nodelist_file) or {}
+                nodelist_file.close()
 
-    outputs = load(open(nodelist_file, 'rb'))
+            if scontrol_file:
+                scontrol_result = load(scontrol_file) or "File not read"
+                scontrol_file.close()
 
-    # TODO: change this back before deploying
+    else:
+        if requested:
+            outputs = getOutputsDict()
+            scontrol_result = getScontrol(requested)
 
-    # outputs = getOutputsDict()
 
     return template('slurm', outputs=outputs, anchor=anchor, requested=requested, scontrol_result=scontrol_result)
 
@@ -208,44 +239,25 @@ def slurm_nodes():
 
 @post('/node')
 def scontrol_show_node():
-    requested = request.forms.get('node') or -1
-    setRequestedCookie(response, requested)
 
     anchor = request.forms.get('anchor') or -1
     setAnchorCookie(response, anchor)
 
+    requested = request.forms.get('node') or -1
+    setRequestedCookie(response, requested)
+
     redirect('/slurm#' + anchor)
 
-
-    result = node = state = ""
-
-    if requested != -1:
-        # result = getScontrol(requested)
-
-        # TODO: change this back before deploying
-
-        result = "State for node" + requested
-
-        for u in result.split(" "):
-            if "NodeName=" in u:
-                node = u.split('=')[1]
-            elif "State=" in u:
-                state = u.split('=')[1]
-
-    # TODO: change this back before deploying ???
-
-    # return template('scontrol', result=result, node=node, state=state)
-
-    ########################################################################################################
-    ###################################### NODE ROUTES END #################################################
-    ########################################################################################################
+########################################################################################################
+###################################### NODE ROUTES END #################################################
+########################################################################################################
 
 
 
 
-    ########################################################################################################
-    ########################################################################################################
-    ########################################################################################################
-    ########################################################################################################
-    ########################################################################################################
-    ########################################################################################################
+########################################################################################################
+########################################################################################################
+########################################################################################################
+########################################################################################################
+########################################################################################################
+########################################################################################################
