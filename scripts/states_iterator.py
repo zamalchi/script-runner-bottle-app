@@ -15,6 +15,32 @@ line_sep = line_sep_char * line_sep_num
 #########################################################################################################################
 #########################################################################################################################
 
+def getSingleStateOutput(state):
+    # %E : reasons for state
+    # %H : timestamp
+    # %N : node list
+    output_format = '"%N\t%20H\t%E"'
+
+    # -a : all
+    # -h : no header
+    # -N : node format
+    # -R : list reasons
+    # -t : states
+    # -o : output format
+    cmd = "sinfo -a -h -N -o {0} -R -t {1}".format(output_format, state)
+
+    # getstatusoutput attaches [0] field (return flag?)
+    # for each state, get a list of output lines (each line conforms to output_format)
+    output = commands.getstatusoutput(cmd)[1].split("\n")
+
+    # modify each line in this state
+    # if the line has a long nodelist (length > 35), it will display the nodelist on a separate line with the other information aligned on the next line
+    # if the line has a short nodelist (length <= 35), it will not modify the line
+    output = getModifiedOutput(output)
+
+    return output
+
+
 # TO BE USED INTERNALLY
 
 # returns a list of lists of strings : [[str, str,...], [str, str,...], ...] for each state 
@@ -22,34 +48,13 @@ def getOutputs():
     # list of outputs from each state : each element of this list is a list of lines
     outputs = []
 
-    # %E : reasons for state
-    # %H : timestamp
-    # %N : node list 
-    output_format = '"%N\t%20H\t%E"'
-
     for s in states:
 
-        # -a : all
-        # -h : no header
-        # -N : node format
-        # -R : list reasons
-        # -t : states
-        # -o : output format
-        cmd = "sinfo -a -h -N -o {0} -R -t {1}".format(output_format, s)
-
-        # getstatusoutput attaches [0] field (return flag?)
-        # for each state, get a list of output lines (each line conforms to output_format)
-        o = commands.getstatusoutput(cmd)[1].split("\n")
-
-        # modify each line in this state
-        # if the line has a long nodelist (length > 35), it will display the nodelist on a separate line with the other information aligned on the next line
-        # if the line has a short nodelist (length <= 35), it will not modify the line
-        o = getModifiedOutput(o)
-
         # append to main outputs list
-        outputs.append(o)
+        outputs.append(getSingleStateOutput(s))
 
     return outputs
+
 
 # zips together states and outputs into a dictionary
 def getOutputsDict():
@@ -82,6 +87,8 @@ def getOutputsDict():
 #             text += line_sep + "\n"
 #
 #     return text
+
+
 
 # modifies formatting of each string in a list (the list represents one state) based on the length of each nodelist
 def getModifiedOutput(o):

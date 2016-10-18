@@ -30,7 +30,9 @@
 
 <body style="padding-top: 60px;">
 
-% include('_navbar.tpl', outputs=outputs)
+% states = sorted(outputs.keys())
+
+% include('_navbar.tpl', states=states)
 
 <!-- main container start -->
 <div class="container" name="main">
