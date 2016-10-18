@@ -1,4 +1,4 @@
-<div class="row" id="outputs">
+<div class="row-fluid" id="outputs">
 	<div class="col-md-12">
 	<hr />
 
@@ -26,15 +26,15 @@
 							% if len(l.split("\t")) == 3:
 
 								% nodelist, time, reasons = l.split("\t")
-								<div class="row">
+								<div class="row line">
 									<a name="{{i}}" class="anchor"></a>
-									<div class="col-md-2">
+									<div class="col-md-2 node_name">
 										% include('__nodenames.tpl', nodelist=nodelist, anchor=i, requested=requested)
 									</div>
-									<div class="col-md-3">
+									<div class="col-md-3 node_time">
 										<pre name="field">{{time}}</pre>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-7 node_reason">
 										<pre name="field">{{reasons}}</pre>
 									</div>
 								</div>

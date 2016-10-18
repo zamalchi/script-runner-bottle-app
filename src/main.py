@@ -145,34 +145,34 @@ def hostNotSuppliedMsg():
 ###################################### NODE ROUTES START ###############################################
 ########################################################################################################
 
-@route('/reinstall')
-def reinstall_node():
-    host = getHostParam(request)
-
-    cmd = "{0} {1}".format(getFileName("reinstall"), host)
-
-    if host:
-        result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
-        return result
-
-    return hostNotSuppliedMsg()
+# @route('/reinstall')
+# def reinstall_node():
+#     host = getHostParam(request)
+#
+#     cmd = "{0} {1}".format(getFileName("reinstall"), host)
+#
+#     if host:
+#         result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
+#         return result
+#
+#     return hostNotSuppliedMsg()
 
 
 ########################################################################################################
 ########################################################################################################
 
-@route('/default')
-def default_node():
-    host = getHostParam(request)
-
-    cmd = "{0} {1}".format(getFileName("default"), host)
-
-    if host:
-        result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
-
-        return result
-
-    return hostNotSuppliedMsg()
+# @route('/default')
+# def default_node():
+#     host = getHostParam(request)
+#
+#     cmd = "{0} {1}".format(getFileName("default"), host)
+#
+#     if host:
+#         result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
+#
+#         return result
+#
+#     return hostNotSuppliedMsg()
 
 
 ########################################################################################################

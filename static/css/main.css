@@ -1,6 +1,24 @@
 body {
   background-color: #476f9e; }
 
+.navbar {
+  background-color: #cccccc;
+  margin: 0 auto;
+  padding: 10px; }
+
+.nav-item {
+  flex: 1; }
+
+.nav-button {
+  font-size: 1.5vw; }
+
+@media (min-width: 800px) {
+  .nav-list {
+    display: flex;
+    justify-content: space-between; } }
+@media (min-width: 1200px) {
+  .nav-button {
+    font-size: 1.3em; } }
 div#outputs div[name="state"] [name="state-title"] {
   font-size: 2vw;
   margin-left: 30px; }
