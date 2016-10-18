@@ -3,29 +3,42 @@
 
 % from scripts.states_iterator import parseNodeList
 
+<form action="/node" method="post" enctype="multipart/form-data">
+
+<!-- for reloading the page to a specific location -->
+<input type="hidden" name="anchor" value="{{anchor}}" />
+
 <!-- a list to parse -->
 % if '[' in nodelist:
 	% parsed = parseNodeList(nodelist)
-	<form action="/node" method="post" enctype="multipart/form-data">
-		<select name="node" onclick="this.parentElement.submit()">
-			% for node in parsed:
-				<option name="nodeOption" value="{{node}}">
-					node{{node}}
-				</option>
+	
+	<select name="node" onclick="this.parentElement.submit()">
+
+		% for node in parsed:
+			% if str(requested) == str(node):
+			<option name="nodeOption" value="{{node}}" selected>
+			% else:
+			<option name="nodeOption" value="{{node}}">
 			% end
-		</select>
-		<span>
-			[{{len(parsed)}}]
-		</span>
-	</form>
+				node{{node}}
+			</option>
+		% end
+	</select>
+
+	<span class="label label-default" style="font-size: 1em;">
+		{{len(parsed)}}
+	</span>
 
 <!-- a single node -->
 % else:
 	% node = nodelist.replace('node', '')
-	<form action="/node" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="node" class="field" value="{{node}}" />
-		<button type="submit">
-			{{nodelist}}
-		</button>
-	</form>
+
+	<input type="hidden" name="node" class="field" value="{{node}}" />
+
+	<button type="submit">
+		{{nodelist}}
+	</button>
+
 % end
+
+</form>

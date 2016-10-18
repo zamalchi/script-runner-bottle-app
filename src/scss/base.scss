@@ -7,6 +7,8 @@ body {
 	background-color: $bg_color;
 }
 
+@import 'navbar';
+
 @import 'outputs';
 
 @import 'scontrol';

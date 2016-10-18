@@ -17,7 +17,7 @@
 
 	<!-- custom js functions -->
 	% include('_js_functions.tpl')
-
+	
 	<!-- SCRIPTS END -->
 	<!-- ######################################################################################################### -->
 
@@ -28,13 +28,15 @@
 <!-- time : current time -->
 <!-- outputs : [str] from all the states -->
 
-<body>
+<body style="padding-top: 60px;">
+
+% include('_navbar.tpl', outputs=outputs)
 
 <!-- main container start -->
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl')
+% include('_outputs.tpl', anchorHere=anchor, requested=requested, scontrol_result=scontrol_result)
 <!-- outputs row end -->
 
 </div>
