@@ -9,7 +9,7 @@
 import os
 import sys
 
-from src.bottle import route, get, request, static_file, SimpleTemplate, url
+from src.bottle import route, get, post, request, response, static_file, SimpleTemplate, url, template, redirect
 
 from config.dirs import ROOT_DIR
 
@@ -26,6 +26,23 @@ if __name__ == "__main__":
     print("Run app through wrapper.")
     print("Exiting...")
     exit()
+
+### DEV MODE ###########################################################################################
+
+devMode = False
+
+def setDevMode(d):
+    global devMode
+    if type(d) is bool:
+        devMode = d
+    print("###############")
+    print("DEV MODE ACTIVE")
+    print("###############")
+
+
+def getDevMode():
+    global devMode
+    return devMode
 
 ### FOR CSS READING IN TEMPLATES #######################################################################
 
@@ -85,7 +102,26 @@ def fonts(filename):
 # def setCookie(response, value):
 #     response.set_cookie("foo", value)
 
+### ANCHOR ######################################################
+def getAnchorCookie(req):
+    return req.get_cookie("anchor") or "-1"
 
+def setAnchorCookie(res, anchor):
+    res.set_cookie("anchor", str(anchor))
+
+def deleteAnchorCookie(res):
+    res.delete_cookie("anchor")
+
+### REQUESTED NODE ##############################################
+
+def getRequestedCookie(req):
+    return req.get_cookie("requested") or "-1"
+
+def setRequestedCookie(res, requested):
+    res.set_cookie("requested", str(requested))
+
+def deleteRequestedCookie(res):
+    res.delete_cookie("requested")
 
 ### HELPER METHODS #####################################################################################
 
@@ -126,34 +162,34 @@ def hostNotSuppliedMsg():
 ###################################### NODE ROUTES START ###############################################
 ########################################################################################################
 
-@route('/reinstall')
-def reinstall_node():
-    host = getHostParam(request)
-
-    cmd = "{0} {1}".format(getFileName("reinstall"), host)
-
-    if host:
-        result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
-        return result
-
-    return hostNotSuppliedMsg()
+# @route('/reinstall')
+# def reinstall_node():
+#     host = getHostParam(request)
+#
+#     cmd = "{0} {1}".format(getFileName("reinstall"), host)
+#
+#     if host:
+#         result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
+#         return result
+#
+#     return hostNotSuppliedMsg()
 
 
 ########################################################################################################
 ########################################################################################################
 
-@route('/default')
-def default_node():
-    host = getHostParam(request)
-
-    cmd = "{0} {1}".format(getFileName("default"), host)
-
-    if host:
-        result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
-
-        return result
-
-    return hostNotSuppliedMsg()
+# @route('/default')
+# def default_node():
+#     host = getHostParam(request)
+#
+#     cmd = "{0} {1}".format(getFileName("default"), host)
+#
+#     if host:
+#         result = getHTMLWrapper(commands.getstatusoutput(cmd)[1])
+#
+#         return result
+#
+#     return hostNotSuppliedMsg()
 
 
 ########################################################################################################
@@ -162,15 +198,55 @@ def default_node():
 @route('/slurm')
 def slurm_nodes():
 
-    text = saveOutputsToVar()
+    outputs = {}
+    scontrol_result = ""
 
-    #######################################################
+    anchor = getAnchorCookie(request)
+    deleteAnchorCookie(response)
 
-    result = "<pre>" + text + "</pre>"
+    requested = getRequestedCookie(request)
+    deleteRequestedCookie(response)
 
-    result = getHTMLWrapper(result)
+    if getDevMode():
+        from pickle import load
 
-    return result
+        if requested:
+            nodelist_file = scontrol_file = None
+            try:
+                nodelist_file = open(os.path.join(ROOT_DIR, "local_example.p"), 'rb')
+                scontrol_file = open(os.path.join(ROOT_DIR, "local_scontrol.p"), 'rb')
+            except IOError:
+                pass
+
+            if nodelist_file:
+                outputs = load(nodelist_file) or {}
+                nodelist_file.close()
+
+            if scontrol_file:
+                scontrol_result = load(scontrol_file) or "File not read"
+                scontrol_file.close()
+
+    else:
+        if requested:
+            outputs = getOutputsDict()
+            scontrol_result = getScontrol(requested)
+
+
+    return template('slurm', outputs=outputs, anchor=anchor, requested=requested, scontrol_result=scontrol_result)
+
+########################################################################################################
+########################################################################################################
+
+@post('/node')
+def scontrol_show_node():
+
+    anchor = request.forms.get('anchor') or -1
+    setAnchorCookie(response, anchor)
+
+    requested = request.forms.get('node') or -1
+    setRequestedCookie(response, requested)
+
+    redirect('/slurm#' + anchor)
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
