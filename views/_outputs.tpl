@@ -1,5 +1,8 @@
 <div class="row-fluid" id="outputs">
 	<div class="col-md-12">
+
+	% include('_search.tpl')
+
 	<hr />
 
 	% i = 0 # anchor counter index
