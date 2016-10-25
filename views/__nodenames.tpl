@@ -1,8 +1,6 @@
 <!-- called from _outputs.tpl -->
 <!-- nodelist : str -->
 
-% from scripts.states_iterator import parseNodeList
-
 <form action="/node" method="post" enctype="multipart/form-data">
 
 <!-- for reloading the page to a specific location -->
@@ -13,7 +11,7 @@
 
 	<select name="node" onclick="this.parentElement.submit()">
 
-		% for node in parsed:
+		% for node in nodes:
 			% if str(requested) == str(node):
 			<option name="nodeOption" value="{{node}}" selected>
 			% else:
