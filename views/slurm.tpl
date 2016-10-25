@@ -30,7 +30,7 @@
 
 <body style="padding-top: 60px;">
 
-% states = sorted(outputs.keys())
+% states = sorted(sinfo_output.keys())
 
 % include('_navbar.tpl', states=states)
 
@@ -38,7 +38,7 @@
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl', anchorHere=anchor, requested=requested, scontrol_result=scontrol_result)
+% include('_outputs.tpl', anchorHere=anchor, requested=requested, sinfo_output=sinfo_output, scontrol_output=scontrol_output)
 <!-- outputs row end -->
 
 </div>

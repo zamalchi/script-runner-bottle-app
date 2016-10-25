@@ -13,7 +13,7 @@ from src.bottle import route, get, post, request, response, static_file, SimpleT
 
 from config.dirs import ROOT_DIR
 
-from scripts.states_iterator import *
+# from scripts.states_iterator import *
 
 from classes.Slurm import Slurm
 
@@ -218,38 +218,39 @@ def slurm_nodes():
     #################################################
 
     # if dev mode
-    if getDevMode():
-        ####
-        from pickle import load
-        sinfo_path = os.path.join(ROOT_DIR, "local_class.p")
-        scontrol_path = os.path.join(ROOT_DIR, "local_scontrol.p")
-        ####
-
-        try:
-            sinfo_file = open(sinfo_path, 'rb')
-            sinfo_output = load(sinfo_file)
-            sinfo_file.close()
-
-            # if a specific node was requested
-            if requested:
-                scontrol_file = open(scontrol_path, 'rb')
-                scontrol_output = load(scontrol_file)
-                scontrol_file.close()
-
-        except IOError:
-            pass
+    # if getDevMode():
+    #     ####
+    #     from pickle import load
+    #     sinfo_path = os.path.join(ROOT_DIR, "local_class.p")
+    #     scontrol_path = os.path.join(ROOT_DIR, "local_scontrol.p")
+    #     ####
+    #
+    #     try:
+    #         sinfo_file = open(sinfo_path, 'rb')
+    #         sinfo_output = load(sinfo_file)
+    #         sinfo_file.close()
+    #
+    #         # if a specific node was requested
+    #         if requested:
+    #             scontrol_file = open(scontrol_path, 'rb')
+    #             scontrol_output = load(scontrol_file)
+    #             scontrol_file.close()
+    #
+    #     except IOError:
+    #         pass
 
     #################################################
 
     # not dev mode
-    else:
-        # dict of (state --> obj) pairs
-        sinfo_output = Slurm.getNonEmptyStates()
+    # else:
 
-        # if a specific node was requested
-        if requested:
-            # get the scontrol info for that node (nodename, scontrol output)
-            scontrol_output = (requested, getScontrol(requested))
+    # dict of (state --> obj) pairs
+    sinfo_output = Slurm.getNonEmptyStates()
+
+    # if a specific node was requested
+    if requested:
+        # get the scontrol info for that node (nodename, scontrol output)
+        scontrol_output = (requested, Slurm.getScontrol(requested))
 
     #################################################
 

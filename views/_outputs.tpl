@@ -7,8 +7,8 @@
 
 	% i = 0 # anchor counter index
 
-	% for state in sorted(outputs.keys()):
-		% if filter(None, outputs[state]):
+	% for state in states:
+		% if filter(None, outputs[state]): # TODO : redundant b/c only non-empty states are passed here
 
 			<div name="state" id="state-{{state}}">
 				
@@ -21,53 +21,51 @@
 
 					<div class="panel-body">
 
-						% lines = outputs[state]
+						% sinfo_object = sinfo_output[state]
+						% entries = sinfo_object.entries
 
 						<div class="container-fluid" name="state-fields">
 
-						% for l in lines:
-							% if len(l.split("\t")) == 3:
+						% for each in entries:
 
-								% nodelist, time, reasons = l.split("\t")
-								<div class="row line">
-									<a name="{{i}}" class="anchor"></a>
-									<div class="col-md-2 node_name">
-										% include('__nodenames.tpl', nodelist=nodelist, anchor=i, requested=requested)
-									</div>
-									<div class="col-md-3 node_time">
-										<pre name="field">{{time}}</pre>
-									</div>
-									<div class="col-md-7 node_reason">
-										<pre name="field">{{reasons}}</pre>
-									</div>
+							<div class="row line">
+								<a name="{{i}}" class="anchor"></a>
+								<div class="col-md-2 node_name">
+									% include('__nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested)
 								</div>
+								<div class="col-md-3 node_time">
+									<pre name="field">{{each.time}}</pre>
+								</div>
+								<div class="col-md-7 node_reason">
+									<pre name="field">{{each.reasons}}</pre>
+								</div>
+							</div>
 
-								% if str(anchorHere) == str(i):
-									<div class="row">
-										<div class="col-md-12">
-											<div class="panel panel-default" style="border: 1px solid grey;">
-												<div class="panel-heading">
-													<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
-												</div>
+							% if str(anchorHere) == str(i):
+								<div class="row">
+									<div class="col-md-12">
+										<div class="panel panel-default" style="border: 1px solid grey;">
+											<div class="panel-heading">
+												<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+											</div>
 
-												<div class="panel-body">
-													% for line in scontrol_result.split("\n"):
-														% for field in line.split(" "):
-															% if '=' in field:
-																% key, val = field.split("=")
-																<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
-															% end
+											<div class="panel-body">
+												% for line in scontrol_result.split("\n"):
+													% for field in line.split(" "):
+														% if '=' in field:
+															% key, val = field.split("=")
+															<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
 														% end
 													% end
-												</div>
+												% end
 											</div>
 										</div>
 									</div>
-								% end
-
-								% i += 1
-							
+								</div>
 							% end
+
+							% i += 1
+							
 						% end
 
 						</div>
