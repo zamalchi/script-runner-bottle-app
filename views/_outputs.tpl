@@ -22,8 +22,11 @@
 
 					% sinfo_object = sinfo_output[state]
 					% entries = sinfo_object.entries
+					% requestedLivesHere = sinfo_object.findNodeInEntries(requested)
 
 					<div class="container-fluid" name="state-fields">
+				
+					% entry_counter = 0 # entry counter
 
 					% for each in entries:
 
@@ -40,7 +43,7 @@
 							</div>
 						</div>
 
-						% if str(anchorHere) == str(i):
+						% if requestedLivesHere == entry_counter:
 							<div class="row">
 								<div class="col-md-12">
 									<div class="panel panel-default" style="border: 1px solid grey;">
@@ -64,7 +67,8 @@
 						% end
 
 						% i += 1
-						
+						% entry_counter += 1
+
 					% end
 
 					</div>

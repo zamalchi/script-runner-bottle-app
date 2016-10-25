@@ -198,7 +198,6 @@ class Slurm:
             self.__name = state
             self.__entries = entries
 
-
         def findNodeInEntries(self, node):
             # return <int> : index (in self.__entries) where the node is located (or -1 if not found)
 
