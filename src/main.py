@@ -256,6 +256,7 @@ def slurm_nodes():
 
     return template('slurm',
                     anchor=anchor,
+                    requested=requested,
                     sinfo_output=sinfo_output,
                     scontrol_output=scontrol_output)
 
