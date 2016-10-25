@@ -31,7 +31,7 @@
 	<input type="hidden" name="node" class="field" value="{{nodes[0]}}" />
 
 	<button type="submit">
-		{{nodes[0]}}
+		node{{nodes[0]}}
 	</button>
 
 % end
