@@ -36,7 +36,7 @@
 								<pre name="field">{{each.time}}</pre>
 							</div>
 							<div class="col-md-7 node_reason">
-								<pre name="field">{{each.reasons}}</pre>
+								<pre name="field">{{each.reason}}</pre>
 							</div>
 						</div>
 
