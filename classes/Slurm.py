@@ -35,7 +35,7 @@ class Slurm:
 
         @property
         def time(self):
-            return self.__nodes
+            return self.__time
 
         @property
         def reason(self):
