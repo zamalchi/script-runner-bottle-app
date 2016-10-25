@@ -208,42 +208,6 @@ def slurm_nodes():
     requested = getRequestedCookie(request)
     deleteRequestedCookie(response)
 
-    # state name --> object containing all entries for that state
-    sinfo_output = {}
-
-    # scontrol output for the specific node
-    scontrol_output = ""
-
-
-    #################################################
-
-    # if dev mode
-    # if getDevMode():
-    #     ####
-    #     from pickle import load
-    #     sinfo_path = os.path.join(ROOT_DIR, "local_class.p")
-    #     scontrol_path = os.path.join(ROOT_DIR, "local_scontrol.p")
-    #     ####
-    #
-    #     try:
-    #         sinfo_file = open(sinfo_path, 'rb')
-    #         sinfo_output = load(sinfo_file)
-    #         sinfo_file.close()
-    #
-    #         # if a specific node was requested
-    #         if requested:
-    #             scontrol_file = open(scontrol_path, 'rb')
-    #             scontrol_output = load(scontrol_file)
-    #             scontrol_file.close()
-    #
-    #     except IOError:
-    #         pass
-
-    #################################################
-
-    # not dev mode
-    # else:
-
     # dict of (state --> obj) pairs
     sinfo_output = Slurm.getNonEmptyStates()
 

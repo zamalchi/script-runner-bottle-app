@@ -17,35 +17,6 @@ class Slurm:
     ####################################################################################################
     # X
     ####################################################################################################
-    ### Entry : INNER CLASS START
-    ####################################################################################################
-
-    class Entry:
-        def __init__(self, entry):
-            if len(entry) == 3:
-                self.__nodes, self.__time, self.__reason = entry
-            else:
-                self.__nodes = []
-                self.__time = ""
-                self.__reason = ""
-
-        @property
-        def nodes(self):
-            return self.__nodes
-
-        @property
-        def time(self):
-            return self.__time
-
-        @property
-        def reason(self):
-            return self.__reason
-
-    ####################################################################################################
-    ### Entry : INNER CLASS END
-    ####################################################################################################
-    # X
-    ####################################################################################################
     ### STATIC METHODS START
     ####################################################################################################
 
@@ -169,7 +140,7 @@ class Slurm:
         result = {}
 
         for s in Slurm.states:
-            obj = Slurm(s)
+            obj = Slurm.State(s)
 
             if obj.hasEntries():
                 result[s] = obj
@@ -197,46 +168,83 @@ class Slurm:
     ####################################################################################################
     # X
     ####################################################################################################
-    ### CLASS METHODS START
+    ### CLASS METHODS / INNER CLASSES START
     ####################################################################################################
+    # X
+    ### State : INNER CLASS START
 
-    @property
-    def entries(self):
-        return self.__entries
+    class State:
 
-    # used by : Slurm.getNonEmptyStates
-    def __init__(self, state):
+        @property
+        def entries(self):
+            return self.__entries
 
-        raw = Slurm.getSingleStateOutput(state)
-        entries = []
+        @property
+        def name(self):
+            return self.__name
 
-        for each in raw:
-            entry = Slurm.Entry(each)
+        # used by : Slurm.getNonEmptyStates
+        def __init__(self, state):
 
-            if entry.nodes:
-                entries.append(entry)
+            raw = Slurm.getSingleStateOutput(state)
+            entries = []
 
-        self.__entries = entries
+            for each in raw:
+                entry = Slurm.Entry(each)
+
+                if entry.nodes:
+                    entries.append(entry)
+
+            self.__name = state
+            self.__entries = entries
 
 
-    def findNodeInEntries(self, node):
-        # return <int> : index (in self.__entries) where the node is located (or -1 if not found)
+        def findNodeInEntries(self, node):
+            # return <int> : index (in self.__entries) where the node is located (or -1 if not found)
 
-        node = Slurm.normalizeNodeName(node)
-        i = 0
+            node = Slurm.normalizeNodeName(node)
+            i = 0
 
-        for entry in self.entries:
-            if node in entry.nodes:
-                return i
-            i += 1
+            for entry in self.entries:
+                if node in entry.nodes:
+                    return i
+                i += 1
 
-        return -1
+            return -1
 
-    def hasEntries(self):
-        return bool(self.__entries)
+        def hasEntries(self):
+            return bool(self.__entries)
 
+    ### State : INNER CLASS END
+    # X
+    ### Entry : INNER CLASS START
+
+    class Entry:
+
+        @property
+        def nodes(self):
+            return self.__nodes
+
+        @property
+        def time(self):
+            return self.__time
+
+        @property
+        def reason(self):
+            return self.__reason
+
+        def __init__(self, entry):
+            if len(entry) == 3:
+                self.__nodes, self.__time, self.__reason = entry
+            else:
+                self.__nodes = []
+                self.__time = ""
+                self.__reason = ""
+
+    ### Entry : INNER CLASS END
+    # X
     ####################################################################################################
-    ### CLASS METHODS END
+    ### CLASS METHODS / INNER CLASSES END
     ####################################################################################################
     # X
 ########################################################################################################
