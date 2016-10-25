@@ -211,8 +211,8 @@ def slurm_nodes():
     # state name --> object containing all entries for that state
     sinfo_output = {}
 
-    # node name --> scontrol output for the specific node
-    scontrol_output = ()
+    # scontrol output for the specific node
+    scontrol_output = ""
 
 
     #################################################
@@ -250,7 +250,7 @@ def slurm_nodes():
     # if a specific node was requested
     if requested:
         # get the scontrol info for that node (nodename, scontrol output)
-        scontrol_output = (requested, Slurm.getScontrol(requested))
+        scontrol_output = Slurm.getScontrol(requested)
 
     #################################################
 
