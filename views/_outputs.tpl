@@ -49,7 +49,7 @@
 										</div>
 
 										<div class="panel-body">
-											% for line in scontrol_result.split("\n"):
+											% for line in scontrol_output.split("\n"):
 												% for field in line.split(" "):
 													% if '=' in field:
 														% key, val = field.split("=")
