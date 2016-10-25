@@ -25,7 +25,9 @@ class Slurm:
             if len(entry) == 3:
                 self.__nodes, self.__time, self.__reason = entry
             else:
-                self.__nodes = self.__time = self.__reason = None
+                self.__nodes = []
+                self.__time = ""
+                self.__reason = ""
 
         @property
         def nodes(self):
