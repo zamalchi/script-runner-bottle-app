@@ -245,7 +245,9 @@ def scontrol_show_node():
 @post('/search')
 def search_for_node():
 
-    requested = Slurm.normalizeNodeName(request.forms.get('search'))
+    requested_node = Slurm.normalizeNodeName(request.forms.get('search'))
+
+    setRequestedCookie(response, requested_node)
 
     # states = sorted(d.keys())
     # for state in states:
