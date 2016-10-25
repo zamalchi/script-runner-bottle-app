@@ -9,9 +9,8 @@
 <input type="hidden" name="anchor" value="{{anchor}}" />
 
 <!-- a list to parse -->
-% if '[' in nodelist:
-	% parsed = parseNodeList(nodelist)
-	
+% if len(nodes) > 1:
+
 	<select name="node" onclick="this.parentElement.submit()">
 
 		% for node in parsed:
@@ -26,17 +25,15 @@
 	</select>
 
 	<span class="label label-default" style="font-size: 1em;">
-		{{len(parsed)}}
+		{{len(nodes)}}
 	</span>
 
 <!-- a single node -->
 % else:
-	% node = nodelist.replace('node', '')
-
-	<input type="hidden" name="node" class="field" value="{{node}}" />
+	<input type="hidden" name="node" class="field" value="{{nodes[0]}}" />
 
 	<button type="submit">
-		{{nodelist}}
+		{{nodes[0]}}
 	</button>
 
 % end
