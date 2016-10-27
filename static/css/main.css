@@ -42,10 +42,11 @@ div#outputs div[name="state"] div[name="state-fields"] select {
   overflow: scroll; }
 
 .entry {
-  border: 2px solid darkgrey;
+  border: 2px solid #cccccc;
   border-radius: 3px;
   margin: 3px auto;
-  padding: 3px; }
+  padding: 3px;
+  background-color: #dddddd; }
 
 div.panel[name="scontrol"] {
   margin-top: 30px; }

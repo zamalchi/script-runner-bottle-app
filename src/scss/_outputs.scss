@@ -55,8 +55,9 @@ div#outputs {
 // }
 
 .entry {
-	border: 2px solid darkgrey;
+	border: 2px solid $dark_grey;
 	border-radius: 3px;
 	margin: 3px auto;
 	padding: 3px;
+	background-color: $light_grey;
 }
