@@ -44,8 +44,8 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 .entry {
   border: 2px solid #cccccc;
   border-radius: 3px;
-  margin: 3px auto;
-  padding: 3px;
+  margin: 5px auto;
+  padding: 10px;
   background-color: #dddddd; }
 
 div.panel[name="scontrol"] {
