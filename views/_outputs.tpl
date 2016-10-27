@@ -28,6 +28,7 @@
 					% entry_counter = 0 # entry counter
 
 					% for each in entries:
+						% noNodeList = False # if the entry has a single node, don't add the nodelist in a row below
 
 						<div class="entry">
 
@@ -99,15 +100,17 @@
 								</div>
 							% end
 
-							<div class="row">
-								<div class="col-md-12">
-									% nodelist = []
-									% for node in each.nodes:
-										% nodelist.append(node)
-									% end
-									<pre name="nodelist">{{" ".join(nodelist)}}</pre>
+							% if not noNodeList:
+								<div class="row">
+									<div class="col-md-12">
+										% nodelist = []
+										% for node in each.nodes:
+											% nodelist.append(node)
+										% end
+										<pre name="nodelist">{{" ".join(nodelist)}}</pre>
+									</div>
 								</div>
-							</div>
+							% end
 
 							% i += 1
 							% entry_counter += 1
