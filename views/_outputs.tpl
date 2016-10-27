@@ -110,6 +110,8 @@
 						% i += 1
 						% entry_counter += 1
 
+						<hr style="border-bottom: 1px solid darkgrey; padding: 0; margin: 0 5px;"/>
+
 					% end
 
 					</div>
