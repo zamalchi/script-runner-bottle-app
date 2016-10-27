@@ -42,7 +42,7 @@
 						</div>
 
 						% if requestedLivesHere == entry_counter:
-							<div class="row" onload="anchorHere(this)" data-anchor="{{i}}">
+							<div class="row" id="requested" data-anchor="{{i}}">
 								<div class="col-md-12">
 									<div class="panel panel-default" style="border: 1px solid grey;">
 										<div class="panel-heading">
