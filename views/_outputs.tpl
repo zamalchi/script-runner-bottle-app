@@ -28,14 +28,13 @@
 					% entry_counter = 0 # entry counter
 
 					% for each in entries:
-						% noNodeList = False # if the entry has a single node, don't add the nodelist in a row below
 
 						<div class="entry">
 
 							<div class="row line">
 								<a name="{{i}}" class="anchor"></a>
 								<div class="col-md-3 node_name">
-									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested, noNodeList=noNodeList)
+									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested)
 								</div>
 								<div class="col-md-3 node_time">
 									<pre name="field">{{each.time}}</pre>
@@ -100,7 +99,7 @@
 								</div>
 							% end
 
-							% if not noNodeList:
+							% if len(each.nodes) > 1:
 								<div class="row">
 									<div class="col-md-12">
 										% nodelist = []
