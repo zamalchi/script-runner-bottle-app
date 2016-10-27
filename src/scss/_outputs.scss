@@ -45,8 +45,13 @@ div#outputs {
 
 .nodelist {
 	height: 1em;
-	line-height: 1em;
-	overflow: scroll;
+	max-height: 3em;
+
+	line-height: 2em;
+	
+	overflow: auto;
+	overflow-x: hidden;
+	
 	width: 100%;
 }
 
