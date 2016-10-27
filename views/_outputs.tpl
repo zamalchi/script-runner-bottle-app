@@ -4,6 +4,7 @@
 	<hr />
 
 	% i = 0 # anchor counter index
+	% requestedInfoDisplayed = False # ensures only one div is displayed when providing scontrol output (case : node in multiple states)
 
 	% for state in states:
 
@@ -21,7 +22,6 @@
 					% sinfo_object = sinfo_output[state]
 					% entries = sinfo_object.entries
 					% requestedLivesHere = sinfo_object.findNodeInEntries(requested)
-					% requestedInfoDisplayed = False
 
 					<div class="container-fluid" name="state-fields">
 				
