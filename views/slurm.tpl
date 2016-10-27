@@ -15,7 +15,7 @@
 <!-- time : current time -->
 <!-- outputs : [str] from all the states -->
 
-<body style="padding-top: 180px;" onload="anchorToRequested()">
+<body style="padding-top: 143.5px;" onload="anchorToRequested()">
 
 % states = sorted(sinfo_output.keys())
 
