@@ -62,7 +62,7 @@
 											</div>
 										</div>
 
-										<div id="full-view" class="panel panel-default" style="border: 1px solid grey;">
+										<div id="full-view" class="panel panel-default tab-pane fade" style="border: 1px solid grey;">
 											<div class="panel-heading">
 												<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
 											</div>
