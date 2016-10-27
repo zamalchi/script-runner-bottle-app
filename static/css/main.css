@@ -31,12 +31,12 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 
 .anchor {
   display: inline-block;
-  padding-top: 300px;
-  margin-top: -300px; }
+  padding-top: 200px;
+  margin-top: -200px; }
 
 .title-anchor {
-  padding-top: 100px;
-  margin-top: -100px; }
+  padding-top: 200px;
+  margin-top: -200px; }
 
 .nodelist {
   overflow: scroll; }
