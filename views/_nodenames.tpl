@@ -5,7 +5,6 @@
 
 <!-- for reloading the page to a specific location -->
 <input type="hidden" name="anchor" value="{{anchor}}" />
-<span>{{anchor}}</span>
 
 <!-- a list to parse -->
 % if len(nodes) > 1:
