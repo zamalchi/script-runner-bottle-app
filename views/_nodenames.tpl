@@ -29,6 +29,7 @@
 
 <!-- a single node -->
 % else:
+	% global noNodeList
 	% noNodeList = True
 	<input type="hidden" name="node" class="field" value="{{nodes[0]}}" />
 
