@@ -97,6 +97,16 @@
 							</div>
 						% end
 
+						<div class="row">
+							<div class="col-md-12">
+								% nodelist = []
+								% for node in each.nodes:
+									% nodelist.append(node)
+								% end
+								<span>{{" ".join(nodelist)}}</span>
+							</div>
+						</div>
+
 						% i += 1
 						% entry_counter += 1
 
