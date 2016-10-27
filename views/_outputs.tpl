@@ -21,6 +21,7 @@
 					% sinfo_object = sinfo_output[state]
 					% entries = sinfo_object.entries
 					% requestedLivesHere = sinfo_object.findNodeInEntries(requested)
+					% requestedInfoDisplayed = False
 
 					<div class="container-fluid" name="state-fields">
 				
@@ -41,7 +42,8 @@
 							</div>
 						</div>
 
-						% if requestedLivesHere == entry_counter:
+						% if requestedLivesHere == entry_counter and not requestedInfoDisplayed:
+							% requestedInfoDisplayed = True
 							<div class="row" id="requested" data-anchor="{{i}}">
 								<div class="col-md-12">
 		
