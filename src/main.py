@@ -13,7 +13,9 @@ from src.bottle import route, get, post, request, response, static_file, SimpleT
 
 from config.dirs import ROOT_DIR
 
-from scripts.states_iterator import *
+# from scripts.states_iterator import *
+
+from classes.Slurm import Slurm
 
 ### APACHE #############################################################################################
 
@@ -198,41 +200,30 @@ def hostNotSuppliedMsg():
 @route('/slurm')
 def slurm_nodes():
 
-    outputs = {}
-    scontrol_result = ""
-
+    # get and delete anchor cookie
     anchor = getAnchorCookie(request)
     deleteAnchorCookie(response)
 
+    # get and delete requested node cookie
     requested = getRequestedCookie(request)
     deleteRequestedCookie(response)
 
-    if getDevMode():
-        from pickle import load
+    # dict of (state --> obj) pairs
+    sinfo_output = Slurm.getNonEmptyStates()
 
-        if requested:
-            nodelist_file = scontrol_file = None
-            try:
-                nodelist_file = open(os.path.join(ROOT_DIR, "local_example.p"), 'rb')
-                scontrol_file = open(os.path.join(ROOT_DIR, "local_scontrol.p"), 'rb')
-            except IOError:
-                pass
+    # if a specific node was requested
+    if requested:
+        # get the scontrol info for that node (nodename, scontrol output)
+        scontrol_output = Slurm.getScontrol(requested)
 
-            if nodelist_file:
-                outputs = load(nodelist_file) or {}
-                nodelist_file.close()
+    #################################################
 
-            if scontrol_file:
-                scontrol_result = load(scontrol_file) or "File not read"
-                scontrol_file.close()
+    return template('slurm',
+                    anchor=anchor,
+                    requested=requested,
+                    sinfo_output=sinfo_output,
+                    scontrol_output=scontrol_output)
 
-    else:
-        if requested:
-            outputs = getOutputsDict()
-            scontrol_result = getScontrol(requested)
-
-
-    return template('slurm', outputs=outputs, anchor=anchor, requested=requested, scontrol_result=scontrol_result)
 
 ########################################################################################################
 ########################################################################################################
@@ -247,6 +238,21 @@ def scontrol_show_node():
     setRequestedCookie(response, requested)
 
     redirect('/slurm#' + anchor)
+
+########################################################################################################
+########################################################################################################
+
+@post('/search')
+def search_for_node():
+
+    # get requested node and parse out the number
+    requested_node = Slurm.normalizeNodeName(request.forms.get('search'))
+
+    # set the cookie to be used in /slurm
+    setRequestedCookie(response, requested_node)
+
+    redirect("/slurm")
+
 
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
