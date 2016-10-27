@@ -35,7 +35,7 @@
 							<div class="row line">
 								<a name="{{i}}" class="anchor"></a>
 								<div class="col-md-3 node_name">
-									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested)
+									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested, noNodeList=noNodeList)
 								</div>
 								<div class="col-md-3 node_time">
 									<pre name="field">{{each.time}}</pre>
