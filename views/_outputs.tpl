@@ -103,7 +103,7 @@
 								% for node in each.nodes:
 									% nodelist.append(node)
 								% end
-								<span class="label label-default nodelist">{{" ".join(nodelist)}}</span>
+								<pre name="nodelist">{" ".join(nodelist)}}</pre>
 							</div>
 						</div>
 
