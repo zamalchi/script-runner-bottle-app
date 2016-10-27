@@ -8,19 +8,6 @@
 
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- ######################################################################################################### -->
-	<!-- SCRIPTS START -->	
-
- 	<!-- jquery must come first and is required by bootstrap -->
-	<script src="js/jquery-3.1.0.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-
-	<!-- custom js functions -->
-	% include('_js_functions.tpl')
-	
-	<!-- SCRIPTS END -->
-	<!-- ######################################################################################################### -->
-
 </head>
 
 
@@ -43,6 +30,20 @@
 
 </div>
 <!-- main container end -->
+
+
+<!-- ######################################################################################################### -->
+<!-- SCRIPTS START -->	
+
+	<!-- jquery must come first and is required by bootstrap -->
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- custom js functions -->
+% include('_js_functions.tpl')
+
+<!-- SCRIPTS END -->
+<!-- ######################################################################################################### -->
 
 </body>
 
