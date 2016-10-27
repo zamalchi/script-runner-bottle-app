@@ -58,7 +58,17 @@
 											</div>
 
 											<div class="panel-body">
-												<h5>OVerview!</h5>
+												% overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "AllocMem", "State"]
+												% for line in scontrol_output.split("\n"):
+													% for field in line.split(" "):
+														% if '=' in field:
+															% key, val = field.split("=")
+															% if key in overviewFields:
+																<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
+															% end
+														% end
+													% end
+												% end
 											</div>
 										</div>
 
