@@ -39,6 +39,7 @@ div#outputs div[name="state"] div[name="state-fields"] select {
   margin-top: -200px; }
 
 .nodelist {
+  font-family: Monospace;
   min-height: 1em;
   max-height: 4em;
   line-height: 2em;
