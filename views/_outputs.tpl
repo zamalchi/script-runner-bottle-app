@@ -1,7 +1,6 @@
 <div class="row-fluid" id="outputs">
 	<div class="col-md-12">
 
-	<hr />
 
 	% i = 0 # anchor counter index
 	% requestedInfoDisplayed = False # ensures only one div is displayed when providing scontrol output (case : node in multiple states)
