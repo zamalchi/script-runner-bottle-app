@@ -28,7 +28,7 @@
 <!-- time : current time -->
 <!-- outputs : [str] from all the states -->
 
-<body style="padding-top: 60px;">
+<body style="padding-top: 60px;" onload="anchorToRequested()">
 
 % states = sorted(sinfo_output.keys())
 
@@ -38,7 +38,7 @@
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl', anchorHere=anchor, requested=requested, sinfo_output=sinfo_output, scontrol_output=scontrol_output)
+% include('_outputs.tpl', anchorHere=anchor, requested=requested, states=states, sinfo_output=sinfo_output, scontrol_output=scontrol_output)
 <!-- outputs row end -->
 
 </div>
