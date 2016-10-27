@@ -103,7 +103,7 @@
 								% for node in each.nodes:
 									% nodelist.append(node)
 								% end
-								<pre name="nodelist">{" ".join(nodelist)}}</pre>
+								<pre name="nodelist">{{" ".join(nodelist)}}</pre>
 							</div>
 						</div>
 
