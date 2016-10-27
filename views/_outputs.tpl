@@ -44,22 +44,43 @@
 						% if requestedLivesHere == entry_counter:
 							<div class="row" id="requested" data-anchor="{{i}}">
 								<div class="col-md-12">
-									<div class="panel panel-default" style="border: 1px solid grey;">
-										<div class="panel-heading">
-											<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+		
+									<ul class="nav nav-tabs">
+										<li class="over-view"><a href="#over-view" data-toggle="tab">Overview</a></li>
+										<li class="full-view"><a href="#full-view" data-toggle="tab">Full view</a></li>
+									</ul>
+									
+									<div class="tab-content">
+
+										<div id="over-view" class="panel panel-default tab-pane fade in active" style="border: 1px solid grey;">
+											<div class="panel-heading">
+												<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+											</div>
+
+											<div class="panel-body">
+												<h5>OVerview!</h5>
+											</div>
 										</div>
 
-										<div class="panel-body">
-											% for line in scontrol_output.split("\n"):
-												% for field in line.split(" "):
-													% if '=' in field:
-														% key, val = field.split("=")
-														<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
+										<div id="full-view" class="panel panel-default" style="border: 1px solid grey;">
+											<div class="panel-heading">
+												<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+											</div>
+
+											<div class="panel-body">
+												% for line in scontrol_output.split("\n"):
+													% for field in line.split(" "):
+														% if '=' in field:
+															% key, val = field.split("=")
+															<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
+														% end
 													% end
 												% end
-											% end
+											</div>
 										</div>
+
 									</div>
+
 								</div>
 							</div>
 						% end
