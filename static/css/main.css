@@ -39,7 +39,9 @@ div#outputs div[name="state"] div[name="state-fields"] select {
   margin-top: -200px; }
 
 .nodelist {
-  overflow: scroll; }
+  overflow: scroll;
+  resize: none;
+  width: 100%; }
 
 .entry {
   border: 2px solid #9b9b9b;

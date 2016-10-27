@@ -7,5 +7,12 @@ function anchorToRequested () {
 	window.location.hash = anchor;
 }
 
+function searchFromNodeList(elem) {
+	var search = document.getElementById("search");
+	var node = elem.attributes["data-node"].value;
+
+	search.value = node;
+	search.form.submit();
+}
 
 </script>
