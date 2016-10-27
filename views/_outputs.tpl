@@ -30,16 +30,13 @@
 
 						<div class="row line">
 							<a name="{{i}}" class="anchor"></a>
-							<div class="col-md-1 entry-index">
-								<span>{{i}}</span>
-							</div>
 							<div class="col-md-2 node_name">
 								% include('__nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested)
 							</div>
 							<div class="col-md-3 node_time">
 								<pre name="field">{{each.time}}</pre>
 							</div>
-							<div class="col-md-6 node_reason">
+							<div class="col-md-7 node_reason">
 								<pre name="field">{{each.reason}}</pre>
 							</div>
 						</div>
