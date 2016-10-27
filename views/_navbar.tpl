@@ -16,7 +16,7 @@
 
 		<div class="row">
 			<div class="col-md-12">
-				% include('__search.tpl')
+				% include('_search.tpl')
 			</div>
 		</div>
 	</div>
