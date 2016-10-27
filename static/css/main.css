@@ -40,7 +40,6 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 
 .nodelist {
   overflow: scroll;
-  resize: none;
   width: 100%; }
 
 .entry {

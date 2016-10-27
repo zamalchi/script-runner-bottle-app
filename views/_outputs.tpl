@@ -102,11 +102,11 @@
 							% if len(each.nodes) > 1:
 								<div class="row">
 									<div class="col-md-12">
-										<textarea class="nodelist" rows="2" readonly name="nodelist">
+										<div class="nodelist" name="nodelist">
 										% for node in each.nodes:
 											<a href="#" onclick="searchFromNodeList(this)" data-node="{{node}}">{{node}}</a>		
 										% end
-										</textarea>
+										</div>
 									</div>
 								</div>
 							% end
