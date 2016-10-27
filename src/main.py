@@ -245,25 +245,11 @@ def scontrol_show_node():
 @post('/search')
 def search_for_node():
 
+    # get requested node and parse out the number
     requested_node = Slurm.normalizeNodeName(request.forms.get('search'))
 
+    # set the cookie to be used in /slurm
     setRequestedCookie(response, requested_node)
-
-    # states = sorted(d.keys())
-    # for state in states:
-    #     hasStates = filter(None, d[state])
-    #
-    #     if hasStates:
-    #         for line in hasStates:
-    #             if len(line.split("\t")) == 3:
-    #                 nodelist, time, reasons = line.split("\t")
-    #
-    #                 nodelist = parseNodeList(nodelist)
-    #
-    #                 if requested in nodelist:
-    #                     setAnchorCookie(response, states.index(state))
-    #
-    # setRequestedCookie(response, requested)
 
     redirect("/slurm")
 
