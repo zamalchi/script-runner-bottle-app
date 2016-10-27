@@ -40,7 +40,7 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 
 .nodelist {
   min-height: 1em;
-  max-height: 3em;
+  max-height: 4em;
   line-height: 2em;
   overflow: auto;
   overflow-x: hidden;
