@@ -176,17 +176,21 @@ class Slurm:
     class State:
 
         @property
-        def entries(self):
-            return self.__entries
-
-        @property
         def name(self):
             return self.__name
 
-        # used by : Slurm.getNonEmptyStates
-        def __init__(self, state):
+        @property
+        def entries(self):
+            return self.__entries
 
-            raw = Slurm.getSingleStateOutput(state)
+        # used by : Slurm.getNonEmptyStates
+        def __init__(self, state, output=None):
+
+            if output is not None:
+                raw = output.split("\n")
+            else:
+                raw = Slurm.getSingleStateOutput(state)
+
             entries = []
 
             for each in raw:
@@ -233,7 +237,10 @@ class Slurm:
             return self.__reason
 
         def __init__(self, entry):
-            if len(entry) == 3:
+            if type(entry) is str:
+                entry = entry.split("\t")
+
+            if type(entry) is list and len(entry) == 3:
                 self.__nodes, self.__time, self.__reason = entry
             else:
                 self.__nodes = []
@@ -258,6 +265,10 @@ class Slurm:
         def data(self):
             return self.__data
 
+        @property
+        def state(self):
+            return self.__state
+
         def __init__(self, raw):
             fields = filter(None, raw.split(' '))
             data = {}
@@ -270,6 +281,9 @@ class Slurm:
 
                 elif key == "Nodes":
                     self.__nodes = Slurm.parseNodeNames(val)
+
+                elif key == "State":
+                    self.__state = val
 
                 else:
                     data[key] = val
