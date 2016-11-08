@@ -150,7 +150,7 @@ class Slurm:
     ###### SCONTROL METHODS
 
     @staticmethod
-    def getScontrol(node):
+    def getScontrolShowNode(node):
         # FOR PUBLIC USE
         # param node <str | int> : node name/number
         # return <str> : output from scontrol
@@ -162,6 +162,24 @@ class Slurm:
         cmd = "scontrol -a show node {0}".format(node)
 
         return getstatusoutput(cmd)[1]
+
+    @staticmethod
+    def getScontrolShowReservation():
+        # FOR PUBLIC USE
+        # return <list[Reservation]> : output from scontrol
+
+        from commands import getstatusoutput
+
+        cmd = "scontrol -o show reservation"
+
+        output = getstatusoutput(cmd)[1]
+
+        reservations = []
+
+        for each in output.split("\n"):
+            reservations.append(Slurm.Reservation(each))
+
+        return reservations
 
     ####################################################################################################
     ### STATIC METHODS END
@@ -270,6 +288,9 @@ class Slurm:
             return self.__state
 
         def __init__(self, raw):
+            if raw.__class__.__name__ == "Reservation":
+                return raw
+
             fields = filter(None, raw.split(' '))
             data = {}
 

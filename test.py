@@ -4,6 +4,15 @@ import unittest
 
 from classes.Slurm import Slurm
 
+import argparse
+
+# argparse
+parser = argparse.ArgumentParser()
+parser.add_argument('-l', help = "Live data mode", action="store_true", required = False)
+
+args = parser.parse_args()
+liveData = args.l
+
 ######################################################################
 ######################################################################
 # SINFO / SCONTROL DATA HARDCODED FOR TESTING
@@ -41,6 +50,7 @@ node433\t2016-11-01T10:15:28 \tmove
 
 # *************************
 
+
 rawOutput["reservations"] = [
 "ReservationName=cnh_omnipath_testing StartTime=2016-07-11T09:45:59 EndTime=2017-07-11T09:45:59 Duration=365-00:00:00 Nodes=node[317-320] NodeCnt=4 CoreCnt=40 Features=(null) PartitionName=(null) Flags=MAINT,SPEC_NODES Users=root,cnh Accounts=(null) Licenses=(null) State=ACTIVE",
 "ReservationName=root_1 StartTime=2016-08-11T16:40:06 EndTime=2017-08-11T16:40:06 Duration=365-00:00:00 Nodes=node235,node101,node279 NodeCnt=3 CoreCnt=26 Features=(null) PartitionName=(null) Flags=MAINT,IGNORE_JOBS,SPEC_NODES Users=root,sb,ac,gshomo,ghassemi,wha,fridman,denru,cnh,josephe,bernauer,emgolos Accounts=(null) Licenses=(null) State=ACTIVE",
@@ -57,9 +67,22 @@ tests["reservations"]["state"] = ["ACTIVE", "ACTIVE", "ACTIVE", "INACTIVE", "ACT
 ######################################################################
 ######################################################################
 
+def formatStr(raw):
+    return raw.ljust(25)
+
+######################################################################
+######################################################################
+
 class TestSlurmSuite(unittest.TestCase):
 
     def test_state(self):
+        print
+        if liveData:
+            rawOutput["states"] = Slurm.getNonEmptyStates()
+            print(formatStr("States and Entries:") + "(LIVE)")
+        else:
+            print(formatStr("States and Entries:") + "(MOCK)")
+
         for key in rawOutput["states"]:
             obj = Slurm.State(key, rawOutput["states"][key])
 
@@ -74,23 +97,34 @@ class TestSlurmSuite(unittest.TestCase):
                 self.assertTrue(entry.time)
                 self.assertTrue(entry.reason)
 
-        print("\nOK : State and Entry Tests")
+        print(formatStr("States and Entries:") + "OK")
 
 
     def test_reservation(self):
+        print
         i = 0
+        if liveData:
+            rawOutput["reservations"] = Slurm.getReservations()
+            print(formatStr("Reservations:") + "(LIVE)")
+
+        else:
+            print(formatStr("Reservations:") + "(MOCK)")
+
         for each in rawOutput["reservations"]:
             obj = Slurm.Reservation(each)
 
             self.assertTrue(obj.__class__.__name__ == "Reservation")
-            self.assertTrue(obj.name == tests["reservations"]["name"][i])
-            self.assertTrue(len(obj.nodes) == tests["reservations"]["nodeCount"][i])
-            self.assertTrue(obj.state == tests["reservations"]["state"][i])
-            self.assertTrue(type(obj.data) is dict)
+
+            if not liveData:
+                self.assertTrue(obj.name == tests["reservations"]["name"][i])
+                self.assertTrue(len(obj.nodes) == tests["reservations"]["nodeCount"][i])
+                self.assertTrue(obj.state == tests["reservations"]["state"][i])
+                self.assertTrue(type(obj.data) is dict)
 
             i += 1
 
-        print("\nOK : Reservation Tests")
+        print(formatStr("Reservations:") + "OK")
 
 if __name__ == '__main__':
+    print("************************")
     unittest.main()

@@ -214,7 +214,7 @@ def slurm_nodes():
     # if a specific node was requested
     if requested:
         # get the scontrol info for that node (nodename, scontrol output)
-        scontrol_output = Slurm.getScontrol(requested)
+        scontrol_output = Slurm.getScontrolShowNode(requested)
 
     #################################################
 
