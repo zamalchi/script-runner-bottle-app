@@ -2,7 +2,7 @@ body {
   background-color: #476f9e; }
 
 .navbar {
-  background-color: #cccccc;
+  background-color: #9b9b9b;
   margin: 0 auto;
   padding: 10px; }
 
@@ -31,12 +31,32 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 
 .anchor {
   display: inline-block;
-  padding-top: 175px;
-  margin-top: -175px; }
+  padding-top: 250px;
+  margin-top: -250px; }
 
 .title-anchor {
-  padding-top: 100px;
-  margin-top: -100px; }
+  padding-top: 200px;
+  margin-top: -200px; }
+
+.nodelist {
+  font-family: Monospace;
+  min-height: 1em;
+  max-height: 4em;
+  line-height: 2em;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 100%; }
+
+.entry {
+  border: 2px solid #9b9b9b;
+  border-radius: 3px;
+  margin: 5px auto;
+  padding: 10px;
+  background-color: #bcbcbc; }
+
+.button-center {
+  margin-top: 5%;
+  margin-bottom: 5%; }
 
 div.panel[name="scontrol"] {
   margin-top: 30px; }

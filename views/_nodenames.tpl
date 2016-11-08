@@ -5,7 +5,6 @@
 
 <!-- for reloading the page to a specific location -->
 <input type="hidden" name="anchor" value="{{anchor}}" />
-<span>{{anchor}}</span>
 
 <!-- a list to parse -->
 % if len(nodes) > 1:
@@ -31,7 +30,7 @@
 % else:
 	<input type="hidden" name="node" class="field" value="{{nodes[0]}}" />
 
-	<button type="submit">
+	<button type="submit" class="button-center">
 		node{{nodes[0]}}
 	</button>
 
