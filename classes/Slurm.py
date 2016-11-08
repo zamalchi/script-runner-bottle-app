@@ -203,22 +203,24 @@ class Slurm:
 
         # used by : Slurm.getNonEmptyStates
         def __init__(self, state, output=None):
-
-            if output is not None:
-                raw = output.split("\n")
+            if state.__class__.__name__ == "State":
+                self = state
             else:
-                raw = Slurm.getSingleStateOutput(state)
+                if output is not None:
+                    raw = output.split("\n")
+                else:
+                    raw = Slurm.getSingleStateOutput(state)
 
-            entries = []
+                entries = []
 
-            for each in raw:
-                entry = Slurm.Entry(each)
+                for each in raw:
+                    entry = Slurm.Entry(each)
 
-                if entry.nodes:
-                    entries.append(entry)
+                    if entry.nodes:
+                        entries.append(entry)
 
-            self.__name = state
-            self.__entries = entries
+                self.__name = state
+                self.__entries = entries
 
         def findNodeInEntries(self, node):
             # return <int> : index (in self.__entries) where the node is located (or -1 if not found)

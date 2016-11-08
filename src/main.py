@@ -210,11 +210,13 @@ def slurm_nodes():
 
     # dict of (state --> obj) pairs
     sinfo_output = Slurm.getNonEmptyStates()
+    print("SINFO: " + sinfo_output)
 
     # if a specific node was requested
     if requested:
         # get the scontrol info for that node (nodename, scontrol output)
         scontrol_output = Slurm.getScontrolShowNode(requested)
+        print("SCONTROL: " + scontrol_output)
 
     #################################################
 

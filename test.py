@@ -5,15 +5,6 @@ import sys
 
 from classes.Slurm import Slurm
 
-# import argparse
-#
-# # argparse
-# parser = argparse.ArgumentParser()
-# parser.add_argument('-l', help = "Live data mode", action="store_true", required = False)
-#
-# args = parser.parse_args()
-# liveData = args.l
-
 ######################################################################
 ######################################################################
 # SINFO / SCONTROL DATA HARDCODED FOR TESTING
