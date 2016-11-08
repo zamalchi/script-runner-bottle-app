@@ -1,17 +1,18 @@
 #!/usr/bin/python
 
 import unittest
+import sys
 
 from classes.Slurm import Slurm
 
-import argparse
-
-# argparse
-parser = argparse.ArgumentParser()
-parser.add_argument('-l', help = "Live data mode", action="store_true", required = False)
-
-args = parser.parse_args()
-liveData = args.l
+# import argparse
+#
+# # argparse
+# parser = argparse.ArgumentParser()
+# parser.add_argument('-l', help = "Live data mode", action="store_true", required = False)
+#
+# args = parser.parse_args()
+# liveData = args.l
 
 ######################################################################
 ######################################################################
@@ -75,9 +76,11 @@ def formatStr(raw):
 
 class TestSlurmSuite(unittest.TestCase):
 
+    liveData = False
+
     def test_state(self):
         print
-        if liveData:
+        if self.liveData:
             rawOutput["states"] = Slurm.getNonEmptyStates()
             print(formatStr("States and Entries:") + "(LIVE)")
         else:
@@ -103,7 +106,7 @@ class TestSlurmSuite(unittest.TestCase):
     def test_reservation(self):
         print
         i = 0
-        if liveData:
+        if self.liveData:
             rawOutput["reservations"] = Slurm.getReservations()
             print(formatStr("Reservations:") + "(LIVE)")
 
@@ -115,7 +118,7 @@ class TestSlurmSuite(unittest.TestCase):
 
             self.assertTrue(obj.__class__.__name__ == "Reservation")
 
-            if not liveData:
+            if not self.liveData:
                 self.assertTrue(obj.name == tests["reservations"]["name"][i])
                 self.assertTrue(len(obj.nodes) == tests["reservations"]["nodeCount"][i])
                 self.assertTrue(obj.state == tests["reservations"]["state"][i])
@@ -126,5 +129,10 @@ class TestSlurmSuite(unittest.TestCase):
         print(formatStr("Reservations:") + "OK")
 
 if __name__ == '__main__':
+
+    if len(sys.argv) > 1:
+        if sys.argv.pop() == "live":
+            TestSlurmSuite.liveData = True
+
     print("************************")
     unittest.main()
