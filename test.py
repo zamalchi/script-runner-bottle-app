@@ -134,5 +134,5 @@ if __name__ == '__main__':
         if sys.argv.pop() == "live":
             TestSlurmSuite.liveData = True
 
-    print("************************")
+    print("----------------------------------------------------------------------")
     unittest.main()
