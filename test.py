@@ -107,7 +107,7 @@ class TestSlurmSuite(unittest.TestCase):
         print
         i = 0
         if self.liveData:
-            rawOutput["reservations"] = Slurm.getReservations()
+            rawOutput["reservations"] = Slurm.getScontrolShowReservation()
             print(formatStr("Reservations:") + "(LIVE)")
 
         else:
