@@ -242,6 +242,41 @@ class Slurm:
 
     ### Entry : INNER CLASS END
     # X
+    ### Reservation : INNER CLASS START
+    
+    class Reservation:
+
+        @property
+        def name(self):
+            return self.__name
+
+        @property
+        def nodes(self):
+            return self.__nodes
+        
+        @property
+        def data(self):
+            return self.__data
+
+        def __init__(self, raw):
+            fields = filter(None, raw.split(' '))
+            data = {}
+
+            for f in fields:
+                key, val = f.strip().split('=')
+
+                if key == "ReservationName":
+                    self.__name = val
+
+                elif key == "Nodes":
+                    self.__nodes = Slurm.parseNodeNames(val)
+
+                else:
+                    data[key] = val
+
+            self.__data = data
+    
+    
     ####################################################################################################
     ### CLASS METHODS / INNER CLASSES END
     ####################################################################################################
