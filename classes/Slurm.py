@@ -289,27 +289,27 @@ class Slurm:
 
         def __init__(self, raw):
             if raw.__class__.__name__ == "Reservation":
-                return raw
+                self = raw
+            else:
+                fields = filter(None, raw.split(' '))
+                data = {}
 
-            fields = filter(None, raw.split(' '))
-            data = {}
+                for f in fields:
+                    key, val = f.strip().split('=')
 
-            for f in fields:
-                key, val = f.strip().split('=')
+                    if key == "ReservationName":
+                        self.__name = val
 
-                if key == "ReservationName":
-                    self.__name = val
+                    elif key == "Nodes":
+                        self.__nodes = Slurm.parseNodeNames(val)
 
-                elif key == "Nodes":
-                    self.__nodes = Slurm.parseNodeNames(val)
+                    elif key == "State":
+                        self.__state = val
 
-                elif key == "State":
-                    self.__state = val
+                    else:
+                        data[key] = val
 
-                else:
-                    data[key] = val
-
-            self.__data = data
+                self.__data = data
     
     
     ####################################################################################################
