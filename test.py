@@ -72,10 +72,13 @@ class TestSlurmSuite(unittest.TestCase):
     def test_state(self):
         print
         if self.liveData:
-            rawOutput["states"] = Slurm.getNonEmptyStates()
             print(formatStr("States and Entries:") + "(LIVE)")
+            rawOutput["states"] = Slurm.getNonEmptyStates()
         else:
             print(formatStr("States and Entries:") + "(MOCK)")
+
+        # test that the states dict is non-empty
+        self.assertTrue(rawOutput["states"])
 
         for key in rawOutput["states"]:
             obj = Slurm.State(key, rawOutput["states"][key])
