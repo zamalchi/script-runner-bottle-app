@@ -257,6 +257,10 @@ class Slurm:
         def data(self):
             return self.__data
 
+        @property
+        def found(self):
+            return self.__found
+
         def __init__(self, node):
             from commands import getstatusoutput
             node = "node" + Slurm.normalizeNodeName(node)
@@ -264,8 +268,11 @@ class Slurm:
             output = getstatusoutput(cmd)[1]
 
             if "not found" in output:
-                self = None
+                self.__found = False
+                self.__name = self.__state = self.__data = None
             else:
+                self.__found = True
+                
                 fields = filter(None, output.split(' '))
                 data = {}
 
