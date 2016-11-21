@@ -20,7 +20,7 @@
 
 				<div class="panel-body">
 
-					% requestedLivesHere = state.findNodeInEntries(node)
+					% requestedLivesHere = state.findNodeInEntries(node.name)
 
 					<div class="container-fluid" name="state-fields">
 				
@@ -57,7 +57,7 @@
 
 											<div id="over-view" class="panel panel-default tab-pane fade in active" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>node{{node}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{node.name}}</strong></h5>
 												</div>
 
 												<div class="panel-body">
@@ -72,7 +72,7 @@
 
 											<div id="full-view" class="panel panel-default tab-pane fade" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>node{{node}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{node.name}}</strong></h5>
 												</div>
 
 												<div class="panel-body">
