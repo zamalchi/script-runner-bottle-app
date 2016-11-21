@@ -150,7 +150,7 @@ class Slurm:
 
             # getstatusoutput attaches [0] field (return flag?)
             # for each state, get a list of output lines (each line conforms to output_format)
-            output = getstatusoutput(cmd)[1].split("\n")
+            output = filter(None, getstatusoutput(cmd)[1].split("\n"))
 
             self.__name = state
             self.__entries = [Slurm.Entry(each) for each in output]
