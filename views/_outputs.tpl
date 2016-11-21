@@ -20,7 +20,7 @@
 
 				<div class="panel-body">
 
-					% requestedLivesHere = state.findNodeInEntries(requested)
+					% requestedLivesHere = state.findNodeInEntries(node)
 
 					<div class="container-fluid" name="state-fields">
 				
