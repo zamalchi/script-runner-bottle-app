@@ -263,14 +263,15 @@ class Slurm:
 
         def __init__(self, node):
             from commands import getstatusoutput
-            node = "node" + Slurm.normalizeNodeName(node)
-            cmd = "scontrol -a -o show node {0}".format(node)
+            node = Slurm.normalizeNodeName(node)
+            cmd = "scontrol -a -o show node node{}".format(node)
             output = getstatusoutput(cmd)[1]
 
             if "not found" in output:
                 self.__found = False
                 self.__name = node
-                self.__state = self.__data = None
+                self.__state = ""
+                self.__data = {}
             else:
                 self.__found = True
 
