@@ -15,7 +15,7 @@
 
 				<div class="panel-heading" style="padding: 0px;">
 					<a name="{{state.name}}" class="anchor title-anchor"></a>
-					<h2 name="state-title" style="margin: 0px 0px 10px 25px;">{{state}}</h2>
+					<h2 name="state-title" style="margin: 0px 0px 10px 25px;">{{state.name}}</h2>
 				</div>
 
 				<div class="panel-body">

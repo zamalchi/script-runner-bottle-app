@@ -274,11 +274,15 @@ class Slurm:
             else:
                 self.__found = True
 
-                # parse out reason because it contains spaces and will break splitting on ' '
-                fields, reason = output.split("Reason=")
+                data = {}
+
+                if "Reason=" in output:
+                    # parse out reason because it contains spaces and will break splitting on ' '
+                    fields, reason = output.split("Reason=")
+                    # add reason back into data
+                    data["Reason"] = reason
 
                 fields = filter(None, fields.split(' '))
-                data = {}
 
                 for f in fields:
                     key, val = f.strip().split('=')
@@ -290,9 +294,6 @@ class Slurm:
                         self.__state = val
 
                     data[key] = val
-
-                # add reason back into data
-                data["Reason"] = reason
 
                 self.__data = data
 
