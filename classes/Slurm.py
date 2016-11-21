@@ -263,22 +263,25 @@ class Slurm:
             cmd = "scontrol -a -o show node {0}".format(node)
             output = getstatusoutput(cmd)[1]
 
-            fields = filter(None, output.split(' '))
-            data = {}
+            if "not found" in output:
+                self = None
+            else:
+                fields = filter(None, output.split(' '))
+                data = {}
 
-            for f in fields:
-                key, val = f.strip().split('=')
+                for f in fields:
+                    key, val = f.strip().split('=')
 
-                if key == "NodeName":
-                    self.__name = val
+                    if key == "NodeName":
+                        self.__name = val
 
-                elif key == "State":
-                    self.__state = val
+                    elif key == "State":
+                        self.__state = val
 
-                else:
-                    data[key] = val
+                    else:
+                        data[key] = val
 
-            self.__data = data
+                self.__data = data
 
     ####################################################################################################
     ### CLASS METHODS / INNER CLASSES END
