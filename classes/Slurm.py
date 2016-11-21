@@ -190,6 +190,7 @@ class Slurm:
             return self.__reason
 
         def __init__(self, entry):
+            print("ENTRY: " + str(entry))
             if type(entry) is str:
                 nodes, time, reason = entry.split("\t")
                 self.__nodes = Slurm.parseNodeNames(nodes)
@@ -225,7 +226,7 @@ class Slurm:
         def data(self):
             return self.__data
 
-        
+
         def __init__(self, raw):
             # if raw.__class__.__name__ == "Reservation":
             #     self = raw
