@@ -17,15 +17,13 @@
 
 <body style="padding-top: 143.5px;" onload="anchorToRequested()">
 
-% states = sorted(sinfo_output.keys())
-
 % include('_navbar.tpl', states=states)
 
 <!-- main container start -->
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl', anchorHere=anchor, requested=requested, states=states, sinfo_output=sinfo_output, scontrol_output=scontrol_output)
+% include('_outputs.tpl', anchorHere=anchor, states=states, requested_node=requested_node)
 <!-- outputs row end -->
 
 </div>

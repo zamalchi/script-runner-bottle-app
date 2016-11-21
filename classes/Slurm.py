@@ -84,21 +84,7 @@ class Slurm:
     ###### SCONTROL METHODS
 
     @staticmethod
-    def getScontrolShowNode(node):
-        # FOR PUBLIC USE
-        # param node <str | int> : node name/number
-        # return <str> : output from scontrol
-
-        from commands import getstatusoutput
-
-        node = "node" + Slurm.normalizeNodeName(node)
-
-        cmd = "scontrol -a show node {0}".format(node)
-
-        return getstatusoutput(cmd)[1]
-
-    @staticmethod
-    def getScontrolShowReservations():
+    def getReservations():
         # FOR PUBLIC USE
         # return <list[Reservation]> : output from scontrol
 
@@ -106,7 +92,7 @@ class Slurm:
 
         cmd = "scontrol -o show reservation"
 
-        output = getstatusoutput(cmd)[1].split("\n")
+        output = filter(None, getstatusoutput(cmd)[1].split("\n"))
 
         return [Slurm.Reservation(each) for each in output]
 
@@ -190,19 +176,22 @@ class Slurm:
             return self.__reason
 
         def __init__(self, entry):
-            print("ENTRY: " + str(entry))
-            if type(entry) is str:
-                nodes, time, reason = entry.split("\t")
-                self.__nodes = Slurm.parseNodeNames(nodes)
-                self.__time = time
-                self.__reason = reason
+            nodes, time, reason = entry.split("\t")
+            self.__nodes = Slurm.parseNodeNames(nodes)
+            self.__time = time.strip()
+            self.__reason = reason.strip()
 
-            elif type(entry) is list and len(entry) == 3:
-                self.__nodes, self.__time, self.__reason = entry
-            else:
-                self.__nodes = []
-                self.__time = ""
-                self.__reason = ""
+            # if type(entry) is str:
+            #     nodes, time, reason = entry.split("\t")
+            #     self.__nodes = Slurm.parseNodeNames(nodes)
+            #     self.__time = time.strip()
+            #     self.__reason = reason.strip()
+            # elif type(entry) is list and len(entry) == 3:
+            #     self.__nodes, self.__time, self.__reason = entry
+            # else:
+            #     self.__nodes = []
+            #     self.__time = ""
+            #     self.__reason = ""
 
     ### Entry : INNER CLASS END
     # X
@@ -225,7 +214,6 @@ class Slurm:
         @property
         def data(self):
             return self.__data
-
 
         def __init__(self, raw):
             # if raw.__class__.__name__ == "Reservation":
@@ -250,8 +238,48 @@ class Slurm:
                     data[key] = val
 
             self.__data = data
-    
-    
+
+    ### Entry : INNER CLASS END
+    # X
+    ### Reservation : INNER CLASS START
+
+    class Node:
+
+        @property
+        def name(self):
+            return self.__name
+
+        @property
+        def state(self):
+            return self.__state
+
+        @property
+        def data(self):
+            return self.__data
+
+        def __init__(self, node):
+            from commands import getstatusoutput
+            node = "node" + Slurm.normalizeNodeName(node)
+            cmd = "scontrol -a -o show node {0}".format(node)
+            output = getstatusoutput(cmd)[1]
+
+            fields = filter(None, output.split(' '))
+            data = {}
+
+            for f in fields:
+                key, val = f.strip().split('=')
+
+                if key == "NodeName":
+                    self.__name = val
+
+                elif key == "State":
+                    self.__state = val
+
+                else:
+                    data[key] = val
+
+            self.__data = data
+
     ####################################################################################################
     ### CLASS METHODS / INNER CLASSES END
     ####################################################################################################

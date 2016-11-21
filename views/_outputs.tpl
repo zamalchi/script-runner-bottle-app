@@ -8,33 +8,31 @@
 
 	% for state in states:
 
-		<div name="state" id="state-{{state}}">
+		<div name="state" id="state-{{state.name}}">
 			
 			<div class="panel panel-default">
 
 				<div class="panel-heading" style="padding: 0px;">
-					<a name="{{state}}" class="anchor title-anchor"></a>
+					<a name="{{state.name}}" class="anchor title-anchor"></a>
 					<h2 name="state-title" style="margin: 0px 0px 10px 25px;">{{state}}</h2>
 				</div>
 
 				<div class="panel-body">
 
-					% sinfo_object = sinfo_output[state]
-					% entries = sinfo_object.entries
-					% requestedLivesHere = sinfo_object.findNodeInEntries(requested)
+					% requestedLivesHere = state.findNodeInEntries(requested)
 
 					<div class="container-fluid" name="state-fields">
 				
-					% entry_counter = 0 # entry counter
-
-					% for each in entries:
+					% for each in state.entries:
+				
+						% entry_counter = 0 # keeps track of entry indices
 
 						<div class="entry">
 
 							<div class="row line">
 								<a name="{{i}}" class="anchor"></a>
 								<div class="col-md-2 node_name">
-									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested=requested)
+									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested_node=requested_node)
 								</div>
 								<div class="col-md-3 node_time">
 									<pre name="field">{{each.time}}</pre>
@@ -58,7 +56,7 @@
 
 											<div id="over-view" class="panel panel-default tab-pane fade in active" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{requested_node}}</strong></h5>
 												</div>
 
 												<div class="panel-body">

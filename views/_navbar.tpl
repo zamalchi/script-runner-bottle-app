@@ -3,10 +3,10 @@
 		<div class="row">
 			<div class="col-md-12">
 				<ul class="nav nav-pills nav-list">
-					% for state in states:
+					% for s in sorted(states.keys()):
 						<li class="nav-item">
-							<a href="#{{state}}" class="btn btn-default nav-button">
-								{{state}}
+							<a href="#{{s}}" class="btn btn-default nav-button">
+								{{s}}
 							</a>
 						</li>
 					% end

@@ -209,22 +209,21 @@ def slurm_nodes():
     deleteRequestedCookie(response)
 
     # dict of (state --> obj) pairs
-    sinfo_output = Slurm.getNonEmptyStates()
-    print("SINFO: " + str(sinfo_output))
+    states = Slurm.getNonEmptyStates()
 
+    requested_node = ""
     # if a specific node was requested
     if requested:
         # get the scontrol info for that node (nodename, scontrol output)
-        scontrol_output = Slurm.getScontrolShowNode(requested)
-        print("SCONTROL: " + str(scontrol_output))
+        requested_node = Slurm.getScontrolShowNode(requested)
 
     #################################################
 
     return template('slurm',
                     anchor=anchor,
                     requested=requested,
-                    sinfo_output=sinfo_output,
-                    scontrol_output=scontrol_output)
+                    states=states,
+                    requested_node=requested_node)
 
 
 ########################################################################################################
