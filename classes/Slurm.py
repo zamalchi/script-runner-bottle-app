@@ -275,6 +275,7 @@ class Slurm:
                 self.__found = True
 
                 data = {}
+                fields = []
 
                 if "Reason=" in output:
                     # parse out reason because it contains spaces and will break splitting on ' '
