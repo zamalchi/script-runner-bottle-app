@@ -269,11 +269,15 @@ class Slurm:
 
             if "not found" in output:
                 self.__found = False
-                self.__name = self.__state = self.__data = None
+                self.__name = node
+                self.__state = self.__data = None
             else:
                 self.__found = True
-                
-                fields = filter(None, output.split(' '))
+
+                # parse out reason because it contains spaces and will break splitting on ' '
+                fields, reason = output.split("Reason=")
+
+                fields = filter(None, fields.split(' '))
                 data = {}
 
                 for f in fields:
@@ -287,6 +291,8 @@ class Slurm:
 
                     else:
                         data[key] = val
+
+                data["Reason"] = reason
 
                 self.__data = data
 
