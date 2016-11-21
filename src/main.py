@@ -211,19 +211,17 @@ def slurm_nodes():
     # dict of (state --> obj) pairs
     states = Slurm.getNonEmptyStates()
 
-    requested_node = ""
     # if a specific node was requested
     if requested:
         # get the scontrol info for that node (nodename, scontrol output)
-        requested_node = Slurm.getScontrolShowNode(requested)
+        node = Slurm.Node(requested)
 
     #################################################
 
     return template('slurm',
                     anchor=anchor,
-                    requested=requested,
                     states=states,
-                    requested_node=requested_node)
+                    node=node)
 
 
 ########################################################################################################

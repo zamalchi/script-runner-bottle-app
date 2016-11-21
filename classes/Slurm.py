@@ -289,9 +289,9 @@ class Slurm:
                     elif key == "State":
                         self.__state = val
 
-                    else:
-                        data[key] = val
+                    data[key] = val
 
+                # add reason back into data
                 data["Reason"] = reason
 
                 self.__data = data

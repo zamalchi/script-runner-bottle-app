@@ -23,7 +23,7 @@
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl', anchorHere=anchor, states=states, requested_node=requested_node)
+% include('_outputs.tpl', anchor=anchor, states=states, node=node)
 <!-- outputs row end -->
 
 </div>

@@ -6,7 +6,8 @@
 	% i = 0 # anchor counter index
 	% requestedInfoDisplayed = False # ensures only one div is displayed when providing scontrol output (case : node in multiple states)
 
-	% for state in states:
+	% for key in sorted(states.keys()):
+		% state = states[key]
 
 		<div name="state" id="state-{{state.name}}">
 			
@@ -32,7 +33,7 @@
 							<div class="row line">
 								<a name="{{i}}" class="anchor"></a>
 								<div class="col-md-2 node_name">
-									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested_node=requested_node)
+									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested_node=node)
 								</div>
 								<div class="col-md-3 node_time">
 									<pre name="field">{{each.time}}</pre>
@@ -56,19 +57,14 @@
 
 											<div id="over-view" class="panel panel-default tab-pane fade in active" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>node{{requested_node}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{node}}</strong></h5>
 												</div>
 
 												<div class="panel-body">
 													% overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "AllocMem", "State"]
-													% for line in scontrol_output.split("\n"):
-														% for field in line.split(" "):
-															% if '=' in field:
-																% key, val = field.split("=")
-																% if key in overviewFields:
-																	<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
-																% end
-															% end
+													% for key in sorted(node.data.keys()):
+														% if key in overviewFields:
+															<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{node.data[key]}}</span></pre>
 														% end
 													% end
 												</div>
@@ -76,17 +72,12 @@
 
 											<div id="full-view" class="panel panel-default tab-pane fade" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>node{{requested}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{node}}</strong></h5>
 												</div>
 
 												<div class="panel-body">
-													% for line in scontrol_output.split("\n"):
-														% for field in line.split(" "):
-															% if '=' in field:
-																% key, val = field.split("=")
-																<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{val}}</span></pre>
-															% end
-														% end
+													% for key in sorted(node.data.keys()):
+														<pre style="display: inline-block; padding: 5px"><span style="color: blue">{{key}}</span> = <span style="color: green; font-weight: bold">{{node.data[key]}}</span></pre>
 													% end
 												</div>
 											</div>
@@ -101,8 +92,8 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="nodelist" name="nodelist">
-										% for node in each.nodes:
-											<a href="#" onclick="searchFromNodeList(this)" data-node="{{node}}">{{node}}</a>		
+										% for n in each.nodes:
+											<a href="#" onclick="searchFromNodeList(this)" data-node="{{n}}">{{n}}</a>		
 										% end
 										</div>
 									</div>
