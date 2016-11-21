@@ -82,9 +82,9 @@ class Slurm:
             if len(line.split("\t")) == 3:
                 nodes, time, reasons = line.split("\t")
 
-            elif type(line) is list:
+            elif type(line) is list and len(line) == 3:
 
-                # parse fields
+                nodes, time, reasons = line
 
                 nodes = Slurm.parseNodeNames(nodes)
 
