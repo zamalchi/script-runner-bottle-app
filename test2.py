@@ -26,7 +26,7 @@ class TestSlurmSuite(unittest.TestCase):
 
         for s in states.values():
             self.assertTrue(s.__class__.__name__ == "State")
-        print("OK : States are all Slurm.State objects")
+        print("OK : All states are Slurm.State objects")
 
         for s in states.values():
             self.assertTrue(s.hasEntries())
@@ -51,6 +51,10 @@ class TestSlurmSuite(unittest.TestCase):
 
         self.assertTrue(reservations)
         print("OK : List of reservations exists")
+
+        for r in reservations:
+            self.assertTrue(r.__class__.__name__ == "Reservation")
+        print("OK : All reservations are Slurm.Reservation objects")
 
         for r in reservations:
             self.assertTrue(r.name and r.nodes and r.state and r.data)
