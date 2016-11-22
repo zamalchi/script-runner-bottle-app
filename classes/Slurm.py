@@ -47,7 +47,7 @@ class Slurm:
             single node name (ex. 'node034')
         :return: <list[str]> sorted list of normalized nodes (ex. [34, 45, 46, ...], [34])
         """
-        REPLACE_CHARS = ['node[]']
+        REPLACE_CHARS = 'node[]'
         parsedNodeList = []
 
         # creates list of one or more node (numbers | ranges)
