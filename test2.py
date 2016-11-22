@@ -70,12 +70,13 @@ class TestSlurmSuite(unittest.TestCase):
         print("OK : All nodes are Slurm.Node objects")
 
         for n in nodes:
-            self.assertTrue(n.found)
-        print("OK : All nodes found")
+            self.assertTrue(n.found or not n.data)
+        print("OK : All nodes either found or (if not found) have no data")
 
         for n in nodes:
-            self.assertTrue(n.state and n.data)
-        print("OK : All nodes have state and data attributes")
+            if n.found:
+                self.assertTrue(n.state and n.data))
+        print("OK : All found nodes have state and data attributes")
 
         for n in nodes:
             self.assertTrue(type(n.data) is dict)
