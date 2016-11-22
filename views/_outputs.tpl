@@ -3,11 +3,18 @@
 
 	<hr />
 
-	% i = 0 # anchor counter index
-	% requestedInfoDisplayed = False # ensures only one div is displayed when providing scontrol output (case : node in multiple states)
+	% # counter for entries (accumulated across all states)
+	% entryCounter = 0
+
+	% # ensures only one div is displayed when providing scontrol output (case : node in multiple states)
+	% requestedInfoDisplayed = False 
+
+
 
 	% for key in sorted(states.keys()):
 		% state = states[key]
+	
+		% requestedLivesHere = state.findNodeInEntries(node.name)
 
 		<div name="state" id="state-{{state.name}}">
 			
@@ -20,20 +27,17 @@
 
 				<div class="panel-body">
 
-					% requestedLivesHere = state.findNodeInEntries(node.name)
 
 					<div class="container-fluid" name="state-fields">
 				
 					% for each in state.entries:
 				
-						% entry_counter = 0 # keeps track of entry indices
-
 						<div class="entry">
 
 							<div class="row line">
-								<a name="{{i}}" class="anchor"></a>
+								<a name="{{entryCounter}}" class="anchor"></a>
 								<div class="col-md-2 node_name">
-									% include('_nodenames.tpl', nodes=each.nodes, anchor=i, requested_node=node)
+									% include('_nodenames.tpl', nodes=each.nodes, entryIndex=entryCounter, requested=node)
 								</div>
 								<div class="col-md-3 node_time">
 									<pre name="field">{{each.time}}</pre>
@@ -43,9 +47,9 @@
 								</div>
 							</div>
 
-							% if requestedLivesHere == entry_counter and not requestedInfoDisplayed:
+							% if requestedLivesHere == entryCounter and not requestedInfoDisplayed:
 								% requestedInfoDisplayed = True
-								<div class="row" id="requested" data-anchor="{{i}}">
+								<div class="row" id="requested" data-anchor="{{entryCounter}}">
 									<div class="col-md-12">
 			
 										<ul class="nav nav-tabs">
@@ -57,7 +61,7 @@
 
 											<div id="over-view" class="panel panel-default tab-pane fade in active" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>{{node.name}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{node.name}}</strong></h5>
 												</div>
 
 												<div class="panel-body">
@@ -72,7 +76,7 @@
 
 											<div id="full-view" class="panel panel-default tab-pane fade" style="border: 1px solid grey;">
 												<div class="panel-heading">
-													<h5>Scontrol output for <strong>{{node.name}}</strong></h5>
+													<h5>Scontrol output for <strong>node{{node.name}}</strong></h5>
 												</div>
 
 												<div class="panel-body">

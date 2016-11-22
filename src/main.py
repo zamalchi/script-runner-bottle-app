@@ -213,8 +213,10 @@ def slurm_nodes():
 
     # if a specific node was requested
     if requested:
-        # get the scontrol info for that node (nodename, scontrol output)
+        # get the scontrol info for that node
         node = Slurm.Node(requested)
+    else:
+        node = None
 
     #################################################
 
