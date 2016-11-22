@@ -38,30 +38,30 @@ class TestSlurmSuite(unittest.TestCase):
 
 
 
-    def test_reservation(self):
-        print
-        i = 0
-        if self.liveData:
-            rawOutput["reservations"] = Slurm.getScontrolShowReservation()
-            print(formatStr("Reservations:") + "(LIVE)")
-
-        else:
-            print(formatStr("Reservations:") + "(MOCK)")
-
-        for each in rawOutput["reservations"]:
-            obj = Slurm.Reservation(each)
-
-            self.assertTrue(obj.__class__.__name__ == "Reservation")
-
-            if not self.liveData:
-                self.assertTrue(obj.name == tests["reservations"]["name"][i])
-                self.assertTrue(len(obj.nodes) == tests["reservations"]["nodeCount"][i])
-                self.assertTrue(obj.state == tests["reservations"]["state"][i])
-                self.assertTrue(type(obj.data) is dict)
-
-            i += 1
-
-        print(formatStr("Reservations:") + "OK")
+    # def test_reservation(self):
+    #     print
+    #     i = 0
+    #     if self.liveData:
+    #         rawOutput["reservations"] = Slurm.getScontrolShowReservation()
+    #         print(formatStr("Reservations:") + "(LIVE)")
+    #
+    #     else:
+    #         print(formatStr("Reservations:") + "(MOCK)")
+    #
+    #     for each in rawOutput["reservations"]:
+    #         obj = Slurm.Reservation(each)
+    #
+    #         self.assertTrue(obj.__class__.__name__ == "Reservation")
+    #
+    #         if not self.liveData:
+    #             self.assertTrue(obj.name == tests["reservations"]["name"][i])
+    #             self.assertTrue(len(obj.nodes) == tests["reservations"]["nodeCount"][i])
+    #             self.assertTrue(obj.state == tests["reservations"]["state"][i])
+    #             self.assertTrue(type(obj.data) is dict)
+    #
+    #         i += 1
+    #
+    #     print(formatStr("Reservations:") + "OK")
 
 if __name__ == '__main__':
 
