@@ -294,7 +294,7 @@ class Slurm:
             from commands import getstatusoutput
             node = Slurm.normalizeNodeName(nodeName)
 
-            cmd = "scontrol -a -o show node node{}".format(nodeName)
+            cmd = "scontrol -a -o show node node{}".format(node)
             output = getstatusoutput(cmd)[1]
 
             self.__name = node
