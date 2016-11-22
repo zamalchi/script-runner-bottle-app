@@ -74,7 +74,9 @@ class TestSlurmSuite(unittest.TestCase):
         print("OK : All nodes either found or (if not found) have no data")
 
         for n in nodes:
+            print("NODE: " + str(n.name))
             if n.found:
+                ("NODE FOUND: " + str(n.name))
                 self.assertTrue(n.state and n.data)
         print("OK : All found nodes have state and data attributes")
 
