@@ -230,7 +230,7 @@ class Slurm:
 
         @property
         def data(self):
-            """<dict[str -> str]> : dictionary of key->vals from the Slurm reservation output"""
+            """<dict[str -> str]> : dictionary of key-val pairs from `scontrol` output"""
             return self.__data
 
         def __init__(self, raw):
@@ -268,18 +268,22 @@ class Slurm:
         """
         @property
         def name(self):
+            """<str> : number associated with the node ; normalized with Slurm.normalizeNodeName"""
             return self.__name
 
         @property
         def state(self):
+            """<str> : the Slurm state to which the node currently belongs"""
             return self.__state
 
         @property
         def data(self):
+            """<dict[str -> str] : dictionary of key-val pairs from `scontrol` output"""
             return self.__data
 
         @property
         def found(self):
+            """<bool> : true if `scontrol` returned info on this node"""
             return self.__found
 
         def __init__(self, nodeName):
