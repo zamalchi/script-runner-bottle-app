@@ -40,6 +40,10 @@ class TestSlurmSuite(unittest.TestCase):
                 self.assertTrue(e.nodes and e.time and e.reason)
         print("OK : All entries have nodes, time, and reason attributes")
 
+        print
+
+    ############################################################################################
+
     def test_reservation(self):
         reservations = Slurm.getReservations()
 
@@ -58,6 +62,10 @@ class TestSlurmSuite(unittest.TestCase):
         for r in reservations:
             self.assertTrue(type(r.data) is dict)
         print("OK : All reservations' data attribute are type dictionary")
+
+        print
+
+    ############################################################################################
 
     def test_node(self):
         nodes = []
@@ -86,7 +94,9 @@ class TestSlurmSuite(unittest.TestCase):
             self.assertTrue(n.name == Slurm.normalizeNodeName(n.name))
         print("OK : All nodes' names are in normalized format")
 
+        print
 
+    ############################################################################################
 
 if __name__ == '__main__':
 
