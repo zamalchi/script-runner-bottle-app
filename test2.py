@@ -17,6 +17,8 @@ def formatStr(raw):
 class TestSlurmSuite(unittest.TestCase):
 
     def test_state(self):
+        print(" --- STATE TESTS ---")
+
         states = Slurm.getNonEmptyStates()
 
         self.assertTrue(states)
@@ -45,6 +47,8 @@ class TestSlurmSuite(unittest.TestCase):
     ############################################################################################
 
     def test_reservation(self):
+        print(" --- RESERVATION TESTS ---")
+
         reservations = Slurm.getReservations()
 
         self.assertTrue(reservations)
@@ -68,6 +72,8 @@ class TestSlurmSuite(unittest.TestCase):
     ############################################################################################
 
     def test_node(self):
+        print(" --- NODE TESTS ---")
+
         nodes = []
         nodes.append(Slurm.Node("034"))
         nodes.append(Slurm.Node(100))
