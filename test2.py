@@ -17,7 +17,7 @@ def formatStr(raw):
 class TestSlurmSuite(unittest.TestCase):
 
     def test_state(self):
-        print(" --- STATE TESTS ---")
+        print("\n --- STATE TESTS ---")
 
         states = Slurm.getNonEmptyStates()
 
@@ -42,12 +42,10 @@ class TestSlurmSuite(unittest.TestCase):
                 self.assertTrue(e.nodes and e.time and e.reason)
         print("OK : All entries have nodes, time, and reason attributes")
 
-        print
-
     ############################################################################################
 
     def test_reservation(self):
-        print(" --- RESERVATION TESTS ---")
+        print("\n --- RESERVATION TESTS ---")
 
         reservations = Slurm.getReservations()
 
@@ -67,12 +65,10 @@ class TestSlurmSuite(unittest.TestCase):
             self.assertTrue(type(r.data) is dict)
         print("OK : All reservations' data attribute are type dictionary")
 
-        print
-
     ############################################################################################
 
     def test_node(self):
-        print(" --- NODE TESTS ---")
+        print("\n --- NODE TESTS ---")
 
         nodes = []
         nodes.append(Slurm.Node("034"))
@@ -99,8 +95,6 @@ class TestSlurmSuite(unittest.TestCase):
         for n in nodes:
             self.assertTrue(n.name == Slurm.normalizeNodeName(n.name))
         print("OK : All nodes' names are in normalized format")
-
-        print
 
     ############################################################################################
 
