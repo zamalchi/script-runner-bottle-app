@@ -307,18 +307,19 @@ class Slurm:
                 self.__found = True
 
                 data = {}
-                fields = ''
 
                 #### PRE-PARSING (for outlying cases)
                 if "Reason=" in output:
                     # parse out reason because it can contain spaces and will break splitting on ' '
-                    fields, reason = output.split("Reason=")
+                    remainder, reason = output.split("Reason=")
                     # add reason back into data
                     data["Reason"] = reason
+                    # split fields on ' ' and filter empty elements
+                    fields = filter(None, remainder.split(' '))
+                else:
+                    # if no pre-parsing happened, use the original output for parsing
+                    fields = filter(None, output.split(' '))
                 ####
-
-                # split fields on ' ' and filter empty elements
-                fields = filter(None, fields.split(' '))
 
                 for f in fields:
                     key, val = f.strip().split('=')
