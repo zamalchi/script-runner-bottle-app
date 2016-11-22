@@ -84,7 +84,7 @@ class TestSlurmSuite(unittest.TestCase):
             obj = Slurm.State(key, rawOutput["states"][key])
 
             self.assertTrue(obj.__class__.__name__ == "State")
-            self.assertTrue(obj.name in Slurm.states)
+            self.assertTrue(obj.name in Slurm.STATES)
             self.assertTrue(obj.hasEntries())
             self.assertTrue(type(obj.entries) is list)
 
