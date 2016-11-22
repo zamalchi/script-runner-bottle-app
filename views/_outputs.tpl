@@ -104,8 +104,7 @@
 								</div>
 							% end
 
-							% i += 1
-							% entry_counter += 1
+							% entryCounter += 1
 
 						</div>
 
