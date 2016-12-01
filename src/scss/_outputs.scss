@@ -1,77 +1,121 @@
 div#outputs {
-	div[name="state"] {
 
-		[name="state-title"] {
-			font-size: 2vw;
-			margin-left: 30px;
-		}
+	div.state {
 
-		div[name="state-fields"] {
+		.panel {
 
-			.field {
-				overflow: hidden;
-				white-space: nowrap;
-			}
-			select {
-				padding-top: 3px;
-				padding-bottom: 3px;
+			.panel-heading {
+				padding: 0px;
+			
+				.state-title {
+					margin: 0px 0px 10px 25px;
+				}
 			}
 
-		}
+			.entry {
 
-		.line {
-		}
+				.tab-content {
 
-		.node_name {
-		}
-		.node_time {
-		}
-		.node_reason {
+					.node-data {
+						border: 1px solid grey;
+					}
+
+					pre {
+						display: inline-block;
+						padding: 5px;
+					}
+
+					.node-field-key {
+						color: blue;
+					}
+					.node-field-val {
+						color: green;
+						font-weight: bold;
+					}
+				}
+			}
+
 		}
 	}
 }
 
-// fixes page positioning around anchors
-.anchor {
-	display: inline-block;
-	padding-top: 250px;
-	margin-top: -250px;
-}
 
-.title-anchor {
-	padding-top: 200px;
-	margin-top: -200px;
-}
 
-.nodelist {
-	font-family: Monospace;
-	min-height: 1em;
-	max-height: 4em;
 
-	line-height: 2em;
-	
-	overflow: auto;
-	overflow-x: hidden;
-	
-	width: 100%;
-}
+// div#outputs {
+// 	div[name="state"] {
 
-// .hiddenText{
-//     width:0px;
-//     height:0px;
-//     overflow:hidden;
-//     display:inline-block;
+// 		[name="state-title"] {
+// 			font-size: 2vw;
+// 			margin-left: 30px;
+// 		}
+
+// 		div[name="state-fields"] {
+
+// 			.field {
+// 				overflow: hidden;
+// 				white-space: nowrap;
+// 			}
+// 			select {
+// 				padding-top: 3px;
+// 				padding-bottom: 3px;
+// 			}
+
+// 		}
+
+// 		.line {
+// 		}
+
+// 		.node_name {
+// 		}
+// 		.node_time {
+// 		}
+// 		.node_reason {
+// 		}
+// 	}
 // }
 
-.entry {
-	border: 2px solid $dark_grey;
-	border-radius: 3px;
-	margin: 5px auto;
-	padding: 10px;
-	background-color: $light_grey;
-}
+// // fixes page positioning around anchors
+// .anchor {
+// 	display: inline-block;
+// 	padding-top: 250px;
+// 	margin-top: -250px;
+// }
 
-.button-center {
-	margin-top: 5%;
-	margin-bottom: 5%;
-}
+// .title-anchor {
+// 	padding-top: 200px;
+// 	margin-top: -200px;
+// }
+
+// .nodelist {
+// 	font-family: Monospace;
+// 	min-height: 1em;
+// 	max-height: 4em;
+
+// 	line-height: 2em;
+	
+// 	overflow: auto;
+// 	overflow-x: hidden;
+	
+// 	width: 100%;
+// }
+
+// // .hiddenText{
+// //     width:0px;
+// //     height:0px;
+// //     overflow:hidden;
+// //     display:inline-block;
+// // }
+
+// .entry {
+// 	border: 2px solid $dark_grey;
+// 	border-radius: 3px;
+// 	margin: 5px auto;
+// 	padding: 10px;
+// 	background-color: $light_grey;
+// }
+
+// .button-center {
+// 	margin-top: 5%;
+// 	margin-bottom: 5%;
+// }

@@ -1,10 +1,9 @@
-<!-- called from _outputs.tpl -->
-<!-- nodelist : str -->
+<!-- called from _entry.tpl -->
 
 <form action="/node" method="post" enctype="multipart/form-data">
 
 <!-- for reloading the page to a specific location -->
-<input type="hidden" name="anchor" value="{{anchor}}" />
+<input type="hidden" name="anchor" value="{{entryCounter}}" />
 
 <!-- a list to parse -->
 % if len(nodes) > 1:

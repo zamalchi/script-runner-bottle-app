@@ -1,3 +1,11 @@
+<%
+''' Base template for the /slurm route
+	:param anchor : ???
+	:param states : dict(stateName: str --> objects: Slurm.State)
+	:param node   : Slurm.Node object (use Node.found to check if exists)
+'''
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +21,8 @@
 
 <body onload="anchorToRequested()">
 
-% include('_navbar.tpl', states=states)
+<!-- % include('_navbar.tpl', states=states) -->
+% include('_navbar.tpl')
 
 <!-- main container start -->
 <div class="container" name="main">
