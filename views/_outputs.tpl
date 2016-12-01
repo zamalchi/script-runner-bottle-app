@@ -6,7 +6,22 @@ slurm.tpl includes this
 %>
 
 <div class="row-fluid" id="outputs">
+
+	% if node:
+
+	<div class="col-md-4">
+		<div class="container">
+			% include("_requested.tpl", entryCounter=0)
+		</div>
+	</div>
+
+	<div class="col-md-8">
+
+	% else:
+
 	<div class="col-md-12">
+
+	% end
 
 	<hr />
 
