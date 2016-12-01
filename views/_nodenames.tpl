@@ -10,13 +10,13 @@
 
 	<select name="node" onclick="this.parentElement.submit()">
 
-		% for node in nodes:
-			% if requested.name == node:
-			<option name="nodeOption" value="{{node}}" selected>
+		% for each in nodes:
+			% if node.name == each:
+			<option name="nodeOption" value="{{node.name}}" selected>
 			% else:
-			<option name="nodeOption" value="{{node}}">
+			<option name="nodeOption" value="{{node.name}}">
 			% end
-				node{{node}}
+				node{{node.name}}
 			</option>
 		% end
 	</select>
