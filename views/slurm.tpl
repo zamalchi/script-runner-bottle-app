@@ -11,11 +11,7 @@
 </head>
 
 
-<!-- PASSED IN FROM ROUTE -->
-<!-- time : current time -->
-<!-- outputs : [str] from all the states -->
-
-<body style="padding-top: 143.5px;" onload="anchorToRequested()">
+<body onload="anchorToRequested()">
 
 % include('_navbar.tpl', states=states)
 
@@ -23,7 +19,8 @@
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl', anchor=anchor, states=states, node=node)
+<!-- % include('_outputs.tpl', anchor=anchor, states=states, node=node) -->
+% include('_outputs.tpl')
 <!-- outputs row end -->
 
 </div>

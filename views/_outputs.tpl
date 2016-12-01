@@ -1,14 +1,24 @@
+<%
+''' Displays entries of the Slurm states
+slurm.tpl includes this
+	:param anchor : ???
+	:param states : dict(stateName: str --> objects: Slurm.State)
+	:param node   : Slurm.Node object (use Node.found to check if exists)
+'''
+%>
+
 <div class="row-fluid" id="outputs">
 	<div class="col-md-12">
 
 	<hr />
 
-	% # counter for entries (accumulated across all states)
-	% entryCounter = 0
+	<%
+		# counter for entries (accumulated across all states)
+		entryCounter = 0
 
-	% # ensures only one div is displayed when providing scontrol output (case : node in multiple states)
-	% requestedInfoDisplayed = False 
-
+		# ensures only one div is displayed when providing scontrol output (case : node in multiple states)
+		requestedInfoDisplayed = False 
+	%>
 
 
 	% for key in sorted(states.keys()):
