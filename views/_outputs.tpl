@@ -7,7 +7,7 @@ slurm.tpl includes this
 
 <div class="row-fluid" id="outputs">
 
-	% if node:
+	% if node.found:
 
 	<div class="col-md-4">
 		<div class="container">
