@@ -74,6 +74,17 @@ div#outputs div.state .panel .entry .tab-content .node-field-val {
   color: green;
   font-weight: bold; }
 
+.tab-content .node-data {
+  border: 1px solid grey; }
+.tab-content pre {
+  display: inline-block;
+  padding: 5px; }
+.tab-content .node-field-key {
+  color: blue; }
+.tab-content .node-field-val {
+  color: green;
+  font-weight: bold; }
+
 div.panel[name="scontrol"] {
   margin-top: 30px; }
   div.panel[name="scontrol"] [name="title"] {
