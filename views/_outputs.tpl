@@ -42,12 +42,10 @@ slurm.tpl includes this
 				<div class="panel-body">
 					<!-- container of entry divs -->
 					<div class="container-fluid" name="state-fields">
-						% <%
 						% for each in state.entries:
 							% entryCounter += 1
 							% include("_entry.tpl", entry=each)
 						% end 
-						% %>
 					</div>
 				</div>
 			
