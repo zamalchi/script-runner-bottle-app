@@ -12,11 +12,11 @@
 
 		% for each in nodes:
 			% if node.name == each:
-			<option name="nodeOption" value="{{node.name}}" selected>
+			<option name="nodeOption" value="{{each}}" selected>
 			% else:
-			<option name="nodeOption" value="{{node.name}}">
+			<option name="nodeOption" value="{{each}}">
 			% end
-				node{{node.name}}
+				node{{each}}
 			</option>
 		% end
 	</select>
