@@ -22,7 +22,8 @@ devMode = args.d
 if devMode:
     setDevMode(devMode)
 
-ROOT_DIR = os.path.dirname( os.path.realpath(__file__))
+ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
+print("ROOT DIR IN RUN.PY : {}".format(ROOT_DIR))
 
 setRootDir(ROOT_DIR)
 
