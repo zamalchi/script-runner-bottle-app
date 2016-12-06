@@ -47,8 +47,8 @@ def getDevMode():
     return devMode
 
 def setRootDir(dir):
+    print dir
     global ROOT_DIR
-    print ROOT_DIR
     ROOT_DIR = dir
 
 def getRootDir():
