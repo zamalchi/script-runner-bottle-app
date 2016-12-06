@@ -1,17 +1,15 @@
 
 @import 'vars';
 
+@import 'misc';
 
 body {
 	background-color: $bg_color;
 	padding-top: 143.5px;
 }
 
-// top nav and search bar
 @import 'navbar';
 
 @import 'outputs';
 
 @import 'scontrol';
-
-@import 'misc';
