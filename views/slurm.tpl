@@ -1,3 +1,11 @@
+<%
+''' Base template for the /slurm route
+	:param anchor : ???
+	:param states : dict(stateName: str --> objects: Slurm.State)
+	:param node   : Slurm.Node object (use Node.found to check if exists)
+'''
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,21 +19,17 @@
 </head>
 
 
-<!-- PASSED IN FROM ROUTE -->
-<!-- time : current time -->
-<!-- outputs : [str] from all the states -->
+<body onload="anchorToRequested()">
 
-<body style="padding-top: 143.5px;" onload="anchorToRequested()">
-
-% states = sorted(sinfo_output.keys())
-
-% include('_navbar.tpl', states=states)
+<!-- % include('_navbar.tpl', states=states) -->
+% include('_navbar.tpl')
 
 <!-- main container start -->
 <div class="container" name="main">
 
 <!-- outputs row start -->
-% include('_outputs.tpl', anchorHere=anchor, requested=requested, states=states, sinfo_output=sinfo_output, scontrol_output=scontrol_output)
+<!-- % include('_outputs.tpl', anchor=anchor, states=states, node=node) -->
+% include('_outputs.tpl')
 <!-- outputs row end -->
 
 </div>

@@ -75,3 +75,67 @@ div#outputs {
 	margin-top: 5%;
 	margin-bottom: 5%;
 }
+
+
+// ^ ORIGINAL | REFACTORED v
+
+div#outputs {
+
+	div.state {
+
+		.panel {
+
+			.panel-heading {
+				padding: 0px;
+			
+				.state-title {
+					margin: 0px 0px 10px 25px;
+				}
+			}
+
+			.entry {
+
+				.tab-content {
+
+					.node-data {
+						border: 1px solid grey;
+					}
+
+					pre {
+						display: inline-block;
+						padding: 5px;
+					}
+
+					.node-field-key {
+						color: blue;
+					}
+					.node-field-val {
+						color: green;
+						font-weight: bold;
+					}
+				}
+			}
+
+		}
+	}
+}
+
+.tab-content {
+
+	.node-data {
+		border: 1px solid grey;
+	}
+
+	pre {
+		display: inline-block;
+		padding: 5px;
+	}
+
+	.node-field-key {
+		color: blue;
+	}
+	.node-field-val {
+		color: green;
+		font-weight: bold;
+	}
+}

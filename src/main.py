@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 
 ########################################################################################################
 ########################################################################################################
@@ -209,20 +209,21 @@ def slurm_nodes():
     deleteRequestedCookie(response)
 
     # dict of (state --> obj) pairs
-    sinfo_output = Slurm.getNonEmptyStates()
+    states = Slurm.getNonEmptyStates()
 
     # if a specific node was requested
     if requested:
-        # get the scontrol info for that node (nodename, scontrol output)
-        scontrol_output = Slurm.getScontrol(requested)
+        # get the scontrol info for that node
+        node = Slurm.Node(requested)
+    else:
+        node = None
 
     #################################################
 
     return template('slurm',
                     anchor=anchor,
-                    requested=requested,
-                    sinfo_output=sinfo_output,
-                    scontrol_output=scontrol_output)
+                    states=states,
+                    node=node)
 
 
 ########################################################################################################

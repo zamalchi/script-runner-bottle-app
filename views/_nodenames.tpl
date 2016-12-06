@@ -1,23 +1,22 @@
-<!-- called from _outputs.tpl -->
-<!-- nodelist : str -->
+<!-- called from _entry.tpl -->
 
 <form action="/node" method="post" enctype="multipart/form-data">
 
 <!-- for reloading the page to a specific location -->
-<input type="hidden" name="anchor" value="{{anchor}}" />
+<input type="hidden" name="anchor" value="{{entryCounter}}" />
 
 <!-- a list to parse -->
 % if len(nodes) > 1:
 
 	<select name="node" onclick="this.parentElement.submit()">
 
-		% for node in nodes:
-			% if str(requested) == str(node):
-			<option name="nodeOption" value="{{node}}" selected>
+		% for each in nodes:
+			% if node.name == each:
+			<option name="nodeOption" value="{{each}}" selected>
 			% else:
-			<option name="nodeOption" value="{{node}}">
+			<option name="nodeOption" value="{{each}}">
 			% end
-				node{{node}}
+				node{{each}}
 			</option>
 		% end
 	</select>

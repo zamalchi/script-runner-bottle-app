@@ -1,5 +1,6 @@
 body {
-  background-color: #476f9e; }
+  background-color: #476f9e;
+  padding-top: 143.5px; }
 
 .navbar {
   background-color: #9b9b9b;
@@ -57,6 +58,32 @@ div#outputs div[name="state"] div[name="state-fields"] select {
 .button-center {
   margin-top: 5%;
   margin-bottom: 5%; }
+
+div#outputs div.state .panel .panel-heading {
+  padding: 0px; }
+  div#outputs div.state .panel .panel-heading .state-title {
+    margin: 0px 0px 10px 25px; }
+div#outputs div.state .panel .entry .tab-content .node-data {
+  border: 1px solid grey; }
+div#outputs div.state .panel .entry .tab-content pre {
+  display: inline-block;
+  padding: 5px; }
+div#outputs div.state .panel .entry .tab-content .node-field-key {
+  color: blue; }
+div#outputs div.state .panel .entry .tab-content .node-field-val {
+  color: green;
+  font-weight: bold; }
+
+.tab-content .node-data {
+  border: 1px solid grey; }
+.tab-content pre {
+  display: inline-block;
+  padding: 5px; }
+.tab-content .node-field-key {
+  color: blue; }
+.tab-content .node-field-val {
+  color: green;
+  font-weight: bold; }
 
 div.panel[name="scontrol"] {
   margin-top: 30px; }

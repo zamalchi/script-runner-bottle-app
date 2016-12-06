@@ -4,12 +4,17 @@
 ########################################################################################################
 
 class Slurm:
+    """
+    State : getNonEmptyStates() | State(stateName)
+    Reservation : getReservations()
+    Node : Node(nodeName)
+    """
     # X
     ####################################################################################################
     ### STATIC VARIABLES START
     ####################################################################################################
 
-    states = ['allocated', 'completing', 'down', 'drained', 'draining', 'error', 'fail', 'future', 'idle', 'maint',
+    STATES = ['allocated', 'completing', 'down', 'drained', 'draining', 'error', 'fail', 'future', 'idle', 'maint',
               'mixed', 'no_respond', 'npc', 'perfctrs', 'power_down', 'power_up', 'reserved', 'unknown']
 
     ####################################################################################################
@@ -20,126 +25,59 @@ class Slurm:
     ### STATIC METHODS START
     ####################################################################################################
 
-    ###### SINFO METHODS
+    ###### HELPER METHODS
 
-    # used by : Slurm.parseNodeNames
     @staticmethod
     def normalizeNodeName(nodeName):
-        # receives a single-node name (ex. 32)
-        # returns a string containing the node number (ex. '032')
+        """ PUBLIC & PRIVATE
+        Normalizes a node name for use by other methods (ex. 'node034' | 34 --> '034')
+        :param nodeName: <int|str> containing the node number
+        :return: <str> 3-char normalized node number (filled w/ leading 0s)
+        """
+        # chars to be removed from nodeName
+        REPLACE_CHARS = 'node'
 
-        nodeName = str(nodeName)
+        return str(nodeName).strip().translate(None, REPLACE_CHARS).zfill(3)
 
-        replace_chars = ['node']
-        for c in replace_chars:
-            nodeName = nodeName.replace(c, '')
-
-        return nodeName.strip().zfill(3)
-
-    # used by : Slurm.parseStateOutputToList
     @staticmethod
     def parseNodeNames(rawNodeNames):
-        # recieves an unparsed string of nodes (ex. "node[018-021, 34, 45-67]")
-        # or receives a single node string (ex. "node32")
-        # returns a sorted list (of strings) of node names
+        """ PUBLIC & PRIVATE
+        Parses Slurm node lists (from `sinfo` and `scontrol` commands)
+        :param rawNodeNames: <str> human-readable list of single nodes/ranges of nodes (ex. 'node[34, 45-67]') |
+            single node name (ex. 'node034')
+        :return: <list[str]> sorted list of normalized nodes (ex. [34, 45, 46, ...], [34])
+        """
+        REPLACE_CHARS = 'node[]'
+        parsedNodeList = []
 
-        parsedNodeNames = []
-        replace_chars = ['node', '[', ']']
+        # creates list of one or more node (numbers | ranges)
+        nodeList = str(rawNodeNames).strip().translate(None, REPLACE_CHARS).split(',')
 
-        for c in replace_chars:
-            rawNodeNames = str(rawNodeNames).replace(c, '')
-
-        # may be one or more nodes / ranges at this point
-        units = rawNodeNames.split(',')
-
-        # expands any ranges that exist (ex. 018-021)
-        for u in units:
+        # expands any ranges that exist (ex. "018-021")
+        for node in nodeList:
             # single node
-            if '-' not in u:
-                parsedNodeNames.append(Slurm.normalizeNodeName(u))
+            if '-' not in node:
+                parsedNodeList.append(Slurm.normalizeNodeName(node))
             # range of nodes
             else:
-                start, end = u.split('-')
+                start, end = node.split('-')
                 for i in range(int(start), int(end) + 1):
-                    parsedNodeNames.append(Slurm.normalizeNodeName(i))
+                    parsedNodeList.append(Slurm.normalizeNodeName(i))
 
-        return sorted(parsedNodeNames)
+        return sorted(parsedNodeList)
 
-    # used by : Slurm.getSingleStateOutput
-    @staticmethod
-    def parseStateOutputToList(raw):
-        # param raw <str> : raw output from sinfo command
-        # return <[ ([str], str, str) | str ]> : a parsed list of output tuples for one state
-        # [ ( [nodenames], time, reasons ), ... ]
-        # list may also contain a string element, if the line parse was unsuccessful
-
-        parsedList = []
-
-        # for every line in this state
-        for line in raw:
-
-            # if there are 3 fields available to parse, continue...
-            if len(line.split("\t")) == 3:
-
-                # parse fields
-                nodes, time, reasons = line.split("\t")
-
-                nodes = Slurm.parseNodeNames(nodes)
-
-                parsedList.append((nodes, time, reasons))
-
-            # if there are not 3 fields to parse, append the original line
-            else:
-                parsedList.append(line)
-
-        return parsedList
-
-    ### ^ PRIVATE | PUBLIC v
-
-    # used by : Slurm.__init__
-    @staticmethod
-    def getSingleStateOutput(state):
-        # FOR PUBLIC USE
-        # param state <str> : state name
-        # return <[ ([str], str, str) | str ]> : lines of output for state
-        # return is passed directly from Slurm.parseStateOutputToList
-
-        from commands import getstatusoutput
-
-        # %E : reasons for state
-        # %H : timestamp
-        # %N : node list
-        output_format = '"%N\t%20H\t%E"'
-
-        # -a : all
-        # -h : no header
-        # -N : node format
-        # -R : list reasons
-        # -t : states
-        # -o : output format
-        cmd = "sinfo -a -h -N -o {0} -R -t {1}".format(output_format, state)
-
-        # getstatusoutput attaches [0] field (return flag?)
-        # for each state, get a list of output lines (each line conforms to output_format)
-        output = getstatusoutput(cmd)[1].split("\n")
-
-        # modify each line in this state
-        # if the line has a long nodelist (length > 35),
-        #   it will display the nodelist on a separate line with the other information aligned on the next line
-        # if the line has a short nodelist (length <= 35), it will not modify the line
-        # output = getModifiedOutput(output)
-
-        return Slurm.parseStateOutputToList(output)
+    ###### SLURM METHODS
 
     @staticmethod
     def getNonEmptyStates():
-        # FOR PUBLIC USE
-        # return <{ str -> Slurm }> : state name --> Slurm object
-        # returns only non-empty Slurm objects
-
+        """ PUBLIC
+        Calls Slurm.State(name) for each state in Slurm.STATES
+        :return: <dict[str -> Slurm.State]> dictionary of state names to non-empty (State.hasEntries()) State objects
+        """
         result = {}
 
-        for s in Slurm.states:
+        for s in Slurm.STATES:
+            # Slurm.State constructor makes the `sinfo` call
             obj = Slurm.State(s)
 
             if obj.hasEntries():
@@ -147,71 +85,91 @@ class Slurm:
 
         return result
 
-    ###### SCONTROL METHODS
-
     @staticmethod
-    def getScontrol(node):
-        # FOR PUBLIC USE
-        # param node <str | int> : node name/number
-        # return <str> : output from scontrol
-
+    def getReservations():
+        """ PUBLIC
+        Calls and parses `scontrol show reservation`
+        :return: <list[Slurm.Reservation]> list of Reservation objects
+        """
         from commands import getstatusoutput
+        cmd = "scontrol -o show reservation"
 
-        node = "node" + Slurm.normalizeNodeName(node)
+        output = filter(None, getstatusoutput(cmd)[1].split("\n"))
 
-        cmd = "scontrol -a show node {0}".format(node)
-
-        return getstatusoutput(cmd)[1]
+        return [Slurm.Reservation(each) for each in output]
 
     ####################################################################################################
     ### STATIC METHODS END
     ####################################################################################################
     # X
     ####################################################################################################
-    ### CLASS METHODS / INNER CLASSES START
+    ### INNER CLASSES START
     ####################################################################################################
     # X
     ### State : INNER CLASS START
 
     class State:
+        """ PUBLIC
+        Describes a group of entries which share a common Slurm state
+        """
+        @property
+        def name(self):
+            """<str>"""
+            return self.__name
 
         @property
         def entries(self):
+            """<list[Slurm.Entry]>"""
             return self.__entries
 
-        @property
-        def name(self):
-            return self.__name
-
-        # used by : Slurm.getNonEmptyStates
         def __init__(self, state):
+            """ PUBLIC
+            Calls `sinfo` on the state name provided and creates a Slurm.State object from the data received
+            :param state: <str> state name (all options are in Slurm.STATES)
+            """
+            from commands import getstatusoutput
+            # %E : reasons for state
+            # %H : timestamp
+            # %N : node list
+            output_format = '"%N\t%20H\t%E"'
+            # -a : all
+            # -h : no header
+            # -N : node format
+            # -R : list reasons
+            # -t : states
+            # -o : output format
+            cmd = "sinfo -a -h -N -o {} -R -t {}".format(output_format, state)
 
-            raw = Slurm.getSingleStateOutput(state)
-            entries = []
+            # getstatusoutput attaches [0] field (return flag?)
+            # for each state, get an output conforming to output_format
+            output = filter(None, getstatusoutput(cmd)[1].split("\n"))
 
-            for each in raw:
-                entry = Slurm.Entry(each)
+            self.__name = str(state)
+            self.__entries = [Slurm.Entry(each) for each in output]
 
-                if entry.nodes:
-                    entries.append(entry)
+        ### CLASS METHODS
 
-            self.__name = state
-            self.__entries = entries
+        def findNodeInEntries(self, nodeName):
+            """ PUBLIC
+            Searches a Slurm.State object's entries to see if a specific node is present
+            :param nodeName: <str|int> name of node to find
+            :return: <int> index of entry containing the node | -1 if not found
+            """
 
-        def findNodeInEntries(self, node):
-            # return <int> : index (in self.__entries) where the node is located (or -1 if not found)
+            node = Slurm.normalizeNodeName(nodeName)
 
-            node = Slurm.normalizeNodeName(node)
             i = 0
-
             for entry in self.entries:
                 if node in entry.nodes:
                     return i
                 i += 1
-
             return -1
 
         def hasEntries(self):
+            """ PUBLIC
+            Determines if a Slurm.State is empty / devoid of entries
+            :return: <bool>
+            """
             return bool(self.__entries)
 
     ### State : INNER CLASS END
@@ -219,31 +177,165 @@ class Slurm:
     ### Entry : INNER CLASS START
 
     class Entry:
-
+        """ PRIVATE-PUBLIC : accessed through a Slurm.State object
+        Describes a group of nodes which share a time and reason for being in a Slurm state
+        """
         @property
         def nodes(self):
+            """<list[str]> : list of nodes numbers which share the same time and reason"""
             return self.__nodes
 
         @property
         def time(self):
+            """<str> : starting time for the nodes being in their current state"""
             return self.__time
 
         @property
         def reason(self):
+            """<str> : reason the nodes are in their current state"""
             return self.__reason
 
         def __init__(self, entry):
-            if len(entry) == 3:
-                self.__nodes, self.__time, self.__reason = entry
-            else:
-                self.__nodes = []
-                self.__time = ""
-                self.__reason = ""
+            """ PRIVATE : used by Slurm.State()
+            Receives a line of output from `sinfo` on a single Slurm state ; parses data into a Slurm.Entry object
+            :param entry: <str> tab-separated string (format: "*nodes*\t*time*\t*reason*")
+            """
+            nodes, time, reason = entry.split('\t')
+            self.__nodes = Slurm.parseNodeNames(nodes)
+            self.__time = time.strip()
+            self.__reason = reason.strip()
 
     ### Entry : INNER CLASS END
     # X
+    ### Reservation : INNER CLASS START
+    
+    class Reservation:
+        """ PUBLIC
+        Describes a Slurm reservation
+        """
+        @property
+        def name(self):
+            """<str> : name of the reservation"""
+            return self.__name
+
+        @property
+        def nodes(self):
+            """<list[str]> : list of node numbers under the reservation"""
+            return self.__nodes
+
+        @property
+        def state(self):
+            """<str> : 'ACTIVE'|'INACTIVE'"""
+            return self.__state
+
+        @property
+        def data(self):
+            """<dict[str -> str]> : dictionary of key-val pairs from `scontrol` output"""
+            return self.__data
+
+        def __init__(self, raw):
+            """ PRIVATE : used by Slurm.getReservations()
+            Receives raw data and parses into a Slurm.Reservation object
+            :param raw: <str> `scontrol` output about a single reservation
+            """
+            fields = filter(None, raw.split(' '))
+            data = {}
+
+            for f in fields:
+                key, val = f.strip().split('=')
+
+                if key == "ReservationName":
+                    self.__name = val
+
+                elif key == "Nodes":
+                    self.__nodes = Slurm.parseNodeNames(val)
+
+                elif key == "State":
+                    self.__state = val
+
+                # add all fields to data
+                data[key] = val
+
+            self.__data = data
+
+    ### Entry : INNER CLASS END
+    # X
+    ### Reservation : INNER CLASS START
+
+    class Node:
+        """ PUBLIC
+        Describes a single Slurm node
+        """
+        @property
+        def name(self):
+            """<str> : number associated with the node ; normalized with Slurm.normalizeNodeName"""
+            return self.__name
+
+        @property
+        def state(self):
+            """<str> : the Slurm state to which the node currently belongs"""
+            return self.__state
+
+        @property
+        def data(self):
+            """<dict[str -> str] : dictionary of key-val pairs from `scontrol` output"""
+            return self.__data
+
+        @property
+        def found(self):
+            """<bool> : true if `scontrol` returned info on this node"""
+            return self.__found
+
+        def __init__(self, nodeName):
+            """ PUBLIC
+            Calls `scontrol show node` and parses data into a Slurm.Node object
+            :param nodeName: <str|int> name / number of target node
+            """
+            from commands import getstatusoutput
+            node = Slurm.normalizeNodeName(nodeName)
+
+            cmd = "scontrol -a -o show node node{}".format(node)
+            output = getstatusoutput(cmd)[1]
+
+            self.__name = node
+
+            if "not found" in output:
+                self.__found = False
+                self.__state = ""
+                self.__data = {}
+            else:
+                self.__found = True
+
+                data = {}
+
+                #### PRE-PARSING (for outlying cases)
+                if "Reason=" in output:
+                    # parse out reason because it can contain spaces and will break splitting on ' '
+                    remainder, reason = output.split("Reason=")
+                    # add reason back into data
+                    data["Reason"] = reason
+                    # split fields on ' ' and filter empty elements
+                    fields = filter(None, remainder.split(' '))
+                else:
+                    # if no pre-parsing happened, use the original output for parsing
+                    fields = filter(None, output.split(' '))
+                ####
+
+                for f in fields:
+                    key, val = f.strip().split('=')
+
+                    if key == "State":
+                        self.__state = val
+
+                    # add all fields to data
+                    data[key] = val
+
+                self.__data = data
+
+    ### Node : INNER CLASS END
+    # X
     ####################################################################################################
-    ### CLASS METHODS / INNER CLASSES END
+    ### INNER CLASSES END
     ####################################################################################################
     # X
 ########################################################################################################
