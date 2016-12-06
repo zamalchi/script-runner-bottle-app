@@ -29,7 +29,7 @@
 
 <!-- outputs row start -->
 <!-- % include('_outputs.tpl', anchor=anchor, states=states, node=node) -->
-% include('_outputs.tpl')
+% # include('_outputs.tpl')
 <!-- outputs row end -->
 
 </div>
