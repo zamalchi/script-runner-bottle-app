@@ -24,6 +24,7 @@ body {
   border-radius: 10px;
   padding-left: 60px;
   font-size: 2em;
-  margin-top: 20px; }
+  margin-top: 20px !important;
+  color: red; }
 
 /*# sourceMappingURL=main.css.map */
