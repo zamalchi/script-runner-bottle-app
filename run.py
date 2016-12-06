@@ -2,9 +2,8 @@
 
 import argparse
 
-from src.main import *
-
-from src.bottle import run
+from main import *
+from modu.bottle import run
 
 # argparse
 parser = argparse.ArgumentParser()

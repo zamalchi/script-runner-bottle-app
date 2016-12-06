@@ -794,7 +794,7 @@ class Bottle(object):
             :param name: The name for this route. (default: None)
             :param apply: A decorator or plugin or a list of plugins. These are
               applied to the route callback in addition to installed plugins.
-            :param skip: A list of plugins, plugin classes or names. Matching
+            :param skip: A list of plugins, plugin modu or names. Matching
               plugins are not installed to this route. ``True`` skips all.
 
             Any additional keyword arguments are stored as route-specific

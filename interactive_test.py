@@ -3,7 +3,7 @@
 import readline
 import code
 
-from classes.Slurm import *
+from modu.slurm import *
 
 all = Slurm.getNonEmptyStates()
 

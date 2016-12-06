@@ -3,7 +3,7 @@
 import unittest
 import sys
 
-from classes.Slurm import Slurm
+from modu.slurm import Slurm
 
 ######################################################################
 ######################################################################
