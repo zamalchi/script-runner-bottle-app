@@ -22,4 +22,8 @@ devMode = args.d
 if devMode:
     setDevMode(devMode)
 
+ROOT_DIR = os.path.dirname( os.path.realpath(__file__))
+
+setRootDir(ROOT_DIR)
+
 run(host=address, port=port, debug=True)

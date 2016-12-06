@@ -11,7 +11,7 @@ import sys
 
 from src.bottle import route, get, post, request, response, static_file, SimpleTemplate, url, template, redirect
 
-from config.dirs import ROOT_DIR
+#from config.dirs import ROOT_DIR
 
 # from scripts.states_iterator import *
 
@@ -45,6 +45,14 @@ def setDevMode(d):
 def getDevMode():
     global devMode
     return devMode
+
+def setRootDir(dir):
+    global ROOT_DIR
+    ROOT_DIR = dir
+
+def getRootDir():
+    global ROOT_DIR
+    return ROOT_DIR
 
 ### FOR CSS READING IN TEMPLATES #######################################################################
 
