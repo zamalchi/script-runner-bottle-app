@@ -45,22 +45,22 @@ bottle.SimpleTemplate.defaults["url"] = bottle.url
 # CSS
 @bottle.get('/css/<filename:re:.*\.css>')
 def stylesheets(filename):
-    return bottle.static_file(filename, root='./static/css')
+    return bottle.static_file(filename, root='static/css')
 
 # JAVASCRIPT
 @bottle.get('/js/<filename:re:.*\.js>')
 def javascripts(filename):
-    return bottle.static_file(filename, root='./static/js')
+    return bottle.static_file(filename, root='static/js')
 
 # IMAGES
 @bottle.get('/img/<filename:re:.*\.(jpg|png|gif|ico)>')
 def images(filename):
-    return bottle.static_file(filename, root='./static/img')
+    return bottle.static_file(filename, root='static/img')
 
 # FONTS
 @bottle.get('/fonts/<filename:re:.*\.(eot|ttf|woff|woff2|svg)>')
 def fonts(filename):
-    return bottle.static_file(filename, root='./static/fonts')
+    return bottle.static_file(filename, root='static/fonts')
 
 @bottle.error(404)
 def error404(error):
