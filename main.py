@@ -13,17 +13,13 @@ import argparse
 import modu.bottle as bottle
 import modu.slurm as slurm
 
-### APACHE #############################################################################################
-
-os.chdir(os.path.dirname(__file__))
-sys.path.insert(1, os.path.dirname(__file__))
-
 ### ARG PARSING ########################################################################################
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-a', help="Host address", action="store", dest="a", required=True)
 parser.add_argument('-p', help="Port number", action="store", dest="p", required=True)
 parser.add_argument('-d', help="Dev mode", action="store_true", required=False)
+parser.add_argument('-r', help="Live reloading", action="store_true", required=False)
 
 args = parser.parse_args()
 
@@ -32,9 +28,13 @@ ENV = argparse.Namespace()
 ENV.HOST = args.a
 ENV.PORT = args.p
 ENV.DEV = True if args.d else False
+ENV.RELOAD = True if args.r else False
 ENV.ROOT = os.path.dirname(os.path.realpath(__file__))
 
-print("ROOT DIR IN MAIN.PY : {}".format(ENV.ROOT))
+### APACHE #############################################################################################
+
+os.chdir(ENV.ROOT)
+sys.path.insert(1, ENV.ROOT)
 
 ### FOR CSS READING IN TEMPLATES #######################################################################
 
@@ -66,43 +66,14 @@ def fonts(filename):
 def error404(error):
     return 'Nothing here, sorry'
 
-### COOKIE GETTERS/SETTERS #############################################################################
-
-# ### ANCHOR ######################################################
-# def getAnchorCookie(req):
-#     return req.get_cookie("anchor") or "-1"
-#
-# def setAnchorCookie(res, anchor):
-#     res.set_cookie("anchor", str(anchor))
-#
-# def deleteAnchorCookie(res):
-#     res.delete_cookie("anchor")
-#
-# ### REQUESTED NODE ##############################################
-#
-# def getRequestedCookie(req):
-#     return req.get_cookie("requested") or "-1"
-#
-# def setRequestedCookie(res, requested):
-#     res.set_cookie("requested", str(requested))
-#
-# def deleteRequestedCookie(res):
-#     res.delete_cookie("requested")
-
 ########################################################################################################
 ########################################################################################################
 ########################################################################################################
-
-#
-#
 #
 # ^^^ FUNCTIONS, SETTINGS ^^^
 #
 # vvv ROUTES vvv
 #
-#
-#
-
 ########################################################################################################
 ###################################### NODE ROUTES START ###############################################
 ########################################################################################################
@@ -120,12 +91,8 @@ def slurm_nodes():
     # dict of (state --> obj) pairs
     states = slurm.Slurm.getNonEmptyStates()
 
-    # if a specific node was requested
-    if requested:
-        # get the scontrol info for that node
-        node = slurm.Slurm.Node(requested)
-    else:
-        node = None
+    # if a specific node was requested, get the scontrol info for that node
+    node = slurm.Slurm.Node(requested) if requested else None
 
     #################################################
 
@@ -161,6 +128,14 @@ def search_for_node():
 ########################################################################################################
 ###################################### NODE ROUTES END #################################################
 ########################################################################################################
+
+print "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
+print "APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT)
+print "HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST)
+print "HOST PORT        : {hostPort}".format(hostPort=ENV.PORT)
+print "DEVELOPMENT MODE : {devMode}".format(devMode=ENV.DEV)
+print "LIVE RELOADING   : {liveReload}".format(liveReload=ENV.RELOAD)
+print "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
 
 bottle.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV)
 
