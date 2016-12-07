@@ -21,6 +21,8 @@ debug-watch:
 local:
 	/usr/bin/env python main.py -a localhost -p 8081 -d
 
+test: test-slurm test-slurm-interactive
+
 test-slurm: clean-pyc
 	/usr/bin/env python -m modu.tests.slurm-test
 
