@@ -1,7 +1,6 @@
 <div class="container-fluid" name="states-container">
 	<div class="row">
 		<div class="col-md-12">
-			<h3>States container!</h3>
 
 			<%
 				# counter for entries (accumulated across all states)
