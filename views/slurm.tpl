@@ -30,13 +30,13 @@
 
 	<div class="row">
 	% if node.found:
-		<div class="col-md-7">
+		<div class="col-md-4">
 		% include('_requested.tpl')
 		</div>
 	% end
 
 	% if node.found:
-		<div class="col-md-4">
+		<div class="col-md-7">
 	% else:
 		<div class="col-md-12">
 	% end
