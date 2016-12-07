@@ -29,21 +29,18 @@
 <div class="container-fluid" name="main">
 
 	<div class="row">
-	% if node.found:
-		<div class="col-md-4">
-		% include('_requested.tpl')
-		</div>
-	% end
 
-	% if node.found:
+		% if node.found:
+			<div class="col-md-4">
+			% include('_requested.tpl')
+			</div>
+		% end
+		
 		<div class="col-md-7">
-	% else:
-		<div class="col-md-12">
-	% end
-		% include('_states.tpl')
+			% include('_states.tpl')
 		</div>
+		
 	</div>
-
 </div>
 <!-- main container end -->
 
