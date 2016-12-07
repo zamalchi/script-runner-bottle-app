@@ -46,12 +46,12 @@ bottle.SimpleTemplate.defaults["url"] = bottle.url
 ### STATIC ROUTING ########################################################################################
 
 # CSS
-@app.get('/css/<filename:re:.*\.css>')
+@app.get('/css/<filename:re:.*\.css(.map)?>')
 def stylesheets(filename):
     return bottle.static_file(filename, root='static/css')
 
 # JAVASCRIPT
-@app.get('/js/<filename:re:.*\.js>')
+@app.get('/js/<filename:re:.*\.js(.map)?>')
 def javascripts(filename):
     return bottle.static_file(filename, root='./static/js')
 
