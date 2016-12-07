@@ -27,10 +27,21 @@
 <!-- main container start -->
 <div class="container" name="main">
 
-<!-- outputs row start -->
-<!-- % include('_outputs.tpl', anchor=anchor, states=states, node=node) -->
-% # include('_outputs.tpl')
-<!-- outputs row end -->
+	<div class="row">
+	% if node.found:
+		<div class="col-md-5">
+		% include('_requested.tpl')
+		</div>
+	% end
+
+	% if node.found:
+		<div class="col-md-7">
+	% else:
+		<div class="col-md-12">
+	% end
+		% include('_states.tpl')
+		</div>
+	</div>
 
 </div>
 <!-- main container end -->
