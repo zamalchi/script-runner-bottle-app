@@ -6,6 +6,7 @@
 
 ### IMPORTS ############################################################################################
 
+from __future__ import print_function
 import os
 import sys
 import argparse
@@ -75,11 +76,13 @@ def error404(error):
 # vvv ROUTES vvv
 #
 ########################################################################################################
-###################################### NODE ROUTES START ###############################################
+##################################### SLURM ROUTES START ###############################################
 ########################################################################################################
 
-@bottle.get('/')
-@bottle.get('/slurm')
+app = bottle.Bottle()
+
+@app.get('/')
+@app.get('/slurm')
 def slurm_nodes():
     # get and delete anchor cookie
     anchor = bottle.request.cookies.get("anchor", -1)
@@ -102,7 +105,7 @@ def slurm_nodes():
 ########################################################################################################
 ########################################################################################################
 
-@bottle.post('/node')
+@app.post('/node')
 def scontrol_show_node():
     anchor = bottle.request.forms.get('anchor') or -1
     bottle.response.set_cookie("anchor", anchor)
@@ -116,7 +119,7 @@ def scontrol_show_node():
 ########################################################################################################
 ########################################################################################################
 
-@bottle.post('/search')
+@app.post('/search')
 def search_for_node():
     # get requested node and parse out the number
     requested = slurm.Slurm.normalizeNodeName(bottle.request.forms.get('search'))
@@ -127,18 +130,18 @@ def search_for_node():
     bottle.redirect("/slurm")
 
 ########################################################################################################
-###################################### NODE ROUTES END #################################################
+##################################### SLURM ROUTES END #################################################
 ########################################################################################################
 
-print "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
-print "APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT)
-print "HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST)
-print "HOST PORT        : {hostPort}".format(hostPort=ENV.PORT)
-print "DEBUG            : {devMode}".format(devMode=ENV.DEV)
-print "LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD)
-print "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
+print("* * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+print("APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT))
+print("HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST))
+print("HOST PORT        : {hostPort}".format(hostPort=ENV.PORT))
+print("DEBUG            : {devMode}".format(devMode=ENV.DEV))
+print("LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD))
+print("* * * * * * * * * * * * * * * * * * * * * * * * * * * ")
 
-bottle.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV, reloader=ENV.RELOAD)
+app.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV, reloader=ENV.RELOAD)
 
 ########################################################################################################
 ########################################################################################################
