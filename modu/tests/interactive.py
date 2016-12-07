@@ -3,9 +3,10 @@
 import code
 import readline
 
-import modu.slurm as slurm
+# context provides the slurm module
+from .context import slurm
 
-print "import modu.slurm as slurm"
+print "from .context import slurm"
 print "states = slurm.Slurm.getNonEmptyStates()"
 print "----------------------------------------------------------------------"
 

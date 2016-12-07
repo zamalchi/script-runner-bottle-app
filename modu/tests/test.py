@@ -3,7 +3,8 @@
 import sys
 import unittest
 
-import modu.slurm as slurm
+# context provides the slurm module
+from .context import slurm
 
 ######################################################################
 ######################################################################
