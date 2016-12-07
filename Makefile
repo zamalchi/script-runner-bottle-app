@@ -10,5 +10,8 @@ debug-watch:
 local:
 	/usr/bin/env python main.py -a localhost -p 8081 -d
 
-test:
-	echo "No tests yet."
+test-slurm:
+	/usr/bin/env python -m modu.tests.test
+
+test-slurm-interactive:
+	/usr/bin/env python -m modu.tests.interactive
