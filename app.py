@@ -14,6 +14,8 @@ import argparse
 import modu.bottle as bottle
 import modu.slurm as slurm
 
+app = bottle.Bottle()
+
 ### ARG PARSING ########################################################################################
 
 parser = argparse.ArgumentParser()
@@ -44,26 +46,26 @@ bottle.SimpleTemplate.defaults["url"] = bottle.url
 ### STATIC ROUTING ########################################################################################
 
 # CSS
-@bottle.get('/css/<filename:re:.*\.css>')
+@app.get('/css/<filename:re:.*\.css>')
 def stylesheets(filename):
     return bottle.static_file(filename, root='static/css')
 
 # JAVASCRIPT
-@bottle.get('/js/<filename:re:.*\.js>')
+@app.get('/js/<filename:re:.*\.js>')
 def javascripts(filename):
     return bottle.static_file(filename, root='static/js')
 
 # IMAGES
-@bottle.get('/img/<filename:re:.*\.(jpg|png|gif|ico)>')
+@app.get('/img/<filename:re:.*\.(jpg|png|gif|ico)>')
 def images(filename):
     return bottle.static_file(filename, root='static/img')
 
 # FONTS
-@bottle.get('/fonts/<filename:re:.*\.(eot|ttf|woff|woff2|svg)>')
+@app.get('/fonts/<filename:re:.*\.(eot|ttf|woff|woff2|svg)>')
 def fonts(filename):
     return bottle.static_file(filename, root='static/fonts')
 
-@bottle.error(404)
+@app.error(404)
 def error404(error):
     return 'Nothing here, sorry'
 
@@ -78,8 +80,6 @@ def error404(error):
 ########################################################################################################
 ##################################### SLURM ROUTES START ###############################################
 ########################################################################################################
-
-app = bottle.Bottle()
 
 @app.get('/')
 @app.get('/slurm')
