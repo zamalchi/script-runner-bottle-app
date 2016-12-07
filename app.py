@@ -96,7 +96,7 @@ def slurm_nodes():
     states = slurm.Slurm.getNonEmptyStates()
 
     # if a specific node was requested, get the scontrol info for that node
-    node = slurm.Slurm.Node(requested) if requested else None
+    node = slurm.Slurm.Node(requested)
 
     #################################################
 
