@@ -3,6 +3,8 @@
 
 @import 'misc';
 
+@import 'requested';
+
 body {
 	background-color: $bg_color;
 	padding-top: 143.5px;
@@ -13,4 +15,3 @@ body {
 
 @import 'states';
 
-@import 'requested';
