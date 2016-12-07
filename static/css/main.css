@@ -43,35 +43,37 @@ body {
     margin-top: 20px !important;
     color: red; }
 
-[name="states-container"] .anchor {
-  display: inline-block;
-  padding-top: 250px;
-  margin-top: -250px; }
-[name="states-container"] .title-anchor {
-  padding-top: 200px;
-  margin-top: -200px; }
-[name="states-container"] .nodelist {
-  font-family: Monospace;
-  min-height: 1em;
-  max-height: 4em;
-  line-height: 2em;
-  overflow: auto;
-  overflow-x: hidden;
-  width: 100%; }
-[name="states-container"] .entry {
-  border: 2px solid #9b9b9b;
-  border-radius: 3px;
-  margin: 5px auto;
-  padding: 10px;
-  background-color: #bcbcbc; }
-[name="states-container"] [name="state-title"] {
-  font-size: 2vw;
-  margin-left: 30px; }
-[name="states-container"] div[name="state-fields"] .field {
-  overflow: hidden;
-  white-space: nowrap; }
-[name="states-container"] div[name="state-fields"] select {
-  padding-top: 3px;
-  padding-bottom: 3px; }
+[name="states-container"] {
+  margin-top: 30px; }
+  [name="states-container"] .anchor {
+    display: inline-block;
+    padding-top: 250px;
+    margin-top: -250px; }
+  [name="states-container"] .title-anchor {
+    padding-top: 200px;
+    margin-top: -200px; }
+  [name="states-container"] .nodelist {
+    font-family: Monospace;
+    min-height: 1em;
+    max-height: 4em;
+    line-height: 2em;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%; }
+  [name="states-container"] .entry {
+    border: 2px solid #9b9b9b;
+    border-radius: 3px;
+    margin: 5px auto;
+    padding: 10px;
+    background-color: #bcbcbc; }
+  [name="states-container"] [name="state-title"] {
+    font-size: 2vw;
+    margin-left: 30px; }
+  [name="states-container"] div[name="state-fields"] .field {
+    overflow: hidden;
+    white-space: nowrap; }
+  [name="states-container"] div[name="state-fields"] select {
+    padding-top: 3px;
+    padding-bottom: 3px; }
 
 /*# sourceMappingURL=main.css.map */
