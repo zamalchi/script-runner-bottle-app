@@ -26,7 +26,7 @@ test-slurm: clean
 test-slurm-shell: clean
 	/usr/bin/env python -m modu.tests.slurm-test-shell
 
-# COMPILING
+# COMPILING / TRANSPILING
 # ----------------------------------------------------------------------
 scss:
 	./src/scss-to-css-transpiler.sh
@@ -62,6 +62,11 @@ help:
 	@echo "        Run modu.tests.slurm-test. Tests integrity of slurm data parsing."
 	@echo "    test-slurm-shell"
 	@echo "        Run modu.tests.slurm-test-shell. Returns an interactive shell."
+	@echo "----------------------------------------------------------------------"
+	@echo "    scss"
+	@echo "        Compile scss source files to css static files."
+	@echo "    scss-watch"
+	@echo "        Watch for changes and recompile scss."
 	@echo "----------------------------------------------------------------------"
 	@echo "    clean"
 	@echo "        Remove python artifacts."
