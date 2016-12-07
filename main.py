@@ -133,11 +133,11 @@ print "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
 print "APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT)
 print "HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST)
 print "HOST PORT        : {hostPort}".format(hostPort=ENV.PORT)
-print "DEVELOPMENT MODE : {devMode}".format(devMode=ENV.DEV)
-print "LIVE RELOADING   : {liveReload}".format(liveReload=ENV.RELOAD)
+print "DEBUG            : {devMode}".format(devMode=ENV.DEV)
+print "LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD)
 print "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
 
-bottle.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV)
+bottle.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV, reloader=ENV.RELOAD)
 
 ########################################################################################################
 ########################################################################################################

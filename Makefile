@@ -1,11 +1,10 @@
 run:
 	/usr/bin/env python main.py -a 172.16.1.254 -p 19191
 
-
-dev:
+debug:
 	/usr/bin/env python main.py -a 172.16.1.254 -p 19191 -d
 
-dev-watch:
+debug-watch:
 	/usr/bin/env python main.py -a 172.16.1.254 -p 19191 -d -r
 
 local:
