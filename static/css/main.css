@@ -2,16 +2,20 @@
   margin-top: 5%;
   margin-bottom: 5%; }
 
-[name="requested-container"] .tab-content .tab-pane {
-  border: 1px solid #bcbcbc; }
-[name="requested-container"] .tab-content .node-field-key {
-  color: blue; }
-[name="requested-container"] .tab-content .node-field-val {
-  color: green;
-  font-weight: bold; }
-[name="requested-container"] pre {
-  display: inline-block;
-  padding: 5px; }
+[name="requested-container"] {
+  position: fixed;
+  max-width: 30vw;
+  margin-top: 30px; }
+  [name="requested-container"] .tab-content .tab-pane {
+    border: 1px solid #bcbcbc; }
+  [name="requested-container"] .tab-content .node-field-key {
+    color: blue; }
+  [name="requested-container"] .tab-content .node-field-val {
+    color: green;
+    font-weight: bold; }
+  [name="requested-container"] pre {
+    display: inline-block;
+    padding: 5px; }
 
 body {
   background-color: #476f9e;
