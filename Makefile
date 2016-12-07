@@ -2,18 +2,22 @@
 HOST=172.16.1.254
 PORT=19191
 
+# SERVING
+# ----------------------------------------------------------------------
 run:
-	/usr/bin/env python main.py -a $(HOST) -p $(PORT)
+	/usr/bin/env python app.py -a $(HOST) -p $(PORT)
 
 debug:
-	/usr/bin/env python main.py -a $(HOST) -p $(PORT) -d
+	/usr/bin/env python app.py -a $(HOST) -p $(PORT) -d
 
 debug-watch:
-	/usr/bin/env python main.py -a $(HOST) -p $(PORT) -d -r
+	/usr/bin/env python app.py -a $(HOST) -p $(PORT) -d -r
 
 local:
-	/usr/bin/env python main.py -a localhost -p 8081 -d
+	/usr/bin/env python app.py -a localhost -p 8081 -d
 
+# TESTING
+# ----------------------------------------------------------------------
 test: test-slurm test-slurm-shell
 
 test-slurm: clean
@@ -22,14 +26,19 @@ test-slurm: clean
 test-slurm-shell: clean
 	/usr/bin/env python -m modu.tests.slurm-test-shell
 
+# MISC
+# ----------------------------------------------------------------------
 clean:
 	find . -name '*.pyc' -exec rm --force {} +
 	find . -name '*.pyo' -exec rm --force {} +
 	find . -name '*~' -exec rm --force  {} +
 
+# HELP
+# ----------------------------------------------------------------------
 help:
 	@echo "----------------------------------------------------------------------"
 	@echo "HOST ADDRESS : http://$(HOST):$(PORT)"
+	@echo "----------------------------------------------------------------------"
 	@echo "    run"
 	@echo "        Run the slurm server."
 	@echo "    debug"
@@ -49,5 +58,7 @@ help:
 	@echo "    clean"
 	@echo "        Remove python artifacts."
 	@echo "----------------------------------------------------------------------"
+
+# ----------------------------------------------------------------------
 
 .PHONY: clean test-slurm test-slurm-shell
