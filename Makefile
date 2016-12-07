@@ -2,8 +2,6 @@
 HOST=172.16.1.254
 PORT=19191
 
-.PHONY: clean test-slurm test-slurm-shell
-
 run:
 	/usr/bin/env python main.py -a $(HOST) -p $(PORT)
 
@@ -31,20 +29,25 @@ clean:
 
 help:
 	@echo "----------------------------------------------------------------------"
+	@echo "HOST ADDRESS : http://$(HOST):$(PORT)"
 	@echo "    run"
-	@echo "        Run the slurm server on $(HOST):$(PORT)."
+	@echo "        Run the slurm server."
 	@echo "    debug"
-	@echo "        Run the slurm server on $(HOST):$(PORT) in debug mode."
+	@echo "        Run the slurm server in debug mode."
 	@echo "    debug-watch"
-	@echo "        Run the slurm server on $(HOST):$(PORT) in debug mode with live reload."
+	@echo "        Run the slurm server in debug mode with live reload."
 	@echo "    local"
 	@echo "        Run the slurm server on localhost in debug mode."
+	@echo "----------------------------------------------------------------------"
 	@echo "    test"
 	@echo "        Run testing suite."
 	@echo "    test-slurm"
 	@echo "        Run modu.tests.slurm-test. Tests integrity of slurm data parsing."
 	@echo "    test-slurm-shell"
 	@echo "        Run modu.tests.slurm-test-shell. Returns an interactive shell."
+	@echo "----------------------------------------------------------------------"
 	@echo "    clean"
 	@echo "        Remove python artifacts."
 	@echo "----------------------------------------------------------------------"
+
+.PHONY: clean test-slurm test-slurm-shell
