@@ -1,3 +1,7 @@
+.button-center {
+  margin-top: 5%;
+  margin-bottom: 5%; }
+
 body {
   background-color: #476f9e;
   padding-top: 143.5px; }
@@ -6,25 +10,64 @@ body {
   background-color: #9b9b9b;
   margin: 0 auto;
   padding: 10px; }
+  .navbar .nav-item {
+    flex: 1; }
+  .navbar .nav-button {
+    font-size: 1.5vw; }
+  @media (min-width: 800px) {
+    .navbar .nav-list {
+      display: flex;
+      justify-content: space-between; } }
+  @media (min-width: 1200px) {
+    .navbar .nav-button {
+      font-size: 1.3em; } }
+  .navbar #search {
+    border-radius: 10px;
+    padding-left: 60px;
+    font-size: 2em;
+    margin-top: 20px !important;
+    color: red; }
 
-.nav-item {
-  flex: 1; }
+[name="states-container"] .anchor {
+  display: inline-block;
+  padding-top: 250px;
+  margin-top: -250px; }
+[name="states-container"] .title-anchor {
+  padding-top: 200px;
+  margin-top: -200px; }
+[name="states-container"] .nodelist {
+  font-family: Monospace;
+  min-height: 1em;
+  max-height: 4em;
+  line-height: 2em;
+  overflow: auto;
+  overflow-x: hidden;
+  width: 100%; }
+[name="states-container"] .entry {
+  border: 2px solid #9b9b9b;
+  border-radius: 3px;
+  margin: 5px auto;
+  padding: 10px;
+  background-color: #bcbcbc; }
+[name="states-container"] [name="state-title"] {
+  font-size: 2vw;
+  margin-left: 30px; }
+[name="states-container"] div[name="state-fields"] .field {
+  overflow: hidden;
+  white-space: nowrap; }
+[name="states-container"] div[name="state-fields"] select {
+  padding-top: 3px;
+  padding-bottom: 3px; }
 
-.nav-button {
-  font-size: 1.5vw; }
-
-@media (min-width: 800px) {
-  .nav-list {
-    display: flex;
-    justify-content: space-between; } }
-@media (min-width: 1200px) {
-  .nav-button {
-    font-size: 1.3em; } }
-#search {
-  border-radius: 10px;
-  padding-left: 60px;
-  font-size: 2em;
-  margin-top: 20px !important;
-  color: red; }
+[name="requested-container"] .tab-content .node-data {
+  border: 1px solid #bcbcbc; }
+[name="requested-container"] .tab-content pre {
+  display: inline-block;
+  padding: 5px; }
+[name="requested-container"] .tab-content .node-field-key {
+  color: blue; }
+[name="requested-container"] .tab-content .node-field-val {
+  color: green;
+  font-weight: bold; }
 
 /*# sourceMappingURL=main.css.map */

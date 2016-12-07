@@ -1,0 +1,24 @@
+
+[name="requested-container"] {
+	
+
+	.tab-content {
+
+		.node-data {
+			border: 1px solid $light_grey;
+		}
+
+		pre {
+			display: inline-block;
+			padding: 5px;
+		}
+
+		.node-field-key {
+			color: blue;
+		}
+		.node-field-val {
+			color: green;
+			font-weight: bold;
+		}
+	}
+}

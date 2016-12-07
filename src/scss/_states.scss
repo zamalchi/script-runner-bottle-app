@@ -1,0 +1,57 @@
+
+[name="states-container"] {
+
+
+	// fixes page positioning around anchors
+	.anchor {
+		display: inline-block;
+		padding-top: 250px;
+		margin-top: -250px;
+	}
+
+	.title-anchor {
+		padding-top: 200px;
+		margin-top: -200px;
+	}
+
+	.nodelist {
+		font-family: Monospace;
+		min-height: 1em;
+		max-height: 4em;
+
+		line-height: 2em;
+		
+		overflow: auto;
+		overflow-x: hidden;
+		
+		width: 100%;
+	}
+
+
+	.entry {
+		border: 2px solid $dark_grey;
+		border-radius: 3px;
+		margin: 5px auto;
+		padding: 10px;
+		background-color: $light_grey;
+	}
+
+
+	[name="state-title"] {
+		font-size: 2vw;
+		margin-left: 30px;
+	}
+
+	div[name="state-fields"] {
+
+		.field {
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		select {
+			padding-top: 3px;
+			padding-bottom: 3px;
+		}
+
+	}
+}

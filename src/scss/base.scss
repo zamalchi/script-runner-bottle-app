@@ -1,6 +1,8 @@
 
 @import 'vars';
 
+@import 'misc';
+
 body {
 	background-color: $bg_color;
 	padding-top: 143.5px;
@@ -9,8 +11,6 @@ body {
 // top nav and search bar
 @import 'navbar';
 
-// @import 'outputs';
+@import 'states';
 
-// @import 'scontrol';
-
-// @import 'misc';
+@import 'requested';

@@ -25,7 +25,7 @@
 % include('_navbar.tpl')
 
 <!-- main container start -->
-<div class="container" name="main">
+<div class="container-fluid" name="main">
 
 	<div class="row">
 	% if node.found:
