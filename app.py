@@ -53,7 +53,7 @@ def stylesheets(filename):
 # JAVASCRIPT
 @app.get('/js/<filename:re:.*\.js>')
 def javascripts(filename):
-    return bottle.static_file(filename, root='static/js')
+    return bottle.static_file(filename, root='./static/js')
 
 # IMAGES
 @app.get('/img/<filename:re:.*\.(jpg|png|gif|ico)>')
