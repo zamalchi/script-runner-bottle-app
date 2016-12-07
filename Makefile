@@ -29,10 +29,10 @@ test-slurm-shell: clean
 # COMPILING / TRANSPILING
 # ----------------------------------------------------------------------
 scss:
-	./src/scss-to-css-transpiler.sh
+	./src/scss/transpiler.sh
 
 scss-watch:
-	./src/scss-to-css-transpiler.sh --watch
+	./src/scss/transpiler.sh --watch
 
 # MISC
 # ----------------------------------------------------------------------
