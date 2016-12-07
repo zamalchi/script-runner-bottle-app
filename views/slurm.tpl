@@ -19,7 +19,8 @@
 </head>
 
 
-<body onload="anchorToRequested()">
+<!-- <body onload="anchorToRequested()"> -->
+<body>
 
 <!-- % include('_navbar.tpl', states=states) -->
 % include('_navbar.tpl')
