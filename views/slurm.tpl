@@ -30,16 +30,16 @@
 
 	<div class="row">
 
-		% if node.found:
-			<div class="col-md-4">
-			% include('_requested.tpl')
-			</div>
-		% end
+		<div class="col-md-4">
+			% if node.found:
+				% include('_requested.tpl')
+			% end
+		</div>
 		
 		<div class="col-md-7">
 			% include('_states.tpl')
 		</div>
-		
+
 	</div>
 </div>
 <!-- main container end -->
