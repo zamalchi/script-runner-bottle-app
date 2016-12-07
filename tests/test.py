@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-import unittest
 import sys
+import unittest
 
-from modu.slurm import Slurm
+import modu.slurm as slurm
 
 ######################################################################
 ######################################################################
@@ -19,7 +19,7 @@ class TestSlurmSuite(unittest.TestCase):
     def test_state(self):
         print("\n --- STATE TESTS ---")
 
-        states = Slurm.getNonEmptyStates()
+        states = slurm.Slurm.getNonEmptyStates()
 
         self.assertTrue(states)
         print("OK : List of states exists")
@@ -47,7 +47,7 @@ class TestSlurmSuite(unittest.TestCase):
     def test_reservation(self):
         print("\n --- RESERVATION TESTS ---")
 
-        reservations = Slurm.getReservations()
+        reservations = slurm.Slurm.getReservations()
 
         self.assertTrue(reservations)
         print("OK : List of reservations exists")
@@ -62,7 +62,7 @@ class TestSlurmSuite(unittest.TestCase):
 
         for r in reservations:
             for n in r.nodes:
-                self.assertTrue(n == Slurm.normalizeNodeName(n))
+                self.assertTrue(n == slurm.Slurm.normalizeNodeName(n))
         print("OK : All reserved nodes are in normalized format")
 
         for r in reservations:
@@ -75,9 +75,9 @@ class TestSlurmSuite(unittest.TestCase):
         print("\n --- NODE TESTS ---")
 
         nodes = []
-        nodes.append(Slurm.Node("034"))
-        nodes.append(Slurm.Node(100))
-        nodes.append(Slurm.Node("node123"))
+        nodes.append(slurm.Slurm.Node("034"))
+        nodes.append(slurm.Slurm.Node(100))
+        nodes.append(slurm.Slurm.Node("node123"))
 
         for n in nodes:
             self.assertTrue(n.__class__.__name__ == "Node")
@@ -97,16 +97,11 @@ class TestSlurmSuite(unittest.TestCase):
         print("OK : All nodes' data attribute are type dictionary")
 
         for n in nodes:
-            self.assertTrue(n.name == Slurm.normalizeNodeName(n.name))
+            self.assertTrue(n.name == slurm.Slurm.normalizeNodeName(n.name))
         print("OK : All nodes' names are in normalized format")
 
     ############################################################################################
 
 if __name__ == '__main__':
-
-    # if len(sys.argv) > 1:
-    #     if sys.argv.pop() == "live":
-    #         TestSlurmSuite.liveData = True
-
     print "----------------------------------------------------------------------",
     unittest.main()
