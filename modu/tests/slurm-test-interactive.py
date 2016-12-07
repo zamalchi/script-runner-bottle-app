@@ -6,7 +6,8 @@ import readline
 # context provides the slurm module
 from context import slurm
 
-print "from .context import slurm"
+print "----------------------------------------------------------------------"
+print "from context import slurm"
 print "states = slurm.Slurm.getNonEmptyStates()"
 print "----------------------------------------------------------------------"
 
