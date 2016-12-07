@@ -26,6 +26,14 @@ test-slurm: clean
 test-slurm-shell: clean
 	/usr/bin/env python -m modu.tests.slurm-test-shell
 
+# COMPILING
+# ----------------------------------------------------------------------
+scss:
+	./src/scss-to-css-transpiler.sh
+
+scss-watch:
+	./src/scss-to-css-transpiler.sh --watch
+
 # MISC
 # ----------------------------------------------------------------------
 clean:

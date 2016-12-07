@@ -8,11 +8,6 @@
 			border: 1px solid $light_grey;
 		}
 
-		pre {
-			display: inline-block;
-			padding: 5px;
-		}
-
 		.node-field-key {
 			color: blue;
 		}
@@ -21,4 +16,10 @@
 			font-weight: bold;
 		}
 	}
+
+	pre {
+		display: inline-block;
+		padding: 5px;
+	}
+
 }
