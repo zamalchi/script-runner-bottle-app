@@ -59,7 +59,7 @@ body {
   padding-top: 3px;
   padding-bottom: 3px; }
 
-[name="requested-container"] .tab-content .node-data {
+[name="requested-container"] .tab-content .tab-pane {
   border: 1px solid #bcbcbc; }
 [name="requested-container"] .tab-content pre {
   display: inline-block;
