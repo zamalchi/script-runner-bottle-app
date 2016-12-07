@@ -2,7 +2,7 @@
 HOST=172.16.1.254
 PORT=19191
 
-.PHONY: clean-pyc test-slurm test-slurm-shell
+.PHONY: clean test-slurm test-slurm-shell
 
 run:
 	/usr/bin/env python main.py -a $(HOST) -p $(PORT)
@@ -18,10 +18,10 @@ local:
 
 test: test-slurm test-slurm-shell
 
-test-slurm: clean-pyc
+test-slurm: clean
 	/usr/bin/env python -m modu.tests.slurm-test
 
-test-slurm-shell: clean-pyc
+test-slurm-shell: clean
 	/usr/bin/env python -m modu.tests.slurm-test-shell
 
 clean:
