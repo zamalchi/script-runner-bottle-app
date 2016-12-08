@@ -5,6 +5,7 @@ import unittest
 
 # context provides the slurm module
 from context import slurm
+import modu.color_printer
 
 ######################################################################
 ######################################################################
