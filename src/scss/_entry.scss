@@ -1,0 +1,41 @@
+.entry {
+	// #######################
+	border: 2px solid $dark_grey;
+	border-radius: 3px;
+	margin: 5px auto;
+	padding: 10px;
+	background-color: $light_grey;
+	// #######################
+	.data {
+		pre {
+			overflow: hidden;
+			white-space: nowrap;
+		}
+		.anchor {}
+		.nodes {
+			.node-count {
+				font-size: 1em;
+			}
+			select {
+				padding-top: 3px;
+				padding-bottom: 3px;
+			}
+		}
+		.time {}
+		.reason {}
+	}
+	// #######################
+	.search-list {
+		font-family: Monospace;
+		min-height: 1em;
+		max-height: 4em;
+
+		line-height: 2em;
+		
+		overflow: auto;
+		overflow-x: hidden;
+		
+		width: 100%;
+	}
+	// #######################
+}

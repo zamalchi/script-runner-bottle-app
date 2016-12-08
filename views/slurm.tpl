@@ -1,3 +1,11 @@
+<%
+''' Base template for the /slurm route
+	:param anchor : ???
+	:param states : dict(stateName: str --> objects: Slurm.State)
+	:param node   : Slurm.Node object (use Node.found to check if exists)
+'''
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,23 +19,32 @@
 </head>
 
 
-<!-- PASSED IN FROM ROUTE -->
-<!-- time : current time -->
-<!-- outputs : [str] from all the states -->
+<!-- <body onload="anchorToRequested()"> -->
+<body>
 
-<body style="padding-top: 60px;" onload="anchorToRequested()">
-
-% states = sorted(sinfo_output.keys())
-
-% include('_navbar.tpl', states=states)
+<!-- % include('_navbar.tpl', states=states) -->
+% include('_navbar.tpl')
 
 <!-- main container start -->
-<div class="container" name="main">
+<div class="container-fluid" id="main-div">
 
-<!-- outputs row start -->
-% include('_outputs.tpl', anchorHere=anchor, requested=requested, states=states, sinfo_output=sinfo_output, scontrol_output=scontrol_output)
-<!-- outputs row end -->
+	<div class="row-fluid">
+		% ##################################################
 
+		<div class="col-xs-4">
+			% if node.found:
+				% include('_requested.tpl')
+			% end
+		</div>
+		
+		% ##################################################
+		
+		<div class="col-xs-8 offset-xs-4">
+			% include('_states.tpl')
+		</div>
+		
+		% ##################################################
+	</div>
 </div>
 <!-- main container end -->
 
