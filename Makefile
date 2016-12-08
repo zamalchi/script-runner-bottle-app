@@ -51,7 +51,7 @@ clean:
 # ----------------------------------------------------------------------
 help:
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
-	@echo "HOST ADDRESS : ${WHITE}http://$(HOST):$(PORT)${NORMAL}"
+	@echo "    HOST ADDRESS : ${WHITE}http://$(HOST):$(PORT)${NORMAL}"
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}run${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server.${NORMAL}"
