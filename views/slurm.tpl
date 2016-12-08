@@ -39,7 +39,7 @@
 		
 		% ##################################################
 		
-		<div class="span8">
+		<div class="span8 offset4">
 			% include('_states.tpl')
 		</div>
 		
