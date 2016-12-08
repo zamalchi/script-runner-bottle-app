@@ -10,7 +10,7 @@ This sub-template displays an individual entry as a part of a slurm state.
 	<div class="row data">
 		% # * * * * * * * * * * * *	
 		<a name="{{index}}" class="anchor"></a>
-		% * * * * * * * * * * * *
+		% # * * * * * * * * * * * *
 		<div class="col-md-2 nodes">
 			% include('_nodes.tpl', nodes=entry.nodes, index=index)
 		</div>
