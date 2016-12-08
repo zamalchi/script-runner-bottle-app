@@ -12,9 +12,7 @@ entryCounter = 0
 <div class="col-xs-12">
 
 	% for key in sorted(states.keys()):
-		<%
-		state = states.get(key)
-		%>
+		% state = states.get(key)
 		% ##################################################
 		<div class="state" id="state-{{state.name}}">
 			
@@ -28,18 +26,14 @@ entryCounter = 0
 				</div>
 				% # * * * * * * * * * * * *	
 				<div class="panel-body">
-					<!-- container of entry divs -->
-
-						% for each in state.entries:
-							% include("_entry.tpl", entry=each, index=entryCounter)
-							% entryCounter += 1
-						% end
-
-					</div>
+					% for each in state.entries:
+						% include("_entry.tpl", entry=each, index=entryCounter)
+						% entryCounter += 1
+					% end
 				</div>
 				% # * * * * * * * * * * * *
 			</div>
-
+			
 			<hr />
 		</div>
 		% ##################################################
