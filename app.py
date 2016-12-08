@@ -13,6 +13,7 @@ import argparse
 
 import modu.bottle as bottle
 import modu.slurm as slurm
+import modu.color_printer as cp
 
 app = bottle.Bottle()
 
@@ -133,13 +134,22 @@ def search_for_node():
 ##################################### SLURM ROUTES END #################################################
 ########################################################################################################
 
-print("* * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+border = "* * * * * * * * * * * * * * * * * * * * * * * * * * * "
+
+cp.printHeader(border)
+
 print("APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT))
 print("HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST))
 print("HOST PORT        : {hostPort}".format(hostPort=ENV.PORT))
-print("DEBUG            : {devMode}".format(devMode=ENV.DEV))
-print("LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD))
-print("* * * * * * * * * * * * * * * * * * * * * * * * * * * ")
+
+debug = "DEBUG            : {devMode}".format(devMode=ENV.DEV)
+reloader = "LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD)
+
+cp.printOK(debug) if ENV.DEV else print(debug)
+cp.printOK(reloader) if ENV.RELOAD else print(reloader)
+
+cp.printHeader(border)
+
 
 app.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV, reloader=ENV.RELOAD)
 
