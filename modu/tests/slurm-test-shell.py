@@ -10,7 +10,8 @@ import modu.slurm as slurm
 import modu.color_printer as cp
 
 print("----------------------------------------------------------------------")
-cp.printWarn("from context import slurm")
+cp.printWarn("import modu.slurm as slurm")
+cp.printWarn("import modu.color_printer as cp")
 cp.printWarn("states = slurm.Slurm.getNonEmptyStates()")
 print("----------------------------------------------------------------------")
 
