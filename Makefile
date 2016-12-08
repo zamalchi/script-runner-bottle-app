@@ -2,9 +2,9 @@
 HOST=172.16.1.254
 PORT=19191
 
-LBLUE="\033[1;34m"
-LGREEN="\033[1;32m"
-NORMAL="\033[m"
+LBLUE=`echo -e "\033[1;34m"`
+LGREEN=`echo -e "\033[1;32m"`
+NORMAL=`echo -e "\033[m"`
 
 # SERVING
 # ----------------------------------------------------------------------
@@ -51,7 +51,7 @@ help:
 	@echo "----------------------------------------------------------------------"
 	@echo "HOST ADDRESS : http://$(HOST):$(PORT)"
 	@echo "----------------------------------------------------------------------"
-	@echo -e "    ${LGREEN}run${NORMAL}"
+	@echo "    ${LGREEN}run${NORMAL}"
 	@echo "        Run the slurm server."
 	@echo "    debug"
 	@echo "        Run the slurm server in debug mode."
