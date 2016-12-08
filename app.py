@@ -108,27 +108,27 @@ def slurm_nodes():
 
 @app.post('/node')
 def scontrol_show_node():
-    anchor = bottle.request.forms.get('anchor') or -1
-    bottle.response.set_cookie("anchor", str(anchor))
+    anchor = str(bottle.request.forms.get('anchor') or -1)
+    bottle.response.set_cookie("anchor", anchor)
 
-    requested = bottle.request.forms.get('node') or -1
-    bottle.response.set_cookie("requested", str(requested))
+    requested = str(bottle.request.forms.get('node') or -1)
+    bottle.response.set_cookie("requested", requested)
 
     bottle.redirect('/slurm#' + anchor)
 
 
 ########################################################################################################
 ########################################################################################################
-
-@app.post('/search')
-def search_for_node():
-    # get requested node and parse out the number
-    requested = slurm.Slurm.normalizeNodeName(bottle.request.forms.get('search'))
-
-    # set the cookie to be used in /slurm
-    bottle.response.set_cookie("requested", str(requested))
-
-    bottle.redirect("/slurm")
+#
+# @app.post('/search')
+# def search_for_node():
+#     # get requested node and parse out the number
+#     requested = slurm.Slurm.normalizeNodeName(bottle.request.forms.get('search'))
+#
+#     # set the cookie to be used in /slurm
+#     bottle.response.set_cookie("requested", str(requested))
+#
+#     bottle.redirect("/slurm")
 
 ########################################################################################################
 ##################################### SLURM ROUTES END #################################################
