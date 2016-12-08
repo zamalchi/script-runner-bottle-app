@@ -8,8 +8,16 @@ body {
 	padding-top: 143.5px;
 }
 
+#main-div {
+	
+}
+
+// top nav and search bar
 @import 'navbar';
 
-@import 'outputs';
+@import 'requested';
 
-@import 'scontrol';
+@import 'states';
+
+@import 'entry';
+

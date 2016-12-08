@@ -19,19 +19,32 @@
 </head>
 
 
-<body onload="anchorToRequested()">
+<!-- <body onload="anchorToRequested()"> -->
+<body>
 
 <!-- % include('_navbar.tpl', states=states) -->
 % include('_navbar.tpl')
 
 <!-- main container start -->
-<div class="container" name="main">
+<div class="container-fluid" id="main-div">
 
-<!-- outputs row start -->
-<!-- % include('_outputs.tpl', anchor=anchor, states=states, node=node) -->
-% include('_outputs.tpl')
-<!-- outputs row end -->
+	<div class="row-fluid">
+		% ##################################################
 
+		<div class="col-xs-4">
+			% if node.found:
+				% include('_requested.tpl')
+			% end
+		</div>
+		
+		% ##################################################
+		
+		<div class="col-xs-8 offset-xs-4">
+			% include('_states.tpl')
+		</div>
+		
+		% ##################################################
+	</div>
 </div>
 <!-- main container end -->
 

@@ -200,10 +200,16 @@ class Slurm:
             Receives a line of output from `sinfo` on a single Slurm state ; parses data into a Slurm.Entry object
             :param entry: <str> tab-separated string (format: "*nodes*\t*time*\t*reason*")
             """
-            nodes, time, reason = entry.split('\t')
-            self.__nodes = Slurm.parseNodeNames(nodes)
-            self.__time = time.strip()
-            self.__reason = reason.strip()
+            fields = entry.split('\t')
+            if len(fields) == 3:
+                nodes, time, reason = entry.split('\t')
+                self.__nodes = Slurm.parseNodeNames(nodes)
+                self.__time = time.strip()
+                self.__reason = reason.strip()
+            else:
+                self.__nodes = []
+                self.__time = ""
+                self.__reason = ""
 
     ### Entry : INNER CLASS END
     # X

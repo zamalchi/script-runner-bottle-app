@@ -1,0 +1,20 @@
+
+#states-div {
+	// #######################	
+	margin-top: 30px;
+	// #######################	
+	.state {
+
+		// fixes page positioning around anchors
+		.anchor {
+			display: inline-block;
+			padding-top: 350px;
+			margin-top: -350px;
+		}
+
+		.title {
+			font-size: 2vw;
+			margin-left: 30px;
+		}
+	}
+}
