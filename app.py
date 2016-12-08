@@ -31,7 +31,7 @@ args = parser.parse_args()
 ENV = argparse.Namespace()
 ENV.HOST = args.a
 ENV.PORT = args.p
-ENV.DEV = True if args.d else False
+ENV.DEBUG = True if args.d else False
 ENV.RELOAD = True if args.r else False
 ENV.ROOT = os.path.dirname(os.path.realpath(__file__))
 
@@ -142,16 +142,18 @@ print("APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT))
 print("HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST))
 print("HOST PORT        : {hostPort}".format(hostPort=ENV.PORT))
 
-debug = "DEBUG            : {devMode}".format(devMode=ENV.DEV)
+debug = "DEBUG            : {devMode}".format(devMode=ENV.DEBUG)
 reloader = "LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD)
 
-cp.printOK(debug) if ENV.DEV else print(debug)
+cp.printOK(debug) if ENV.DEBUG else print(debug)
 cp.printOK(reloader) if ENV.RELOAD else print(reloader)
 
 cp.printHeader(border)
 
+if ENV.DEBUG:
+    app.TEMPLATES.clear()
 
-app.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEV, reloader=ENV.RELOAD)
+app.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEBUG, reloader=ENV.RELOAD)
 
 ########################################################################################################
 ########################################################################################################
