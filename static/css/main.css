@@ -41,7 +41,7 @@ body {
   #requested-div .tab-content pre {
     display: inline-block;
     padding: 5px;
-    overflow: scroll;
+    overflow: auto;
     max-width: 100%; }
   #requested-div .tab-content .node-field-key {
     color: blue; }
