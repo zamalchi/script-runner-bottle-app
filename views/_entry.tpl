@@ -1,50 +1,42 @@
-<div class="entry">
-	<%
-	# NODES, TIME, REASON
-	# ALWAYS DISPLAYS
-	%>
-	<div class="row line">
-		<a name="{{entryCounter}}" class="anchor"></a>
-		<div class="col-md-2 node_name">
-			<!-- % include('_nodenames.tpl', nodes=entry.nodes, entryIndex=entryCounter, requested=node) -->
-			% include('_nodenames.tpl', nodes=entry.nodes)
+<%
+"""
+This sub-template displays an individual entry as a part of a slurm state.
+@:param entry: entry Python object.
+@:param index: index of entry within the list of all entries from all states.
+"""
+%>
+<div class="container-fluid entry">
+	% ##################################################
+	<div class="row data">
+		% * * * * * * * * * * * *	
+		<a name="{{index}}" class="anchor"></a>
+		% * * * * * * * * * * * *
+		<div class="col-md-2 nodes">
+			% include('_nodes.tpl', nodes=entry.nodes, index=index)
 		</div>
-		<div class="col-md-3 node_time">
-			<pre name="field">{{entry.time}}</pre>
+		% * * * * * * * * * * * *
+		<div class="col-md-3 time">
+			<pre>{{entry.time}}</pre>
 		</div>
-		<div class="col-md-7 node_reason">
-			<pre name="field">{{entry.reason}}</pre>
+		% * * * * * * * * * * * *
+		<div class="col-md-7 reason">
+			<pre>{{entry.reason}}</pre>
 		</div>
+		% * * * * * * * * * * * *
 	</div>
-
-	% ##################################################################################
-
-	<%
-	# DATA FROM `SCONTROL SHOW NODE`
-	# DISPLAYS ONLY IF A NODE HAS BEEN REQUESTED AND IT LIVES IN THIS ENTRY -->
-	%>
-	% if requestedLivesHere == entryCounter and not requestedInfoDisplayed:
-		% requestedInfoDisplayed = True
-		% include("_requested.tpl")
-	% end
-
-	% ##################################################################################
-
+	% ##################################################
 	<%
 	# LIST OF NODE-LINKS FOR QUICK SEARCH ON THE PAGE
-	# ALWAYS DISPLAYS FOR ENTRIES WITH MORE THAN ONE NODE
+	# DISPLAYS FOR ENTRIES WITH MORE THAN ONE NODE
 	%>
 	% if len(entry.nodes) > 1:
-		<div class="row">
-			<div class="col-md-12">
-				<div class="nodelist" name="nodelist">
-				% for n in entry.nodes:
-					<a href="#" onclick="searchFromNodeList(this)" data-node="{{n}}">{{n}}</a>		
-				% end
-				</div>
-			</div>
+		<div class="row search-list">
+		<div class="col-md-12">
+			% for n in entry.nodes:
+				<a href="#" onclick="searchFromNodeList(this)" data-node="{{n}}">{{n}}</a>		
+			% end
+		</div>
 		</div>
 	% end
-
+	% ##################################################
 </div>
-
