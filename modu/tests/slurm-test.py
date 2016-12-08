@@ -4,8 +4,9 @@ import sys
 import unittest
 
 # context provides the slurm module
-from context import slurm
-import modu.color_printer
+# from context import slurm
+import modu.slurm as slurm
+import modu.color_printer as cp
 
 ######################################################################
 ######################################################################
@@ -24,25 +25,25 @@ class TestSlurmSuite(unittest.TestCase):
         states = slurm.Slurm.getNonEmptyStates()
 
         self.assertTrue(states)
-        print("OK : List of states exists")
+        cp.printOK("OK : List of states exists")
 
         for s in states.values():
             self.assertTrue(s.__class__.__name__ == "State")
-        print("OK : All states are Slurm.State objects")
+        cp.printOK("OK : All states are Slurm.State objects")
 
         for s in states.values():
             self.assertTrue(s.hasEntries())
-        print("OK : All states have entries")
+        cp.printOK("OK : All states have entries")
 
         for s in states.values():
             for e in s.entries:
                 self.assertTrue(e.__class__.__name__ == "Entry")
-        print("OK : All entries are Slurm.Entry objects")
+        cp.printOK("OK : All entries are Slurm.Entry objects")
 
         for s in states.values():
             for e in s.entries:
                 self.assertTrue(e.nodes and e.time and e.reason)
-        print("OK : All entries have nodes, time, and reason attributes")
+        cp.printOK("OK : All entries have nodes, time, and reason attributes")
 
     ############################################################################################
 
