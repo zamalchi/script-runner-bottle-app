@@ -6,6 +6,10 @@
 	max-width: 30%;
 	margin-top: 30px;
 
+	.nav-tabs > li {
+		background: $light_grey;
+	}
+
 	.tab-content {
 
 		.tab-pane {
