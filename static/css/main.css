@@ -45,7 +45,8 @@ body {
     color: blue; }
   #requested-div .tab-content .node-field-val {
     color: green;
-    font-weight: bold; }
+    font-weight: bold;
+    overflow: scroll; }
 
 #states-div {
   margin-top: 30px; }
