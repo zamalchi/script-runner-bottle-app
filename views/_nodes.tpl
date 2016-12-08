@@ -14,7 +14,7 @@
 		% for each in nodes:
 			% if each.name == node.name:
 			<option value="{{each}}" selected>
-			% else
+			% else:
 			<option value="{{each}}">
 			% end
 				node{{each}}
