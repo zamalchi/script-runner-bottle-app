@@ -29,6 +29,8 @@ body {
     color: red; }
 
 #requested-div {
+  position: fixed;
+  max-width: 30%;
   margin-top: 30px; }
   #requested-div .tab-content .tab-pane {
     border: 1px solid #bcbcbc; }

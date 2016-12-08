@@ -1,5 +1,5 @@
-<div class="container" id="states-div">
-	<div class="row">
+<div class="container-fluid" id="states-div">
+	<div class="row-fluid">
 		<div class="col-xs-12">
 
 			<%
