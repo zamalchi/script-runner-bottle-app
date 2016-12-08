@@ -33,7 +33,7 @@ This sub-template displays an individual entry as a part of a slurm state.
 		<div class="row search-list">
 		<div class="col-md-12">
 			% for n in entry.nodes:
-				<a href="#" onclick="searchFromNodeList(this)" data-node="{{n}}">{{n}}</a>		
+				<a href="#" onclick="searchFromNodeList(this)" data-node="{{n}}" data-anchor={{index}}>{{n}}</a>		
 			% end
 		</div>
 		</div>

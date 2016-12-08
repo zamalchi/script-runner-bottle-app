@@ -25,14 +25,15 @@
 		<div class="row" id="search-bar-row">
 			<div class="col-md-12">
 
-				<form action="/search" method="post" enctype="multipart/form-data">
-					
+				<form action="/node" method="post" enctype="multipart/form-data">
+
 					<div class="form-group">
+						<input type="hidden" id="search-anchor" name="anchor" value="">
 						<%
 						# id    : "search" : css
 						# name  : "search" : bottle-form
 						%>
-						<input id="search" name="search" type="text"
+						<input id="search" name="node" type="text"
 								
 								class="form-control input-lg"
 
