@@ -109,7 +109,7 @@ def slurm_nodes():
 @app.post('/node')
 def scontrol_show_node():
     anchor = bottle.request.forms.get('anchor') or -1
-    bottle.response.set_cookie("anchor", anchor)
+    bottle.response.set_cookie("anchor", str(anchor))
 
     requested = bottle.request.forms.get('node') or -1
     bottle.response.set_cookie("requested", str(requested))
