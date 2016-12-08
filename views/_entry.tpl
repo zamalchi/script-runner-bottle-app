@@ -8,7 +8,7 @@ This sub-template displays an individual entry as a part of a slurm state.
 <div class="container-fluid entry">
 	% ##################################################
 	<div class="row data">
-		% * * * * * * * * * * * *	
+		% # * * * * * * * * * * * *	
 		<a name="{{index}}" class="anchor"></a>
 		% * * * * * * * * * * * *
 		<div class="col-md-2 nodes">
@@ -18,11 +18,11 @@ This sub-template displays an individual entry as a part of a slurm state.
 		<div class="col-md-3 time">
 			<pre>{{entry.time}}</pre>
 		</div>
-		% * * * * * * * * * * * *
+		% # * * * * * * * * * * * *	
 		<div class="col-md-7 reason">
 			<pre>{{entry.reason}}</pre>
 		</div>
-		% * * * * * * * * * * * *
+		% # * * * * * * * * * * * *	
 	</div>
 	% ##################################################
 	<%

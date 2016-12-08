@@ -21,7 +21,7 @@ overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "All
 	</ul>
 	% ##################################################
 	<div class="tab-content">
-		% * * * * * * * * * * * *
+		% # * * * * * * * * * * * *
 		<div id="over-view" class="panel panel-default tab-pane fade in active">
 			<div class="panel-heading">
 				<h5>Scontrol output for <strong>node{{node.name}}</strong> in <strong>{{node.data.get("State")}}</strong></h5>
@@ -35,7 +35,7 @@ overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "All
 				% end
 			</div>
 		</div>
-		% * * * * * * * * * * * *
+		% # * * * * * * * * * * * *
 		<div id="full-view" class="panel panel-default tab-pane fade">
 			<div class="panel-heading">
 				<h5>Scontrol output for <strong>node{{node.name}}</strong></h5>
@@ -47,7 +47,7 @@ overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "All
 				% end
 			</div>
 		</div>
-		% * * * * * * * * * * * *
+		% # * * * * * * * * * * * *
 	</div>
 	% ##################################################
 

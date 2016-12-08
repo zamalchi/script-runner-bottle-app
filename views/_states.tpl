@@ -26,7 +26,7 @@ entryCounter = 0
 					<!-- name of state -->
 					<h2 class="title">{{state.name}}</h2>
 				</div>
-				% * * * * * * * * * * * *
+				% # * * * * * * * * * * * *	
 				<div class="panel-body">
 					<!-- container of entry divs -->
 
@@ -37,7 +37,7 @@ entryCounter = 0
 
 					</div>
 				</div>
-				% * * * * * * * * * * * *
+				% # * * * * * * * * * * * *
 			</div>
 
 			<hr />
