@@ -4,7 +4,7 @@ PORT=19191
 
 LBLUE=`echo -e "\033[1;34m"`
 LGREEN=`echo -e "\033[1;32m"`
-PURPLE=`echo "\033[35m"`
+PURPLE=`echo -e "\033[35m"`
 NORMAL=`echo -e "\033[m"`
 
 # SERVING
