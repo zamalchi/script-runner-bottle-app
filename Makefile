@@ -5,6 +5,7 @@ PORT=19191
 LBLUE=`echo -e "\033[1;34m"`
 LGREEN=`echo -e "\033[1;32m"`
 PURPLE=`echo -e "\033[35m"`
+WHITE=`echo -e "\033[1;37m"`
 NORMAL=`echo -e "\033[m"`
 
 # SERVING
@@ -50,7 +51,7 @@ clean:
 # ----------------------------------------------------------------------
 help:
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
-	@echo "HOST ADDRESS : http://$(HOST):$(PORT)"
+	@echo "HOST ADDRESS : ${WHITE}http://$(HOST):$(PORT)${NORMAL}"
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}run${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server.${NORMAL}"
