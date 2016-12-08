@@ -1,6 +1,6 @@
 <div class="container" id="states-div">
 	<div class="row">
-		<div class="col-md-12">
+		<div class="span12">
 
 			<%
 				# counter for entries (accumulated across all states)
