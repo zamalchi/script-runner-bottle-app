@@ -4,6 +4,7 @@ PORT=19191
 
 LBLUE=`echo -e "\033[1;34m"`
 LGREEN=`echo -e "\033[1;32m"`
+PURPLE=`echo "\033[35m"`
 NORMAL=`echo -e "\033[m"`
 
 # SERVING
@@ -48,33 +49,33 @@ clean:
 # HELP
 # ----------------------------------------------------------------------
 help:
-	@echo "----------------------------------------------------------------------"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "HOST ADDRESS : http://$(HOST):$(PORT)"
-	@echo "----------------------------------------------------------------------"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}run${NORMAL}"
-	@echo "        Run the slurm server."
+	@echo "        ${LBLUE}Run the slurm server.${NORMAL}"
 	@echo "    debug"
-	@echo "        Run the slurm server in debug mode."
+	@echo "        ${LBLUE}Run the slurm server in debug mode.${NORMAL}"
 	@echo "    debug-watch"
-	@echo "        Run the slurm server in debug mode with live reload."
+	@echo "        ${LBLUE}Run the slurm server in debug mode with live reload.${NORMAL}"
 	@echo "    local"
-	@echo "        Run the slurm server on localhost in debug mode."
-	@echo "----------------------------------------------------------------------"
+	@echo "        ${LBLUE}Run the slurm server on localhost in debug mode.${NORMAL}"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    test"
-	@echo "        Run testing suite."
+	@echo "        ${LBLUE}Run testing suite.${NORMAL}"
 	@echo "    test-slurm"
-	@echo "        Run modu.tests.slurm-test. Tests integrity of slurm data parsing."
+	@echo "        ${LBLUE}Run modu.tests.slurm-test. Tests integrity of slurm data parsing.${NORMAL}"
 	@echo "    test-slurm-shell"
-	@echo "        Run modu.tests.slurm-test-shell. Returns an interactive shell."
-	@echo "----------------------------------------------------------------------"
+	@echo "        ${LBLUE}Run modu.tests.slurm-test-shell. Returns an interactive shell.${NORMAL}"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    scss"
-	@echo "        Compile scss source files to css static files."
+	@echo "        ${LBLUE}Compile scss source files to css static files.${NORMAL}"
 	@echo "    scss-watch"
-	@echo "        Watch for changes and recompile scss."
-	@echo "----------------------------------------------------------------------"
+	@echo "        ${LBLUE}Watch for changes and recompile scss.${NORMAL}"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    clean"
-	@echo "        Remove python artifacts."
-	@echo "----------------------------------------------------------------------"
+	@echo "        ${LBLUE}Remove python artifacts.${NORMAL}"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 
 # ----------------------------------------------------------------------
 
