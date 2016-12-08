@@ -12,7 +12,11 @@
 	<select name="node" onclick="this.parentElement.submit()">
 
 		% for each in nodes:
+			% if each.name == node.name:
+			<option value="{{each}}" selected>
+			% else
 			<option value="{{each}}">
+			% end
 				node{{each}}
 			</option>
 		% end
