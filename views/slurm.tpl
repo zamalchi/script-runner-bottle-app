@@ -26,20 +26,24 @@
 % include('_navbar.tpl')
 
 <!-- main container start -->
-<div class="container-fluid" name="main">
+<div class="container-fluid" id="main-div">
 
-	<div class="row">
+	<div class="row-fluid">
+		% ##################################################
 
-		<div class="col-md-4">
+		<div class="span4">
 			% if node.found:
 				% include('_requested.tpl')
 			% end
 		</div>
 		
-		<div class="col-md-7">
+		% ##################################################
+		
+		<div class="span8">
 			% include('_states.tpl')
 		</div>
-
+		
+		% ##################################################
 	</div>
 </div>
 <!-- main container end -->

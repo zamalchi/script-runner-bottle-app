@@ -3,15 +3,19 @@
 
 @import 'misc';
 
-@import 'requested';
-
 body {
 	background-color: $bg_color;
 	padding-top: 143.5px;
 }
 
+#main-div {
+	
+}
+
 // top nav and search bar
 @import 'navbar';
+
+@import 'requested';
 
 @import 'states';
 
