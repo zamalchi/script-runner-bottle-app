@@ -40,13 +40,14 @@ body {
     border-radius: 3px; }
   #requested-div .tab-content pre {
     display: inline-block;
-    padding: 5px; }
+    padding: 5px;
+    overflow: scroll;
+    max-width: 100%; }
   #requested-div .tab-content .node-field-key {
     color: blue; }
   #requested-div .tab-content .node-field-val {
     color: green;
-    font-weight: bold;
-    overflow: scroll; }
+    font-weight: bold; }
 
 #states-div {
   margin-top: 30px; }
