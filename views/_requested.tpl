@@ -1,4 +1,4 @@
-<div class="container-fluid" id="requested-div">
+<div class="container" id="requested-div">
 
 	<div class="row">
 		<div class="col-md-12">
