@@ -53,24 +53,24 @@ class TestSlurmSuite(unittest.TestCase):
         reservations = slurm.Slurm.getReservations()
 
         self.assertTrue(reservations)
-        print("OK : List of reservations exists")
+        cp.printOK("OK : List of reservations exists")
 
         for r in reservations:
             self.assertTrue(r.__class__.__name__ == "Reservation")
-        print("OK : All reservations are Slurm.Reservation objects")
+        cp.printOK("OK : All reservations are Slurm.Reservation objects")
 
         for r in reservations:
             self.assertTrue(r.name and r.nodes and r.state and r.data)
-        print("OK : All reservations have name, nodes, state, and data attributes")
+        cp.printOK("OK : All reservations have name, nodes, state, and data attributes")
 
         for r in reservations:
             for n in r.nodes:
                 self.assertTrue(n == slurm.Slurm.normalizeNodeName(n))
-        print("OK : All reserved nodes are in normalized format")
+        cp.printOK("OK : All reserved nodes are in normalized format")
 
         for r in reservations:
             self.assertTrue(type(r.data) is dict)
-        print("OK : All reservations' data attribute are type dictionary")
+        cp.printOK("OK : All reservations' data attribute are type dictionary")
 
     ############################################################################################
 
@@ -84,24 +84,24 @@ class TestSlurmSuite(unittest.TestCase):
 
         for n in nodes:
             self.assertTrue(n.__class__.__name__ == "Node")
-        print("OK : All nodes are Slurm.Node objects")
+        cp.printOK("OK : All nodes are Slurm.Node objects")
 
         for n in nodes:
             self.assertTrue(n.found or not n.data)
-        print("OK : All nodes either found or (if not found) have no data")
+        cp.printOK("OK : All nodes either found or (if not found) have no data")
 
         for n in nodes:
             if n.found:
                 self.assertTrue(n.state and n.data)
-        print("OK : All found nodes have state and data attributes")
+        cp.printOK("OK : All found nodes have state and data attributes")
 
         for n in nodes:
             self.assertTrue(type(n.data) is dict)
-        print("OK : All nodes' data attribute are type dictionary")
+        cp.printOK("OK : All nodes' data attribute are type dictionary")
 
         for n in nodes:
             self.assertTrue(n.name == slurm.Slurm.normalizeNodeName(n.name))
-        print("OK : All nodes' names are in normalized format")
+        cp.printOK("OK : All nodes' names are in normalized format")
 
     ############################################################################################
 
