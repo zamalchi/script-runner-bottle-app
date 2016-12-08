@@ -19,7 +19,7 @@ entryCounter = 0
 		<div class="state" id="state-{{state.name}}">
 			
 			<div class="panel panel-default">
-				% * * * * * * * * * * * *
+				% # * * * * * * * * * * * *
 				<div class="panel-heading">
 					<!-- anchor for navbar navigation -->
 					<a name="{{state.name}}" class="anchor"></a>
