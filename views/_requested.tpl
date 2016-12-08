@@ -19,7 +19,7 @@
 						% overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "AllocMem", "State"]
 						% for key in sorted(node.data.keys()):
 							% if key in overviewFields:
-								<pre><span class="node-field-key">{{key}}</span> = <span class="node-field-val">{{node.data[key]}}</span></pre>
+								<pre><span class="node-field-key">{{key}}</span> = <span class="node-field-val">{{node.data.get(key)}}</span></pre>
 							% end
 						% end
 					</div>
@@ -32,7 +32,7 @@
 
 					<div class="panel-body">
 						% for key in sorted(node.data.keys()):
-							<pre><span>{{key}}</span> = <span>{{node.data[key]}}</span></pre>
+							<pre><span class="node-field-key">{{key}}</span> = <span class="node-field-val">{{node.data.get(key)}}</span></pre>
 						% end
 					</div>
 				</div>
