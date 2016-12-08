@@ -153,6 +153,8 @@ cp.printHeader(border)
 if ENV.DEBUG:
     app.TEMPLATES.clear()
     print("CLEARED CACHE??")
+else:
+    print("WHY ISN'T IT WORKING???")
 
 app.run(host=ENV.HOST, port=ENV.PORT, debug=ENV.DEBUG, reloader=ENV.RELOAD)
 
