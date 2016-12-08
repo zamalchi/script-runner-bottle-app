@@ -12,7 +12,7 @@
 
 				<div id="over-view" class="panel panel-default tab-pane fade in active">
 					<div class="panel-heading">
-						<h5>Scontrol output for <strong>node{{node.name}}</strong></h5>
+						<h5>Scontrol output for <strong>node{{node.name}}</strong> in <strong>{{node.data.get("State")}}</strong></h5>
 					</div>
 
 					<div class="panel-body">
