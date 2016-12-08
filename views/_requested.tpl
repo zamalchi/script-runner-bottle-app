@@ -1,7 +1,7 @@
 <div class="container" id="requested-div">
 
 	<div class="row">
-		<div class="span12">
+		<div class="col-xs-12">
 
 			<ul class="nav nav-tabs">
 				<li class="active"><a href="#over-view" data-toggle="tab">Overview</a></li>

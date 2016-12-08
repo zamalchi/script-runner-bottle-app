@@ -31,7 +31,7 @@
 	<div class="row-fluid">
 		% ##################################################
 
-		<div class="span4">
+		<div class="col-xs-4">
 			% if node.found:
 				% include('_requested.tpl')
 			% end
@@ -39,7 +39,7 @@
 		
 		% ##################################################
 		
-		<div class="span8 offset4">
+		<div class="col-xs-8 offset-xs-4">
 			% include('_states.tpl')
 		</div>
 		
