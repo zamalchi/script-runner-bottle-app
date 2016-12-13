@@ -362,7 +362,7 @@ class Mock:
   @staticmethod
   def entries(num=None):
     from random import randint
-    if num == None:
+    if num is None:
       return [Mock.entry() for _ in range(randint(0, 10))]
     else:
       return [Mock.entry() for _ in range(num)]
