@@ -20,7 +20,7 @@ debug-watch:
 	/usr/bin/env python app.py -a $(HOST) -p $(PORT) -d -r
 
 local:
-	/usr/bin/env python app.py -a localhost -p 8081 -d
+	/usr/bin/env python app.py -a localhost -p 8081 -d -m
 
 # TESTING
 # ----------------------------------------------------------------------
@@ -60,7 +60,7 @@ help:
 	@echo "    ${LGREEN}debug-watch${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server in debug mode with live reload.${NORMAL}"
 	@echo "    ${LGREEN}local${NORMAL}"
-	@echo "        ${LBLUE}Run the slurm server on localhost in debug mode.${NORMAL}"
+	@echo "        ${LBLUE}Run the slurm server locally in debug mode and with mock data.${NORMAL}"
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}test${NORMAL}"
 	@echo "        ${LBLUE}Run testing suite.${NORMAL}"

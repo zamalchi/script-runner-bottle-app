@@ -87,23 +87,29 @@ def error404(error):
 @app.get('/')
 @app.get('/slurm')
 def slurm_nodes():
-    # get and delete anchor cookie
-    anchor = bottle.request.cookies.get("anchor", -1)
-    bottle.response.delete_cookie("anchor")
-
-    # get and delete requested node cookie
-    requested = bottle.request.cookies.get("requested", "")
-    bottle.response.delete_cookie("requested")
-
-    # dict of (state --> obj) pairs
+  # get and delete anchor cookie
+  anchor = bottle.request.cookies.get("anchor", -1)
+  bottle.response.delete_cookie("anchor")
+  
+  # get and delete requested node cookie
+  requested = bottle.request.cookies.get("requested", "")
+  bottle.response.delete_cookie("requested")
+  
+  # dict of (state --> obj) pairs
+  if ENV.MOCK:
+    states = slurm.Mock.getNonEmptyStates()
+  else:
     states = slurm.Slurm.getNonEmptyStates()
-
-    # if a specific node was requested, get the scontrol info for that node
+  
+  # if a specific node was requested, get the scontrol info for that node
+  if ENV.MOCK:
+    node = slurm.Mock.Node(requested)
+  else:
     node = slurm.Slurm.Node(requested)
-
-    #################################################
-
-    return bottle.template('slurm', anchor=anchor, states=states, node=node)
+  
+  #################################################
+  
+  return bottle.template('slurm', anchor=anchor, states=states, node=node)
 
 ########################################################################################################
 ########################################################################################################
