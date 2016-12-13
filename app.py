@@ -22,6 +22,7 @@ app = bottle.Bottle()
 parser = argparse.ArgumentParser()
 parser.add_argument('-a', help="Host address", action="store", dest="a", required=True)
 parser.add_argument('-p', help="Port number", action="store", dest="p", required=True)
+parser.add_argument('-m', help="Mock slurm data", action="store_true", required=False)
 parser.add_argument('-d', help="Dev mode", action="store_true", required=False)
 parser.add_argument('-r', help="Live reloading", action="store_true", required=False)
 
@@ -31,6 +32,7 @@ args = parser.parse_args()
 ENV = argparse.Namespace()
 ENV.HOST = args.a
 ENV.PORT = args.p
+ENV.MOCK = args.m
 ENV.DEBUG = True if args.d else False
 ENV.RELOAD = True if args.r else False
 ENV.ROOT = os.path.dirname(os.path.realpath(__file__))
@@ -142,9 +144,11 @@ print("APP RUNNING FROM : {project_dir}".format(project_dir=ENV.ROOT))
 print("HOST ADDRESS     : {hostAddr}".format(hostAddr=ENV.HOST))
 print("HOST PORT        : {hostPort}".format(hostPort=ENV.PORT))
 
+data = "DATA             : {dataSource}".format(dataSource=("MOCK" if ENV.MOCK else "LIVE"))
 debug = "DEBUG            : {devMode}".format(devMode=ENV.DEBUG)
 reloader = "LIVE RELOAD      : {liveReload}".format(liveReload=ENV.RELOAD)
 
+cp.printWarn(data) if ENV.MOCK else print(data)
 cp.printOK(debug) if ENV.DEBUG else print(debug)
 cp.printOK(reloader) if ENV.RELOAD else print(reloader)
 
