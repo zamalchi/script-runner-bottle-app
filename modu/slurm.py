@@ -100,6 +100,17 @@ class Slurm:
     
     return [Slurm.Reservation(each) for each in output]
   
+  @staticmethod
+  def getNode(node):
+
+    from commands import getstatusoutput
+    node = Slurm.normalizeNodeName(node)
+    
+    cmd = "scontrol -a -o show node node{}".format(node)
+    output = getstatusoutput(cmd)[1]
+
+    return Slurm.Node(output)
+
   ####################################################################################################
   ### STATIC METHODS END
   ####################################################################################################
@@ -294,20 +305,15 @@ class Slurm:
       """<bool> : true if `scontrol` returned info on this node"""
       return self.__found
     
-    def __init__(self, nodeName):
+    def __init__(self, raw):
       """ PUBLIC
       Calls `scontrol show node` and parses data into a Slurm.Node object
       :param nodeName: <str|int> name / number of target node
       """
-      from commands import getstatusoutput
-      node = Slurm.normalizeNodeName(nodeName)
+      #TODO: Fix docs
       
-      cmd = "scontrol -a -o show node node{}".format(node)
-      output = getstatusoutput(cmd)[1]
-      
-      self.__name = node
-      
-      if "not found" in output:
+      if "not found" in raw:
+        self.__name = raw.split(" ")[0]
         self.__found = False
         self.__state = ""
         self.__data = {}
@@ -317,21 +323,24 @@ class Slurm:
         data = {}
         
         #### PRE-PARSING (for outlying cases)
-        if "Reason=" in output:
+        if "Reason=" in raw:
           # parse out reason because it can contain spaces and will break splitting on ' '
-          remainder, reason = output.split("Reason=")
+          remainder, reason = raw.split("Reason=")
           # add reason back into data
           data["Reason"] = reason
           # split fields on ' ' and filter empty elements
           fields = filter(None, remainder.split(' '))
         else:
           # if no pre-parsing happened, use the original output for parsing
-          fields = filter(None, output.split(' '))
+          fields = filter(None, raw.split(' '))
         ####
         
         for f in fields:
           key, val = f.strip().split('=')
           
+          if key == "NodeName":
+            self.__name = key
+
           if key == "State":
             self.__state = val
           
@@ -355,7 +364,8 @@ class Mock:
   #############################################
 
   class State(Slurm.State):
-    def __init__(self, name, entries):
+    def __init__(self, name, rawEntries):
+      entries = filter(None, rawEntries)
       self.__name = name
       self.__entries = [Mock.Entry(each) for each in entries]
 
@@ -366,44 +376,8 @@ class Mock:
     pass
 
   class Node(Slurm.Node):
-    def __init__(self, raw):
-      
-      if "not found" in output:
-        self.__found = False
-        self.__state = ""
-        self.__data = {}
-      else:
-        self.__found = True
-        
-        data = {}
-        
-        #### PRE-PARSING (for outlying cases)
-        if "Reason=" in output:
-          # parse out reason because it can contain spaces and will break splitting on ' '
-          remainder, reason = output.split("Reason=")
-          # add reason back into data
-          data["Reason"] = reason
-          # split fields on ' ' and filter empty elements
-          fields = filter(None, remainder.split(' '))
-        else:
-          # if no pre-parsing happened, use the original output for parsing
-          fields = filter(None, output.split(' '))
-        ####
-        
-        for f in fields:
-          key, val = f.strip().split('=')
-          
-          if key == "NodeName":
-            self.__name = val
+    pass
 
-          if key == "State":
-            self.__state = val
-          
-          # add all fields to data
-          data[key] = val
-        
-        self.__data = data
-  
   #############################################
 
   # @staticmethod
@@ -430,13 +404,14 @@ class Mock:
       with open(file) as f:
         raw = pickle.load(f)
 
-    states = {}
-    for name, entries in raw.items():
-      obj = Mock.State(name, entries)
-      if obj.hasEntries():
-        states[name] = obj
-    
-    return states
+        states = {}
+        for name, entries in raw.items():
+          obj = Mock.State(name, entries)
+          if obj.hasEntries():
+            states[name] = obj
+        
+        return states
+    return {}
 
   #############################################
 
@@ -446,22 +421,18 @@ class Mock:
     if os.path.exists(file):
       with open(file) as f:
         raw = pickle.load(f)
-
-    reservations = []
-    for each in raw:
-      reservations.append(Mock.Reservation(each))
-
-    return reservations
+        return [Mock.Reservation(each) for each in raw]
+    return []
 
   #############################################
 
   @staticmethod
-  def Node(n):
+  def getNode(node=None):
     file = "local/scontrol_node.p"
     if os.path.exists(file):
       with open(file) as f:
         raw = pickle.load(f)
-
-    return Mock.Node(raw)
+        return Mock.Node(raw)
+    return None
   
   #############################################

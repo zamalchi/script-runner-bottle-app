@@ -27,10 +27,18 @@ local:
 test: test-slurm test-slurm-shell
 
 test-slurm: clean
-	/usr/bin/env python -m modu.tests.slurm-test
+	/usr/bin/env python -m modu.tests.slurmTest
 
 test-slurm-shell: clean
-	/usr/bin/env python -m modu.tests.slurm-test-shell
+	/usr/bin/env python -m modu.tests.slurmTestShell
+
+mock-test: mock-test-slurm mock-test-slurm-shell
+
+mock-test-slurm: clean
+	/usr/bin/env python -m modu.tests.mockSlurmTest
+
+mock-test-slurm-shell: clean
+	/usr/bin/env python -m modu.tests.mockSlurmTestShell
 
 # COMPILING / TRANSPILING
 # ----------------------------------------------------------------------
@@ -80,4 +88,4 @@ help:
 
 # ----------------------------------------------------------------------
 
-.PHONY: clean test-slurm test-slurm-shell
+.PHONY: clean test-slurm test-slurm-shell mock-test-slurm mock-test-slurm-shell
