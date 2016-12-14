@@ -351,45 +351,117 @@ class Slurm:
 ########################################################################################################
 
 class Mock:
-  
-  @staticmethod
-  def entry():
-    from random import randint
-    numNodes = randint(1, 30)
-    nodes = list(set([randint(1, 200) for _ in range(numNodes)]))
-    return Slurm.Entry("[{nodeList}]\t13:45\tReason".format(nodeList=nodes))
 
-  @staticmethod
-  def entries(num=None):
-    from random import randint
-    if num is None:
-      return [Mock.entry() for _ in range(randint(0, 10))]
-    else:
-      return [Mock.entry() for _ in range(num)]
+  #############################################
+
+  class State(Slurm.State):
+    def __init__(self, name, entries):
+      self.__name = name
+      self.__entries = [Mock.Entry(each) for each in entries]
+
+  class Entry(Slurm.Entry):
+    pass
+
+  class Reservation(Slurm.Reservation):
+    pass
+
+  class Node(Slurm.Node):
+    def __init__(self, raw):
+      
+      if "not found" in output:
+        self.__found = False
+        self.__state = ""
+        self.__data = {}
+      else:
+        self.__found = True
+        
+        data = {}
+        
+        #### PRE-PARSING (for outlying cases)
+        if "Reason=" in output:
+          # parse out reason because it can contain spaces and will break splitting on ' '
+          remainder, reason = output.split("Reason=")
+          # add reason back into data
+          data["Reason"] = reason
+          # split fields on ' ' and filter empty elements
+          fields = filter(None, remainder.split(' '))
+        else:
+          # if no pre-parsing happened, use the original output for parsing
+          fields = filter(None, output.split(' '))
+        ####
+        
+        for f in fields:
+          key, val = f.strip().split('=')
+          
+          if key == "NodeName":
+            self.__name = val
+
+          if key == "State":
+            self.__state = val
+          
+          # add all fields to data
+          data[key] = val
+        
+        self.__data = data
+  
+  #############################################
+
+  # @staticmethod
+  # def entry():
+  #   from random import randint
+  #   numNodes = randint(1, 30)
+  #   nodes = list(set([randint(1, 200) for _ in range(numNodes)]))
+  #   return Slurm.Entry("[{nodeList}]\t13:45\tReason".format(nodeList=nodes))
+
+  # @staticmethod
+  # def entries(num=None):
+  #   from random import randint
+  #   if num is None:
+  #     return [Mock.entry() for _ in range(randint(0, 10))]
+  #   else:
+  #     return [Mock.entry() for _ in range(num)]
+
+  #############################################
 
   @staticmethod
   def getNonEmptyStates():
-    """ PUBLIC
-    Calls Slurm.State(name) for each state in Slurm.STATES
-    :return: <dict[str -> Slurm.State]> dictionary of state names to non-empty (State.hasEntries()) State objects
-    """
+    file = "local/sinfo.p"
+    if os.path.exists(file):
+      with open(file) as f:
+        raw = pickle.load(f)
+
     states = {}
-    
-    for s in Slurm.STATES:
-      obj = Slurm.State(s)
-      obj.entries = Mock.entries()
+    for name, entries in raw.items():
+      obj = Mock.State(name, entries)
       if obj.hasEntries():
-        states[s] = obj
+        states[name] = obj
+    
     return states
+
+  #############################################
+
+  @staticmethod
+  def getReservations():
+    file = "local/scontrol_reservation.p"
+    if os.path.exists(file):
+      with open(file) as f:
+        raw = pickle.load(f)
+
+    reservations = []
+    for each in raw:
+      reservations.append(Mock.Reservation(each))
+
+    return reservations
+
+  #############################################
 
   @staticmethod
   def Node(n):
+    file = "local/scontrol_node.p"
+    if os.path.exists(file):
+      with open(file) as f:
+        raw = pickle.load(f)
 
-    node = Slurm.Node(n)
-    node.found = True
-    node.state = "MOCK"
-    node.data = {"NodeName": n,
-                 "CPUAlloc": "16", "CPUErr": "0", "CPUTot": "16",
-                 "RealMemory": "2400", "AllocMem": "1600",
-                 "State": "MOCK"}
-    return node
+    return Mock.Node(raw)
+  
+  #############################################
