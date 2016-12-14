@@ -103,9 +103,9 @@ def slurm_nodes():
   
   # if a specific node was requested, get the scontrol info for that node
   if ENV.MOCK:
-    node = slurm.Mock.Node(requested)
+    node = slurm.Mock.getNode(requested)
   else:
-    node = slurm.Slurm.Node(requested)
+    node = slurm.Slurm.getNode(requested)
   
   #################################################
   

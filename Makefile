@@ -19,7 +19,7 @@ debug:
 debug-watch:
 	/usr/bin/env python app.py -a $(HOST) -p $(PORT) -d -r
 
-local:
+mock:
 	/usr/bin/env python app.py -a localhost -p 8081 -d -m
 
 # TESTING

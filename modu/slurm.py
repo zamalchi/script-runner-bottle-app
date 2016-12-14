@@ -339,7 +339,7 @@ class Slurm:
           key, val = f.strip().split('=')
           
           if key == "NodeName":
-            self.__name = key
+            self.__name = Slurm.normalizeNodeName(val)
 
           if key == "State":
             self.__state = val
