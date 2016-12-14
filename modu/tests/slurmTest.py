@@ -4,20 +4,8 @@ import argparse
 import sys
 import unittest
 
-# context provides the slurm module
-# from context import slurm
 import modu.slurm as slurm
 import modu.color_printer as cp
-
-######################################################################
-######################################################################
-
-parser = argparse.ArgumentParser()
-parser.add_argument('-m', help="Mock slurm data", action="store_true", required=False)
-args = parser.parse_args()
-
-ENV = argparse.Namespace()
-ENV.MOCK = True if args.m else False
 
 ######################################################################
 ######################################################################
@@ -30,16 +18,11 @@ def formatStr(raw):
 
 class TestSlurmSuite(unittest.TestCase):
 
-  if ENV.MOCK:
-    dataSource = slurm.Mock
-  else:
-    dataSource = slurm.Slurm
+  dataSource = slurm.Slurm
 
   def test_state(self):
-
-    print("\n --- STATE TESTS ---")
-
-    states = dataSource.getNonEmptyStates()
+    print("\n --- STATE TESTS ({}) ---".format(self.dataSource))
+    states = self.dataSource.getNonEmptyStates()
 
     self.assertTrue(states)
     cp.printOK("OK : List of states exists")
@@ -65,9 +48,8 @@ class TestSlurmSuite(unittest.TestCase):
   ############################################################################################
 
   def test_reservation(self):
-    print("\n --- RESERVATION TESTS ---")
-
-    reservations = dataSource.getReservations()
+    print("\n --- RESERVATION TESTS ({}) ---".format(self.dataSource))
+    reservations = self.dataSource.getReservations()
 
     self.assertTrue(reservations)
     cp.printOK("OK : List of reservations exists")
@@ -92,15 +74,14 @@ class TestSlurmSuite(unittest.TestCase):
   ############################################################################################
 
   def test_node(self):
-    print("\n --- NODE TESTS ---")
-
+    print("\n --- NODE TESTS ({}) ---".format(self.dataSource))
     nodes = []
-    if ENV.MOCK:
-      nodes.append(dataSource.Node("034"))
-      nodes.append(dataSource.Node(100))
-      nodes.append(dataSource.Node("node123"))
+    if self.dataSource == "modu.slurm.Mock":
+      nodes.append(self.dataSource.getNode())
     else:
-      nodes.append(dataSource.Node())
+      nodes.append(TestSlurmSuite.dataSource.getNode("034"))
+      nodes.append(TestSlurmSuite.dataSource.getNode(100))
+      nodes.append(TestSlurmSuite.dataSource.getNode("node123"))
 
     for n in nodes:
       self.assertTrue(n.__class__.__name__ == "Node")
