@@ -31,15 +31,29 @@
 	<div class="row-fluid">
 		% ##################################################
 
-		<div class="col-xs-4">
-			% if node.found:
+		<div class="col-xs-6">
+		<div class="container-fluid" id="left-subdiv">
+			<div class="row-fluid">
+			<!-- <div class="col-xs-12"> -->
+			% if node and node.found:
 				% include('_requested.tpl')
 			% end
+			<!-- </div> -->
+			</div>
+			
+			<div class="row-fluid">
+			<!-- <div class="col-xs-12"> -->
+			% if reservations:
+				% include('_reservations.tpl')
+			% end
+			<!-- </div> -->
+			</div>
+		</div>
 		</div>
 		
 		% ##################################################
 		
-		<div class="col-xs-8 offset-xs-4">
+		<div class="col-xs-6 offset-xs-6">
 			% include('_states.tpl')
 		</div>
 		

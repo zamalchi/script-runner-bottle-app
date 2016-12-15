@@ -8,7 +8,7 @@ overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "All
 <div id="requested-div">
 
 <div class="row-fluid">
-<div class="col-xs-12">
+<!-- <div class="col-xs-12"> -->
 
 	% ##################################################
 	<ul class="nav nav-tabs">
@@ -26,32 +26,20 @@ overviewFields = ["NodeName", "CPUAlloc", "CPUErr", "CPUTot", "RealMemory", "All
 			<div class="panel-heading">
 				<h5>Scontrol output for <strong>node{{node.name}}</strong> in <strong>{{node.data.get("State")}}</strong></h5>
 			</div>
-
-			<div class="panel-body">
-				% for key in sorted(node.data.keys()):
-					% if key in overviewFields:
-						<pre><span class="node-field-key">{{key}}</span> = <span class="node-field-val">{{node.data.get(key)}}</span></pre>
-					% end
-				% end
-			</div>
+			% include('_data_pairs.tpl', data=node.data, filter=overviewFields)
 		</div>
 		% # * * * * * * * * * * * *
 		<div id="full-view" class="panel panel-default tab-pane fade">
 			<div class="panel-heading">
 				<h5>Scontrol output for <strong>node{{node.name}}</strong> in <strong>{{node.data.get("State")}}</strong></h5>
 			</div>
-
-			<div class="panel-body">
-				% for key in sorted(node.data.keys()):
-					<pre><span class="node-field-key">{{key}}</span> = <span class="node-field-val">{{node.data.get(key)}}</span></pre>
-				% end
-			</div>
+			% include('_data_pairs.tpl', data=node.data, filter=[])
 		</div>
 		% # * * * * * * * * * * * *
 	</div>
 	% ##################################################
 
-</div>
+<!-- </div> -->
 </div>
 
 </div>

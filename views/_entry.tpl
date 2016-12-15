@@ -11,7 +11,7 @@ This sub-template displays an individual entry as a part of a slurm state.
 		% # * * * * * * * * * * * *	
 		<a name="{{index}}" class="anchor"></a>
 		% # * * * * * * * * * * * *
-		<div class="col-md-2 nodes">
+		<div class="col-md-3 nodes">
 			% include('_nodes.tpl', nodes=entry.nodes, index=index)
 		</div>
 		% # * * * * * * * * * * * *
@@ -19,7 +19,7 @@ This sub-template displays an individual entry as a part of a slurm state.
 			<pre>{{entry.time}}</pre>
 		</div>
 		% # * * * * * * * * * * * *	
-		<div class="col-md-7 reason">
+		<div class="col-md-6 reason">
 			<pre>{{entry.reason}}</pre>
 		</div>
 		% # * * * * * * * * * * * *	

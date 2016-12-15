@@ -9,7 +9,7 @@ entryCounter = 0
 
 <div class="container-fluid" id="states-div">
 <div class="row-fluid">
-<div class="col-xs-12">
+<!-- <div class="col-xs-12"> -->
 
 	% for key in sorted(states.keys()):
 		% state = states.get(key)
@@ -39,6 +39,6 @@ entryCounter = 0
 		% ##################################################
 	% end
 
-</div>
+<!-- </div> -->
 </div>
 </div>

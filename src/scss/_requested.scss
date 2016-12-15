@@ -2,9 +2,9 @@
 
 #requested-div {
 	// #######################	
-	position: fixed;
-	max-width: 30%;
-	margin-top: 30px;
+	// position: fixed;
+	// max-width: 30%;
+	// margin-top: 30px;
 	// #######################
 	.nav-tabs {
 		li {
@@ -20,20 +20,7 @@
 			border-radius: $border_radius;
 		}
 
-		pre {
-			display: inline-block;
-			padding: 5px;
-			overflow: auto;
-			max-width: 100%;
-		}
-
-		.node-field-key {
-			color: blue;
-		}
-		.node-field-val {
-			color: green;
-			font-weight: bold;
-		}
+		
 	}
 	// #######################
 }

@@ -8,10 +8,6 @@ body {
 	padding-top: 143.5px;
 }
 
-#main-div {
-	
-}
-
 // top nav and search bar
 @import 'navbar';
 
@@ -21,3 +17,38 @@ body {
 
 @import 'entry';
 
+
+#main-div {
+
+	#left-subdiv {
+		position: fixed;
+		top: 200px;
+		max-width: 45%;
+		// max-height: 75%;
+		padding-right: 0px;
+	}
+	
+}
+@import 'reservations';
+
+.data-pairs {
+	pre {
+		display: inline-block;
+		padding: 5px;
+		overflow: auto;
+		max-width: 100%;
+	}
+
+	.node-field-key {
+		color: blue;
+	}
+	.node-field-val {
+		color: green;
+		font-weight: bold;
+	}
+}
+
+.title {
+	font-size: 1.5vw;
+	margin-left: 30px;
+}

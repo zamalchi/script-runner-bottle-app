@@ -27,26 +27,12 @@ body {
     font-size: 2em;
     margin-top: 20px; }
 
-#requested-div {
-  position: fixed;
-  max-width: 30%;
-  margin-top: 30px; }
-  #requested-div .nav-tabs li {
-    background: #bcbcbc;
-    border-radius: 3px; }
-  #requested-div .tab-content .tab-pane {
-    border: 1px solid #bcbcbc;
-    border-radius: 3px; }
-  #requested-div .tab-content pre {
-    display: inline-block;
-    padding: 5px;
-    overflow: auto;
-    max-width: 100%; }
-  #requested-div .tab-content .node-field-key {
-    color: blue; }
-  #requested-div .tab-content .node-field-val {
-    color: green;
-    font-weight: bold; }
+#requested-div .nav-tabs li {
+  background: #bcbcbc;
+  border-radius: 3px; }
+#requested-div .tab-content .tab-pane {
+  border: 1px solid #bcbcbc;
+  border-radius: 3px; }
 
 #states-div {
   margin-top: 30px; }
@@ -54,9 +40,6 @@ body {
     display: inline-block;
     padding-top: 350px;
     margin-top: -350px; }
-  #states-div .state .title {
-    font-size: 2vw;
-    margin-left: 30px; }
 
 .entry {
   border: 2px solid #9b9b9b;
@@ -80,5 +63,30 @@ body {
     overflow: auto;
     overflow-x: hidden;
     width: 100%; }
+
+#main-div #left-subdiv {
+  position: fixed;
+  top: 200px;
+  max-width: 45%;
+  padding-right: 0px; }
+
+#reservations-panel {
+  overflow-y: scroll;
+  max-height: 15%; }
+
+.data-pairs pre {
+  display: inline-block;
+  padding: 5px;
+  overflow: auto;
+  max-width: 100%; }
+.data-pairs .node-field-key {
+  color: blue; }
+.data-pairs .node-field-val {
+  color: green;
+  font-weight: bold; }
+
+.title {
+  font-size: 1.5vw;
+  margin-left: 30px; }
 
 /*# sourceMappingURL=main.css.map */
