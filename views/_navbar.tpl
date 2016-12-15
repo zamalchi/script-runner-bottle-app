@@ -1,6 +1,27 @@
-<nav id="top-nav" class="navbar navbar-default navbar-fixed-top">
-	<div class="container-fluid">
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container">
 
+	<div class="navbar-brand">Slurm</div>
+	<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</button>
+
+	<div class="collapse navbar-collapse navHeaderCollapse">
+
+		<ul class="nav navbar-nav navbar-right">
+			% for s in sorted(states.keys()):
+				<li><a href="#{{s}}">{{s}}</a></li>
+			% end
+		</ul>
+
+	</div>
+
+</div>
+</nav>
+
+<% '''
 		% #####################################################################
 		% # STATE NAV BUTTONS ROW
 		<div class="row" id="state-nav-row">
@@ -50,3 +71,5 @@
 
 	</div>
 </nav>
+'''
+%>

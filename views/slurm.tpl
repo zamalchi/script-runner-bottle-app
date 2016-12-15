@@ -5,9 +5,10 @@
 	:param node   : Slurm.Node object (use Node.found to check if exists)
 '''
 %>
-
+% ########################################
 <!DOCTYPE html>
 <html>
+% ########################################
 <head>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
  	<link rel="stylesheet" type="text/css" href="css/main.css" />
@@ -16,15 +17,48 @@
 
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+ 	<title>Slurm</title>
 </head>
+% ########################################
 
-
-<!-- <body onload="anchorToRequested()"> -->
+% ########################################
 <body>
+<!-- CONTAINER -->
+<div class="container">
 
-<!-- % include('_navbar.tpl', states=states) -->
-% include('_navbar.tpl')
+<!-- HEADER -->
+<div class="header">
+	% include('_navbar.tpl')
+</div>
 
+<!-- CONTENT AREA -->
+<div id="content_area">
+	<div id="left_col">Left col</div>
+	<div id="right_col">Right col</div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">Footer</div>
+
+</div> <!-- END OF CONTAINER -->
+
+% ########################################
+
+<!-- jquery must come first and is required by bootstrap -->
+<script src="js/jquery-3.1.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<!-- custom js functions -->
+% include('_js_functions.tpl')
+
+% ########################################
+</body>
+% ########################################
+</html>
+% ########################################
+
+
+<% '''
 <!-- main container start -->
 <div class="container-fluid" id="main-div">
 
@@ -75,7 +109,9 @@
 
 <!-- SCRIPTS END -->
 <!-- ######################################################################################################### -->
+</div>
 
 </body>
 
 </html>
+'''%>
