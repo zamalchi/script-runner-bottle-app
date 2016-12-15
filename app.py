@@ -95,21 +95,22 @@ def slurm_nodes():
   requested = bottle.request.cookies.get("requested", "")
   bottle.response.delete_cookie("requested")
   
-  # dict of (state --> obj) pairs
   if ENV.MOCK:
     states = slurm.Mock.getNonEmptyStates()
+    node = slurm.Mock.getNode(requested) if requested else None
+    reservations = slurm.Mock.getReservations()
   else:
+    # dict of (state --> obj) pairs
     states = slurm.Slurm.getNonEmptyStates()
+    # if a specific node was requested, get the scontrol info for that node
+    node = slurm.Slurm.getNode(requested) if requested else None
+    # list of reservation objects
+    reservations = slurm.Slurm.getReservations()
   
-  # if a specific node was requested, get the scontrol info for that node
-  if ENV.MOCK:
-    node = slurm.Mock.getNode(requested)
-  else:
-    node = slurm.Slurm.getNode(requested)
   
   #################################################
   
-  return bottle.template('slurm', anchor=anchor, states=states, node=node)
+  return bottle.template('slurm', anchor=anchor, states=states, node=node, reservations=reservations)
 
 ########################################################################################################
 ########################################################################################################

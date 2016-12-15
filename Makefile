@@ -1,6 +1,8 @@
 
-HOST=172.16.1.254
-PORT=19191
+HOST?=172.16.1.254
+PORT?=19191
+LHOST?=localhost
+LPORT?=8081
 
 LBLUE=`echo -e "\033[1;34m"`
 LGREEN=`echo -e "\033[1;32m"`
@@ -20,7 +22,7 @@ debug-watch:
 	/usr/bin/env python app.py -a $(HOST) -p $(PORT) -d -r
 
 mock:
-	/usr/bin/env python app.py -a localhost -p 8081 -d -m
+	/usr/bin/env python app.py -a $(LHOST) -p $(LPORT) -d -m
 
 # TESTING
 # ----------------------------------------------------------------------
@@ -63,19 +65,33 @@ help:
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}run${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server.${NORMAL}"
+	@echo "        ${LBLUE}  vars: HOST, PORT${NORMAL}"
 	@echo "    ${LGREEN}debug${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server in debug mode.${NORMAL}"
+	@echo "        ${LBLUE}  vars: HOST, PORT${NORMAL}"
 	@echo "    ${LGREEN}debug-watch${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server in debug mode with live reload.${NORMAL}"
-	@echo "    ${LGREEN}local${NORMAL}"
+	@echo "    ${LGREEN}mock${NORMAL}"
 	@echo "        ${LBLUE}Run the slurm server locally in debug mode and with mock data.${NORMAL}"
+	@echo "        ${LBLUE}  vars : LHOST, LPORT${NORMAL}"
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}test${NORMAL}"
 	@echo "        ${LBLUE}Run testing suite.${NORMAL}"
 	@echo "    ${LGREEN}test-slurm${NORMAL}"
-	@echo "        ${LBLUE}Run modu.tests.slurm-test. Tests integrity of slurm data parsing.${NORMAL}"
+	@echo "        ${LBLUE}Run modu.tests.slurmTest.${NORMAL}"
+	@echo "        ${LBLUE}Tests integrity of slurm data parsing.${NORMAL}"
 	@echo "    ${LGREEN}test-slurm-shell${NORMAL}"
-	@echo "        ${LBLUE}Run modu.tests.slurm-test-shell. Returns an interactive shell.${NORMAL}"
+	@echo "        ${LBLUE}Run modu.tests.slurmTestShell.${NORMAL}"
+	@echo "        ${LBLUE}Returns an interactive shell.${NORMAL}"
+	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
+	@echo "    ${LGREEN}mock-test${NORMAL}"
+	@echo "        ${LBLUE}Run testing suite with mock data.${NORMAL}"
+	@echo "    ${LGREEN}mock-test-slurm${NORMAL}"
+	@echo "        ${LBLUE}Run modu.tests.mockSlurmTest.${NORMAL}"
+	@echo "        ${LBLUE}Tests integrity of slurm mock data parsing.${NORMAL}"
+	@echo "    ${LGREEN}mock-test-slurm-shell${NORMAL}"
+	@echo "        ${LBLUE}Run modu.tests.mockSlurmTestShell.${NORMAL}"
+	@echo "        ${LBLUE}Returns an interactive shell.${NORMAL}"
 	@echo "${PURPLE}----------------------------------------------------------------------${NORMAL}"
 	@echo "    ${LGREEN}scss${NORMAL}"
 	@echo "        ${LBLUE}Compile scss source files to css static files.${NORMAL}"

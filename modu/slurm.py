@@ -433,6 +433,6 @@ class Mock:
       with open(file) as f:
         raw = pickle.load(f)
         return Mock.Node(raw)
-    return None
+    return Mock.Node("Node not found.")
   
   #############################################

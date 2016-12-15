@@ -14,10 +14,12 @@ cp.printWarn("import modu.slurm as slurm")
 cp.printWarn("import modu.color_printer as cp")
 cp.printWarn("states = slurm.Mock.getNonEmptyStates()")
 cp.printWarn("reservations = slurm.Mock.getReservations()")
+cp.printWarn("node = slurm.Mock.getNode('node023')")
 print("----------------------------------------------------------------------")
 
 states = slurm.Mock.getNonEmptyStates()
 reservations = slurm.Mock.getReservations()
+node = slurm.Mock.getNode("node023")
 
 vars = globals().copy()
 vars.update(locals())
